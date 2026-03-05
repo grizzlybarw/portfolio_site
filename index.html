@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dan Gruskin — Product Designer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0f0f11;
+      --fg: #e8e4dc;
+      --muted: rgba(232,228,220,0.45);
+      --faint: rgba(232,228,220,0.12);
+      --accent: #d4875a;
+      --accent2: #7b9e87;
+      --border: rgba(232,228,220,0.1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--fg);
+      font-family: 'Instrument Sans', sans-serif;
+      font-weight: 400;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* GRAIN OVERLAY */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      opacity: 0.4;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+      background-size: 180px 180px;
+      mix-blend-mode: overlay;
+    }
+
+    /* GRADIENT BG */
+    .bg-gradient {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse 70% 50% at 5% 15%,  rgba(210, 80,  80,  0.45) 0%, transparent 55%),
+        radial-gradient(ellipse 60% 45% at 30% 5%,  rgba(220, 140, 60,  0.40) 0%, transparent 50%),
+        radial-gradient(ellipse 55% 45% at 60% 0%,  rgba(190, 200, 60,  0.35) 0%, transparent 50%),
+        radial-gradient(ellipse 60% 50% at 90% 20%, rgba(70,  180, 120, 0.40) 0%, transparent 55%),
+        radial-gradient(ellipse 55% 50% at 100% 60%,rgba(60,  130, 200, 0.40) 0%, transparent 55%),
+        radial-gradient(ellipse 60% 45% at 70% 95%, rgba(100, 70,  200, 0.38) 0%, transparent 50%),
+        radial-gradient(ellipse 55% 45% at 20% 90%, rgba(180, 60,  160, 0.38) 0%, transparent 50%),
+        #0f0f11;
+    }
+
+    nav, section, footer { position: relative; z-index: 2; }
+
+    /* NAV */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 2rem 3rem;
+    }
+    .nav-logo {
+      font-weight: 600;
+      font-size: 0.95rem;
+      letter-spacing: 0.04em;
+      color: var(--fg);
+      text-decoration: none;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      letter-spacing: 0.04em;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--fg); }
+
+    /* HERO */
+    .hero {
+      min-height: 42vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 0 3rem 6rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent2);
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeUp 0.7s ease 0.1s forwards;
+    }
+
+    .hero-headline {
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: clamp(1.8rem, 3.5vw, 3.4rem);
+      font-weight: 600;
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+      max-width: 900px;
+      opacity: 0;
+      animation: fadeUp 0.7s ease 0.25s forwards;
+    }
+
+    .hero-headline em {
+      font-family: 'Instrument Serif', serif;
+      font-style: italic;
+      font-weight: 400;
+      color: var(--accent);
+    }
+
+    .swap-wrapper {
+      display: inline-block;
+    }
+
+    .swap-text {
+      display: inline-block;
+      background: var(--accent);
+      color: #fff !important;
+      padding: 0.05em 0.35em;
+      border-radius: 3px;
+      transition: opacity 0.35s ease, transform 0.35s ease, background 0.5s ease;
+    }
+
+    .swap-text.out {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+
+    .swap-text.in {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+
+    .hero-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-top: 3.5rem;
+      opacity: 0;
+      animation: fadeUp 0.7s ease 0.45s forwards;
+    }
+
+    .hero-sub {
+      font-size: 1rem;
+      line-height: 1.75;
+      color: var(--muted);
+      max-width: 420px;
+    }
+
+    .hero-meta {
+      text-align: right;
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+    .hero-meta span {
+      font-size: 0.8rem;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+    }
+    .hero-meta strong {
+      font-weight: 500;
+      color: var(--fg);
+      font-size: 0.85rem;
+    }
+
+    /* WORK */
+    .work {
+      padding: 6rem 3rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 3rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .case-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    .case-card {
+      text-decoration: none;
+      color: var(--fg);
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.3s ease;
+    }
+    .case-card:hover { transform: translateY(-3px); }
+
+    .case-thumb {
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      border-radius: 4px;
+      overflow: hidden;
+      position: relative;
+      margin-bottom: 1.25rem;
+      background: #1a1a1e;
+    }
+
+    .case-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+
+    .case-card:hover .case-thumb img {
+      transform: scale(1.03);
+    }
+
+    .thumb-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(15,15,17,0);
+      transition: background 0.3s ease;
+      display: flex;
+      align-items: flex-end;
+      padding: 1.25rem;
+    }
+    .case-card:hover .thumb-overlay { background: rgba(15,15,17,0.25); }
+
+    .thumb-tag {
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      background: rgba(15,15,17,0.7);
+      color: var(--fg);
+      padding: 0.3rem 0.6rem;
+      border-radius: 2px;
+      opacity: 0;
+      transform: translateY(4px);
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+    .case-card:hover .thumb-tag { opacity: 1; transform: translateY(0); }
+
+    .case-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+
+    .case-title {
+      font-size: 1rem;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      line-height: 1.3;
+    }
+
+    .case-num {
+      font-size: 0.75rem;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+      flex-shrink: 0;
+    }
+
+    .case-tags-row {
+      display: flex;
+      gap: 0.6rem;
+      margin-top: 0.4rem;
+    }
+    .tag {
+      font-size: 0.7rem;
+      color: var(--muted);
+    }
+    .tag + .tag::before {
+      content: '·';
+      margin-right: 0.6rem;
+    }
+
+    /* ABOUT */
+    .about {
+      padding: 6rem 3rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: start;
+    }
+
+    .about-heading {
+      font-size: clamp(1.8rem, 3vw, 2.8rem);
+      font-weight: 600;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.5rem;
+    }
+    .about-heading em {
+      font-family: 'Instrument Serif', serif;
+      font-style: italic;
+      font-weight: 400;
+      color: var(--accent);
+    }
+
+    .about-body {
+      font-size: 0.95rem;
+      line-height: 1.85;
+      color: var(--muted);
+    }
+    .about-body p + p { margin-top: 1rem; }
+
+    .about-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+    }
+    .about-list li {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 1.1rem 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.9rem;
+      gap: 1rem;
+    }
+    .about-list li:first-child { border-top: 1px solid var(--border); }
+    .about-list .role { font-weight: 500; flex-shrink: 0; }
+    .about-list .co { color: var(--muted); font-size: 0.85rem; flex: 1; text-align: center; }
+    .about-list .yr { color: var(--muted); font-size: 0.8rem; letter-spacing: 0.04em; flex-shrink: 0; }
+
+    /* CONTACT */
+    .contact {
+      padding: 6rem 3rem 8rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .contact-inner {
+      border-top: 1px solid var(--border);
+      padding-top: 4rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: start;
+    }
+
+    .contact-heading {
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      font-weight: 600;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+    }
+    .contact-heading em {
+      font-family: 'Instrument Serif', serif;
+      font-style: italic;
+      font-weight: 400;
+      color: var(--accent);
+      display: block;
+    }
+
+    .contact-right {
+      padding-top: 0.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .contact-body {
+      font-size: 0.95rem;
+      line-height: 1.8;
+      color: var(--muted);
+    }
+
+    .contact-links { display: flex; flex-direction: column; }
+    .contact-link {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--border);
+      text-decoration: none;
+      color: var(--fg);
+      transition: color 0.2s;
+    }
+    .contact-link:first-child { border-top: 1px solid var(--border); }
+    .contact-link:hover { color: var(--accent); }
+    .contact-link-label { font-size: 0.85rem; font-weight: 500; }
+    .contact-link-value { font-size: 0.8rem; color: var(--muted); transition: color 0.2s; }
+    .contact-link:hover .contact-link-value { color: var(--accent); }
+
+    footer {
+      padding: 1.5rem 3rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    footer p { font-size: 0.75rem; color: var(--muted); }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 860px) {
+      nav { padding: 1.5rem; }
+      .hero { padding: 0 1.5rem 4rem; }
+      .hero-bottom { flex-direction: column; align-items: flex-start; gap: 2rem; }
+      .hero-meta { text-align: left; }
+      .work { padding: 4rem 1.5rem; }
+      .case-grid { grid-template-columns: 1fr; }
+      .about { grid-template-columns: 1fr; padding: 4rem 1.5rem; gap: 3rem; }
+      .contact { padding: 4rem 1.5rem 6rem; }
+      .contact-inner { grid-template-columns: 1fr; gap: 3rem; }
+      footer { padding: 1.5rem; flex-direction: column; gap: 0.5rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg-gradient"></div>
+
+  <nav>
+    <a href="#" class="nav-logo">Dan Gruskin</a>
+    <ul class="nav-links">
+      <li><a href="#work">Work</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-eyebrow">Senior Product Designer — San Diego, CA</div>
+    <h1 class="hero-headline">
+      I design for <span class="swap-wrapper"><em class="swap-text" id="swapText">high-stakes moments</em></span><br>and the people who<br><em>can't work without them.</em>
+    </h1>
+    <div class="hero-bottom">
+      <p class="hero-sub">
+        15+ years across civic tech, clean energy SaaS, and consumer brands. I design with research, ship with craft, and thrive where the problem space is genuinely hard.
+      </p>
+      <div class="hero-meta">
+        <span>Currently</span>
+        <strong>Senior Product Designer, Civic Tech</strong>
+        <span style="margin-top:0.5rem">Open to</span>
+        <strong>Startups — Remote</strong>
+      </div>
+    </div>
+  </section>
+
+  <section class="work" id="work">
+    <div class="section-label">Selected Work</div>
+    <div class="case-grid">
+
+      <a href="#" class="case-card">
+        <div class="case-thumb">
+          <img src="img/thumbnails/supervisor-review-mode.avif" alt="Supervisor Review Mode" />
+          <div class="thumb-overlay"><span class="thumb-tag">Civic Tech</span></div>
+        </div>
+        <div class="case-meta">
+          <div class="case-title">Supervisor Review Mode</div>
+          <div class="case-num">01</div>
+        </div>
+        <div class="case-tags-row">
+          <span class="tag">Workflow Design</span>
+          <span class="tag">Enterprise UX</span>
+        </div>
+      </a>
+
+      <a href="#" class="case-card">
+        <div class="case-thumb">
+          <img src="img/thumbnails/case-finder.avif" alt="Case Finder" />
+          <div class="thumb-overlay"><span class="thumb-tag">Civic Tech</span></div>
+        </div>
+        <div class="case-meta">
+          <div class="case-title">Case Finder</div>
+          <div class="case-num">02</div>
+        </div>
+        <div class="case-tags-row">
+          <span class="tag">Search & Filter</span>
+          <span class="tag">Information Architecture</span>
+        </div>
+      </a>
+
+      <a href="#" class="case-card">
+        <div class="case-thumb">
+          <img src="img/thumbnails/empower-thumbnails.jpg" alt="GridX Empower Re-imagined" />
+          <div class="thumb-overlay"><span class="thumb-tag">Clean Energy</span></div>
+        </div>
+        <div class="case-meta">
+          <div class="case-title">GridX Empower Re-imagined</div>
+          <div class="case-num">03</div>
+        </div>
+        <div class="case-tags-row">
+          <span class="tag">SaaS</span>
+          <span class="tag">Product Strategy</span>
+        </div>
+      </a>
+
+      <a href="#" class="case-card">
+        <div class="case-thumb">
+          <img src="img/thumbnails/gridx-touchscreen-thumbnails.jpg" alt="GridX Interactive Touchscreen Demo" />
+          <div class="thumb-overlay"><span class="thumb-tag">Clean Energy</span></div>
+        </div>
+        <div class="case-meta">
+          <div class="case-title">GridX Interactive Touchscreen Demo</div>
+          <div class="case-num">04</div>
+        </div>
+        <div class="case-tags-row">
+          <span class="tag">Interactive</span>
+          <span class="tag">Sales Enablement</span>
+        </div>
+      </a>
+
+      <a href="#" class="case-card">
+        <div class="case-thumb">
+          <img src="img/thumbnails/series-page-thumbnail.jpg" alt="Taylor Guitars Series Pages" />
+          <div class="thumb-overlay"><span class="thumb-tag">Consumer Brand</span></div>
+        </div>
+        <div class="case-meta">
+          <div class="case-title">Taylor Guitars Series Pages</div>
+          <div class="case-num">05</div>
+        </div>
+        <div class="case-tags-row">
+          <span class="tag">E-commerce</span>
+          <span class="tag">Content Design</span>
+        </div>
+      </a>
+
+      <a href="#" class="case-card">
+        <div class="case-thumb">
+          <img src="img/thumbnails/sustainability-hub-thumbnail.jpg" alt="Taylor Sustainability Hub" />
+          <div class="thumb-overlay"><span class="thumb-tag">Consumer Brand</span></div>
+        </div>
+        <div class="case-meta">
+          <div class="case-title">Taylor Sustainability Hub</div>
+          <div class="case-num">06</div>
+        </div>
+        <div class="case-tags-row">
+          <span class="tag">Editorial Design</span>
+          <span class="tag">Brand</span>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <section class="about" id="about">
+    <div class="about-left">
+      <div class="section-label">About</div>
+      <h2 class="about-heading">
+        Just a guy who<br>learned Photoshop<br>and turned it into<br><em>a career.</em>
+      </h2>
+      <div class="about-body">
+        <p>I started in web dev and print, moved through creative direction, and landed in product design because that's where design actually changes how people work.</p>
+        <p>Today I build tools for asylum and refugee case management — the kind of work where good design isn't a nice-to-have. Previously GridX and Taylor Guitars. Always looking for the next hard problem.</p>
+      </div>
+    </div>
+    <div class="about-right">
+      <div class="section-label">Experience</div>
+      <ul class="about-list">
+        <li>
+          <span class="role">Senior Product Designer</span>
+          <span class="co">Civic Tech</span>
+          <span class="yr">2022 — Now</span>
+        </li>
+        <li>
+          <span class="role">Product Designer</span>
+          <span class="co">GridX</span>
+          <span class="yr">2019 — 2022</span>
+        </li>
+        <li>
+          <span class="role">Creative Director</span>
+          <span class="co">Taylor Guitars</span>
+          <span class="yr">2014 — 2019</span>
+        </li>
+        <li>
+          <span class="role">Designer / Developer</span>
+          <span class="co">Various</span>
+          <span class="yr">2008 — 2014</span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <div class="contact-inner">
+      <div>
+        <h2 class="contact-heading">
+          Let's work
+          <em>together.</em>
+        </h2>
+      </div>
+      <div class="contact-right">
+        <p class="contact-body">
+          I'm actively looking for my next role at a fast-moving startup. If you're building something that matters and need a designer who can lead, research, and ship — let's talk.
+        </p>
+        <div class="contact-links">
+          <a href="/cdn-cgi/l/email-protection#c5a1a4ab85a1a4aba2b7b0b6aeacabeba6aaa8" class="contact-link">
+            <span class="contact-link-label">Email</span>
+            <span class="contact-link-value"><span class="__cf_email__" data-cfemail="aacecbc4eacecbc4cdd8dfd9c1c3c484c9c5c7">[email&#160;protected]</span></span>
+          </a>
+          <a href="https://linkedin.com/in/dangruskin" target="_blank" class="contact-link">
+            <span class="contact-link-label">LinkedIn</span>
+            <span class="contact-link-value">linkedin.com/in/dangruskin</span>
+          </a>
+          <a href="https://dangruskin.com" target="_blank" class="contact-link">
+            <span class="contact-link-label">Current Site</span>
+            <span class="contact-link-value">dangruskin.com</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2026 Dan Gruskin</p>
+    <p>San Diego, CA — Open to Remote</p>
+  </footer>
+
+  <script>
+    // Mouse parallax on background
+    const bg = document.querySelector('.bg-gradient');
+    let tx = 0, ty = 0, cx = 0, cy = 0;
+
+    document.addEventListener('mousemove', e => {
+      tx = (e.clientX / window.innerWidth  - 0.5) * 40;
+      ty = (e.clientY / window.innerHeight - 0.5) * 40;
+    });
+
+    (function animateBg() {
+      cx += (tx - cx) * 0.05;
+      cy += (ty - cy) * 0.05;
+      if (bg) bg.style.transform = `translate(${cx}px, ${cy}px) scale(1.1)`;
+      requestAnimationFrame(animateBg);
+    })();
+
+    // Word swap animation
+    const swapText = document.getElementById('swapText');
+    const phrases = ['high-stakes moments', 'messy systems', 'complex workflows'];
+    const colors = ['#d4875a', '#7b9e87', '#8a7fc0'];
+    let current = 0;
+
+    if (swapText) {
+      swapText.style.background = colors[0];
+
+      setInterval(() => {
+        swapText.classList.add('out');
+        setTimeout(() => {
+          current = (current + 1) % phrases.length;
+          swapText.textContent = phrases[current];
+          swapText.style.background = colors[current];
+          swapText.classList.remove('out');
+          swapText.classList.add('in');
+          requestAnimationFrame(() => requestAnimationFrame(() => {
+            swapText.classList.remove('in');
+          }));
+        }, 350);
+      }, 2500);
+    }
+
+    // Scroll reveal — use separate transform so parallax doesn't conflict
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08 });
+
+    document.querySelectorAll('.case-card').forEach((el, i) => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(16px)';
+      el.style.transition = `opacity 0.5s ease ${i * 0.07}s, transform 0.5s ease ${i * 0.07}s`;
+      observer.observe(el);
+    });
+
+    document.querySelectorAll('.about-left, .about-right, .contact-inner').forEach((el, i) => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(12px)';
+      el.style.transition = `opacity 0.5s ease ${i * 0.1}s, transform 0.5s ease ${i * 0.1}s`;
+      observer.observe(el);
+    });
+  </script>
+
+</body>
+</html>
