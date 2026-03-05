@@ -500,6 +500,81 @@
       will-change: transform;
     }
 
+    /* PLACEHOLDER IMAGES */
+    .cs-placeholder {
+      background: rgba(28,26,22,0.05);
+      border: 1px dashed rgba(28,26,22,0.18);
+      border-radius: 6px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      color: var(--muted);
+    }
+    .cs-placeholder-icon {
+      font-size: 1.5rem;
+      opacity: 0.4;
+    }
+    .cs-placeholder-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-align: center;
+      max-width: 200px;
+      line-height: 1.5;
+    }
+    .cs-image-caption {
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-top: 0.75rem;
+      font-style: italic;
+      line-height: 1.5;
+    }
+
+    /* BEFORE / AFTER */
+    .cs-before-after {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-top: 3rem;
+    }
+    .cs-before-after-item {}
+    .cs-before-after-tag {
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .cs-before-after-tag.before { color: var(--muted); }
+    .cs-before-after-tag.after  { color: var(--accent2); }
+
+    /* EXPLORATION STRIP */
+    .cs-exploration {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.75rem;
+      margin-top: 1.5rem;
+    }
+    .cs-exploration-item {}
+    .cs-exploration-tag {
+      font-size: 0.68rem;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      margin-top: 0.4rem;
+      text-align: center;
+    }
+    .cs-exploration-tag.selected { color: var(--accent2); font-weight: 600; }
+
+    /* DESIGN SHOWCASE */
+    .cs-design-primary { margin-bottom: 1rem; }
+    .cs-design-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+
     @media (max-width: 860px) {
       nav { padding: 1.5rem; }
       .cs-hero { grid-template-columns: 1fr; padding: 2rem 1.5rem 3rem; gap: 2rem; }
@@ -575,6 +650,25 @@
         <p>The opportunity was clear: bring the entire review workflow into the application and give supervisors the tools they needed without disrupting how officers worked around them.</p>
       </div>
     </div>
+
+    <div class="cs-before-after">
+      <div class="cs-before-after-item">
+        <div class="cs-before-after-tag before">Before</div>
+        <div class="cs-placeholder" style="height: 220px;">
+          <div class="cs-placeholder-icon">🗂</div>
+          <div class="cs-placeholder-label">Old workflow diagram — Acrobat + desktop folder process</div>
+        </div>
+        <div class="cs-image-caption">The existing process: download → annotate offline → re-upload → track manually across folders.</div>
+      </div>
+      <div class="cs-before-after-item">
+        <div class="cs-before-after-tag after">After</div>
+        <div class="cs-placeholder" style="height: 220px;">
+          <div class="cs-placeholder-icon">✦</div>
+          <div class="cs-placeholder-label">New workflow — integrated review mode inside the app</div>
+        </div>
+        <div class="cs-image-caption">The new flow: enter review mode → work in context → concur/not-concur → done. No context switching.</div>
+      </div>
+    </div>
   </section>
 
   <!-- RESULTS -->
@@ -616,6 +710,29 @@
         <div class="cs-phase-label">Prototyping</div>
         <div class="cs-phase-body">
           I built a high-fidelity prototype early — not to look finished, but to make the decisions real enough to critique. The key design challenge was the mode itself: supervisors needed to enter a distinct review context without losing their place in the main application. I explored three patterns for this (overlay, new tab, contextual panel) before landing on a mode toggle that transformed the existing interface rather than replacing it. Leadership feedback tightened the scope; the prototype made those conversations specific.
+          <div class="cs-exploration">
+            <div class="cs-exploration-item">
+              <div class="cs-placeholder" style="height: 130px;">
+                <div class="cs-placeholder-icon">⊡</div>
+                <div class="cs-placeholder-label">Overlay pattern</div>
+              </div>
+              <div class="cs-exploration-tag">Option A — Overlay</div>
+            </div>
+            <div class="cs-exploration-item">
+              <div class="cs-placeholder" style="height: 130px;">
+                <div class="cs-placeholder-icon">⊞</div>
+                <div class="cs-placeholder-label">New tab pattern</div>
+              </div>
+              <div class="cs-exploration-tag">Option B — New Tab</div>
+            </div>
+            <div class="cs-exploration-item">
+              <div class="cs-placeholder" style="height: 130px;">
+                <div class="cs-placeholder-icon">◧</div>
+                <div class="cs-placeholder-label">Mode toggle — selected</div>
+              </div>
+              <div class="cs-exploration-tag selected">Option C — Mode Toggle ✓</div>
+            </div>
+          </div>
         </div>
       </div>
       <div class="cs-process-phase">
@@ -635,6 +752,41 @@
         <div class="cs-phase-body">
           We've historically struggled with adoption on new features — users default to what they know. For this launch I worked with stakeholders to design the rollout itself: a phased approach with a pilot group, in-app guidance for first sessions, and a feedback channel that surfaced issues in real time. The 1,200+ sessions in month two weren't an accident — they were the result of treating launch as part of the design problem.
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE DESIGN -->
+  <section class="cs-section" style="padding-top:0;">
+    <div class="cs-section-label">The Design</div>
+    <div class="cs-design-primary">
+      <div class="cs-placeholder" style="height: 440px;">
+        <div class="cs-placeholder-icon">🖥</div>
+        <div class="cs-placeholder-label">Primary UI — supervisor review mode active state, showing case context panel + review toolbar</div>
+      </div>
+      <div class="cs-image-caption">The review mode toggle transforms the existing case view — no navigation away, no lost context. The toolbar surfaces only the actions relevant to a supervisor's review task.</div>
+    </div>
+    <div class="cs-design-grid">
+      <div>
+        <div class="cs-placeholder" style="height: 200px;">
+          <div class="cs-placeholder-icon">☑</div>
+          <div class="cs-placeholder-label">Concur / Not Concur decision flow</div>
+        </div>
+        <div class="cs-image-caption">The decision flow — the core action that replaced the offline annotation and re-upload cycle.</div>
+      </div>
+      <div>
+        <div class="cs-placeholder" style="height: 200px;">
+          <div class="cs-placeholder-icon">◱</div>
+          <div class="cs-placeholder-label">Case context panel — at-a-glance without leaving review mode</div>
+        </div>
+        <div class="cs-image-caption">The case context panel — surfaced in response to usability testing. Supervisors needed to see the case without switching views.</div>
+      </div>
+      <div>
+        <div class="cs-placeholder" style="height: 200px;">
+          <div class="cs-placeholder-icon">🔔</div>
+          <div class="cs-placeholder-label">Officer notification pattern</div>
+        </div>
+        <div class="cs-image-caption">The notification pattern for officers — designed so supervisor feedback reached the right person without disrupting their workflow.</div>
       </div>
     </div>
   </section>
