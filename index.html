@@ -521,6 +521,52 @@ nav {
 
 .contact-link-label { font-size: 0.85rem; font-weight: 600; }
 .contact-link-value { font-size: 0.8rem; color: rgba(255,255,255,0.6); }
+
+/* FOOTER */
+footer {
+  padding: 1.5rem 3rem;
+  border-top: 2px solid rgba(255,255,255,0.15);
+  background: var(--ink);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+footer p { font-size: 0.75rem; color: rgba(255,255,255,0.45); }
+
+/* MOBILE RESPONSIVE */
+@media (max-width: 860px) {
+  nav { padding: 1.25rem 1.5rem; }
+  .hero { padding: 3rem 1.5rem 4rem; min-height: 50vh; }
+  .hero-bottom { flex-direction: column; align-items: flex-start; gap: 2rem; }
+  .hero-meta { text-align: left; }
+  .work { padding: 4rem 1.5rem; }
+  .case-row { grid-template-columns: 1fr !important; }
+  .about { padding: 5rem 1.5rem; }
+  .about-inner { grid-template-columns: 1fr; gap: 3rem; }
+  .contact { padding: 5rem 1.5rem; }
+  .contact-inner { grid-template-columns: 1fr; gap: 3rem; }
+  footer { padding: 1.5rem; flex-direction: column; gap: 0.5rem; text-align: center; }
+  .cursor-dot, .cursor-orb, .cursor-trail { display: none !important; }
+  body { cursor: auto; }
+}
+
+/* REDUCED MOTION */
+@media (prefers-reduced-motion: reduce) {
+  .cursor-dot, .cursor-orb, .cursor-trail { display: none !important; }
+  body { cursor: auto; }
+  .hero-line-inner,
+  .hero-eyebrow,
+  .hero-rule,
+  .hero-bottom,
+  .case-card,
+  .about-list li,
+  .section-label::before {
+    clip-path: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
   </style>
 </head>
 <body>
@@ -531,8 +577,6 @@ nav {
   <div class="cursor-trail" id="trail1"></div>
   <div class="cursor-trail" id="trail2"></div>
   <div class="cursor-trail" id="trail3"></div>
-
-  <div class="bg-gradient"></div>
 
   <nav>
     <div class="nav-logo-wrap">
@@ -812,22 +856,6 @@ nav {
       });
     })();
 
-    // Mouse parallax on background
-    const bg = document.querySelector('.bg-gradient');
-    let tx = 0, ty = 0, cx = 0, cy = 0;
-
-    document.addEventListener('mousemove', e => {
-      tx = (e.clientX / window.innerWidth  - 0.5) * 40;
-      ty = (e.clientY / window.innerHeight - 0.5) * 40;
-    });
-
-    (function animateBg() {
-      cx += (tx - cx) * 0.05;
-      cy += (ty - cy) * 0.05;
-      if (bg) bg.style.transform = `translate(${cx}px, ${cy}px) scale(1.1)`;
-      requestAnimationFrame(animateBg);
-    })();
-
     // --- HERO REVEAL ---
     window.addEventListener('load', () => {
       const eyebrow = document.getElementById('heroEyebrow');
@@ -938,19 +966,6 @@ nav {
         }
       });
     }, { threshold: 0.08 });
-
-    // Nav logo hover animation
-    const navAnim = document.getElementById('lottie-nav');
-    const navWrap = document.querySelector('.nav-logo-wrap');
-    if (navWrap && navAnim) {
-      navWrap.addEventListener('mouseenter', () => {
-        navAnim.seek(0);
-        navAnim.play();
-      });
-      navWrap.addEventListener('mouseleave', () => {
-        navAnim.stop();
-      });
-    }
 
   </script>
 
