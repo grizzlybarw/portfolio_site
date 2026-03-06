@@ -9,13 +9,13 @@
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg: #0f0f11;
-      --fg: #e8e4dc;
-      --muted: rgba(232,228,220,0.45);
-      --faint: rgba(232,228,220,0.12);
-      --accent: #d4875a;
-      --accent2: #7b9e87;
-      --border: rgba(232,228,220,0.1);
+      --bg: #f5f0e8;
+      --fg: #1a1814;
+      --muted: rgba(26,24,20,0.55);
+      --faint: rgba(26,24,20,0.04);
+      --accent: #c4703f;
+      --accent2: #4d7a5e;
+      --border: rgba(26,24,20,0.12);
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -37,10 +37,10 @@
       inset: 0;
       z-index: 1;
       pointer-events: none;
-      opacity: 0.4;
+      opacity: 0.18;
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
       background-size: 180px 180px;
-      mix-blend-mode: overlay;
+      mix-blend-mode: multiply;
     }
 
     /* GRADIENT BG */
@@ -50,14 +50,12 @@
       z-index: 0;
       pointer-events: none;
       background:
-        radial-gradient(ellipse 70% 50% at 5% 15%,  rgba(210, 80,  80,  0.45) 0%, transparent 55%),
-        radial-gradient(ellipse 60% 45% at 30% 5%,  rgba(220, 140, 60,  0.40) 0%, transparent 50%),
-        radial-gradient(ellipse 55% 45% at 60% 0%,  rgba(190, 200, 60,  0.35) 0%, transparent 50%),
-        radial-gradient(ellipse 60% 50% at 90% 20%, rgba(70,  180, 120, 0.40) 0%, transparent 55%),
-        radial-gradient(ellipse 55% 50% at 100% 60%,rgba(60,  130, 200, 0.40) 0%, transparent 55%),
-        radial-gradient(ellipse 60% 45% at 70% 95%, rgba(100, 70,  200, 0.38) 0%, transparent 50%),
-        radial-gradient(ellipse 55% 45% at 20% 90%, rgba(180, 60,  160, 0.38) 0%, transparent 50%),
-        #0f0f11;
+        radial-gradient(ellipse 65% 55% at 5% 0%,   rgba(255, 195, 140, 0.45) 0%, transparent 55%),
+        radial-gradient(ellipse 55% 45% at 85% 5%,  rgba(180, 220, 185, 0.4) 0%, transparent 50%),
+        radial-gradient(ellipse 50% 45% at 100% 55%, rgba(160, 205, 240, 0.3) 0%, transparent 50%),
+        radial-gradient(ellipse 60% 50% at 15% 90%, rgba(255, 175, 185, 0.3) 0%, transparent 55%),
+        radial-gradient(ellipse 55% 45% at 60% 100%,rgba(200, 180, 240, 0.25) 0%, transparent 50%),
+        #f5f0e8;
     }
 
     nav, section, footer { position: relative; z-index: 2; }
@@ -113,7 +111,7 @@
 
     .hero-headline {
       font-family: 'Instrument Sans', sans-serif;
-      font-size: clamp(1.8rem, 3.5vw, 3.4rem);
+      font-size: clamp(2.5rem, 5vw, 5rem);
       font-weight: 600;
       line-height: 1.08;
       letter-spacing: -0.02em;
@@ -193,20 +191,21 @@
     }
 
     .section-label {
-      font-size: 0.75rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--muted);
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      color: var(--accent);
       margin-bottom: 3rem;
       display: flex;
       align-items: center;
-      gap: 0.75rem;
+      gap: 1rem;
     }
-    .section-label::after {
+    .section-label::before {
       content: '';
-      flex: 1;
-      height: 1px;
-      background: var(--border);
+      width: 24px;
+      height: 2px;
+      background: var(--accent);
+      flex-shrink: 0;
     }
 
     .case-grid {
@@ -231,7 +230,7 @@
       overflow: hidden;
       position: relative;
       margin-bottom: 1.25rem;
-      background: #1a1a1e;
+      background: #e2ddd6;
     }
 
     .case-thumb img {
@@ -249,19 +248,19 @@
     .thumb-overlay {
       position: absolute;
       inset: 0;
-      background: rgba(15,15,17,0);
+      background: rgba(26,24,20,0);
       transition: background 0.3s ease;
       display: flex;
       align-items: flex-end;
       padding: 1.25rem;
     }
-    .case-card:hover .thumb-overlay { background: rgba(15,15,17,0.25); }
+    .case-card:hover .thumb-overlay { background: rgba(26,24,20,0.15); }
 
     .thumb-tag {
       font-size: 0.7rem;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      background: rgba(15,15,17,0.7);
+      background: rgba(245,240,232,0.9);
       color: var(--fg);
       padding: 0.3rem 0.6rem;
       border-radius: 2px;
