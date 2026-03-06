@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: #94a3b8; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; padding: 48px; display: flex; flex-direction: column; gap: 64px; align-items: flex-start; }
+    .mockup { overflow: hidden; position: relative; display: block; box-shadow: 0 8px 40px rgba(0,0,0,0.25); border-radius: 8px; }
+
+    /* ─── APP TOKENS ──────────────────────────────────────────────── */
+    :root {
+      --sidebar-bg: #0f172a;
+      --app-bg: #f1f5f9;
+      --app-surface: #ffffff;
+      --app-text: #1e293b;
+      --app-muted: #64748b;
+      --app-border: #e2e8f0;
+      --app-primary: #3b82f6;
+      --review-bg: #fffbeb;
+      --review-border: #fbbf24;
+      --review-text: #92400e;
+      --green: #16a34a;
+      --red: #dc2626;
+    }
+
+    /* ─── APP SHELL ───────────────────────────────────────────────── */
+    .app { display: flex; height: 100%; background: var(--app-bg); }
+
+    .sidebar { width: 192px; min-width: 192px; background: var(--sidebar-bg); display: flex; flex-direction: column; }
+    .sidebar-logo { padding: 18px 20px 14px; border-bottom: 1px solid rgba(255,255,255,0.07); }
+    .sidebar-logo-name { font-size: 12px; font-weight: 700; color: #fff; letter-spacing: 0.05em; }
+    .sidebar-logo-sub { font-size: 9px; color: rgba(255,255,255,0.3); letter-spacing: 0.12em; text-transform: uppercase; margin-top: 2px; }
+    .sidebar-nav { padding: 10px 0; }
+    .sidebar-section { font-size: 9px; text-transform: uppercase; letter-spacing: 0.12em; color: rgba(255,255,255,0.22); padding: 14px 20px 4px; }
+    .nav-item { display: flex; align-items: center; gap: 9px; padding: 8px 20px; font-size: 12.5px; color: rgba(255,255,255,0.55); border-left: 2px solid transparent; }
+    .nav-item.active { background: rgba(255,255,255,0.09); color: #fff; border-left-color: #60a5fa; }
+    .nav-dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.25); flex-shrink: 0; }
+    .nav-dot.active { background: #60a5fa; }
+
+    .main { flex: 1; display: flex; flex-direction: column; overflow: hidden; min-width: 0; }
+
+    .topbar { height: 48px; background: var(--app-surface); border-bottom: 1px solid var(--app-border); display: flex; align-items: center; padding: 0 24px; gap: 6px; flex-shrink: 0; }
+    .breadcrumb { font-size: 12px; color: var(--app-muted); display: flex; align-items: center; gap: 5px; }
+    .breadcrumb .sep { color: #cbd5e1; font-size: 10px; }
+    .breadcrumb .crumb-active { color: var(--app-text); font-weight: 500; }
+    .topbar-space { flex: 1; }
+    .topbar-avatar { width: 28px; height: 28px; border-radius: 50%; background: #dbeafe; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: #1d4ed8; }
+
+    .review-banner { height: 38px; background: var(--review-bg); border-bottom: 1px solid var(--review-border); padding: 0 24px; display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+    .review-badge { background: #f59e0b; color: #fff; font-size: 9px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; padding: 3px 7px; border-radius: 3px; }
+    .review-banner-text { font-size: 12px; color: var(--review-text); font-weight: 500; }
+    .review-banner-space { flex: 1; }
+    .review-exit-btn { font-size: 11px; color: var(--app-muted); border: 1px solid var(--app-border); background: var(--app-surface); padding: 4px 10px; border-radius: 4px; cursor: pointer; }
+
+    .review-toolbar { height: 44px; background: var(--app-surface); border-bottom: 1px solid var(--app-border); display: flex; align-items: center; padding: 0 24px; gap: 6px; flex-shrink: 0; }
+    .toolbar-label { font-size: 9.5px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--app-muted); margin-right: 2px; }
+    .toolbar-btn { font-size: 12px; font-weight: 500; padding: 5px 12px; border-radius: 5px; border: 1px solid var(--app-border); background: var(--app-surface); color: var(--app-text); cursor: pointer; display: flex; align-items: center; gap: 5px; white-space: nowrap; }
+    .toolbar-btn-concur { background: var(--green); border-color: var(--green); color: #fff; }
+    .toolbar-btn-notconcur { color: var(--red); border-color: #fca5a5; }
+    .toolbar-divider { width: 1px; height: 22px; background: var(--app-border); margin: 0 2px; }
+    .toolbar-space { flex: 1; }
+
+    .content-area { flex: 1; padding: 18px 20px; overflow: hidden; display: flex; flex-direction: column; gap: 14px; }
+    .content-flex { display: flex; gap: 14px; flex: 1; overflow: hidden; min-height: 0; }
+
+    .card { background: var(--app-surface); border: 1px solid var(--app-border); border-radius: 8px; overflow: hidden; }
+    .card-header { padding: 12px 18px; border-bottom: 1px solid var(--app-border); display: flex; align-items: center; gap: 8px; }
+    .card-title { font-size: 12.5px; font-weight: 600; color: var(--app-text); }
+    .card-body { padding: 18px; }
+
+    .case-hdr { background: var(--app-surface); border: 1px solid var(--app-border); border-radius: 8px; padding: 14px 18px; display: flex; align-items: center; gap: 16px; flex-shrink: 0; }
+    .case-hdr-num { font-size: 10px; color: var(--app-muted); letter-spacing: 0.07em; text-transform: uppercase; margin-bottom: 3px; }
+    .case-hdr-name { font-size: 15px; font-weight: 600; color: var(--app-text); }
+    .case-hdr-space { flex: 1; }
+    .case-meta-row { display: flex; gap: 6px; }
+    .badge { font-size: 10.5px; font-weight: 600; padding: 3px 8px; border-radius: 4px; }
+    .badge-review { background: #f3e8ff; color: #7c3aed; }
+    .badge-pending { background: #fef3c7; color: #b45309; }
+    .badge-new { background: #dbeafe; color: #1d4ed8; }
+
+    .doc-viewer { flex: 1; display: flex; flex-direction: column; min-width: 0; }
+    .doc-tab-bar { background: #f8fafc; border-bottom: 1px solid var(--app-border); display: flex; align-items: flex-end; padding: 0 16px; gap: 0; height: 36px; }
+    .doc-tab { font-size: 11.5px; padding: 8px 14px; color: var(--app-muted); border-bottom: 2px solid transparent; cursor: pointer; }
+    .doc-tab.active { color: var(--app-text); border-bottom-color: var(--app-primary); font-weight: 500; }
+    .doc-body { flex: 1; padding: 20px 22px; overflow: hidden; }
+    .doc-section-title { font-size: 13px; font-weight: 600; color: var(--app-text); margin-bottom: 14px; }
+    .doc-field-row { display: flex; gap: 14px; margin-bottom: 14px; }
+    .doc-field { flex: 1; }
+    .doc-field-label { font-size: 9.5px; color: var(--app-muted); text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 5px; }
+    .doc-field-box { height: 30px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 4px; display: flex; align-items: center; padding: 0 10px; font-size: 12.5px; color: var(--app-text); }
+    .doc-field-box.wide { font-size: 11.5px; color: var(--app-muted); }
+    .doc-textarea { height: 80px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 4px; }
+    .doc-line { height: 9px; background: #f1f5f9; border-radius: 3px; margin-bottom: 8px; }
+    .doc-line.s { width: 45%; }
+    .doc-line.m { width: 70%; }
+    .doc-line.l { width: 90%; }
+    .doc-line.full { width: 100%; }
+    .doc-line.heading { height: 12px; width: 50%; background: #e2e8f0; margin-bottom: 12px; }
+
+    .context-panel { width: 232px; min-width: 232px; display: flex; flex-direction: column; }
+    .context-panel-hdr { padding: 11px 16px; background: #f8fafc; border-bottom: 1px solid var(--app-border); }
+    .context-panel-title { font-size: 9.5px; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700; color: var(--app-muted); }
+    .context-field { padding: 10px 16px; border-bottom: 1px solid #f1f5f9; }
+    .context-label { font-size: 9px; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 3px; }
+    .context-value { font-size: 12px; color: var(--app-text); font-weight: 500; }
+    .context-value.muted { color: var(--app-muted); font-weight: 400; font-size: 11.5px; }
+    .context-highlight { background: #f0fdf4; border-left: 3px solid var(--green); padding: 9px 14px; margin: 8px; border-radius: 0 4px 4px 0; }
+    .context-highlight-text { font-size: 11px; color: #15803d; font-weight: 500; }
+    .context-link { padding: 12px 16px; font-size: 11px; color: var(--app-primary); cursor: pointer; display: flex; align-items: center; justify-content: space-between; }
+
+    /* ─── FLOW DIAGRAM STYLES ─────────────────────────────────────── */
+    .flow-page { width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 36px 40px; }
+    .flow-title { font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; font-weight: 700; margin-bottom: 28px; }
+    .flow-row { display: flex; align-items: center; gap: 0; width: 100%; }
+    .flow-step { display: flex; flex-direction: column; align-items: center; flex: 1; }
+    .flow-step-box { padding: 10px 12px; border-radius: 8px; text-align: center; width: 100%; max-width: 120px; }
+    .flow-step-icon { font-size: 18px; margin-bottom: 5px; display: block; }
+    .flow-step-label { font-size: 10.5px; font-weight: 600; line-height: 1.3; }
+    .flow-step-sub { font-size: 9px; margin-top: 3px; line-height: 1.3; }
+    .flow-arrow { font-size: 14px; color: #cbd5e1; flex-shrink: 0; margin: 0 2px; padding-bottom: 14px; }
+    .flow-pain { margin-top: 26px; display: flex; gap: 16px; width: 100%; }
+    .pain-tag { font-size: 9.5px; background: #fee2e2; color: #b91c1c; padding: 5px 10px; border-radius: 4px; font-weight: 500; display: flex; align-items: center; gap: 4px; }
+
+    /* ─── CONCUR / NOT CONCUR panel ──────────────────────────────── */
+    .decision-panel { background: var(--app-surface); border-top: 3px solid var(--app-border); padding: 24px; }
+    .decision-title { font-size: 12px; text-transform: uppercase; letter-spacing: 0.09em; font-weight: 700; color: var(--app-muted); margin-bottom: 16px; }
+    .decision-row { display: flex; gap: 12px; }
+    .decision-btn { flex: 1; padding: 16px; border-radius: 8px; border: 2px solid; cursor: pointer; display: flex; align-items: center; gap: 10px; transition: all 0.15s; }
+    .decision-btn-concur { border-color: #86efac; background: #f0fdf4; }
+    .decision-btn-concur.selected { border-color: var(--green); background: var(--green); color: white; }
+    .decision-btn-notconcur { border-color: #fca5a5; background: #fff5f5; }
+    .decision-icon { font-size: 20px; }
+    .decision-label { font-size: 13px; font-weight: 700; }
+    .decision-sub { font-size: 11px; color: var(--app-muted); margin-top: 2px; }
+    .decision-btn-concur.selected .decision-sub { color: rgba(255,255,255,0.8); }
+    .decision-comment { margin-top: 14px; }
+    .decision-comment-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--app-muted); margin-bottom: 6px; font-weight: 600; }
+    .decision-comment-box { width: 100%; border: 1px solid var(--app-border); border-radius: 6px; padding: 10px 12px; font-size: 12.5px; color: var(--app-muted); background: #f8fafc; height: 64px; font-style: italic; }
+    .decision-actions { margin-top: 14px; display: flex; gap: 8px; justify-content: flex-end; }
+    .decision-cancel { font-size: 12px; padding: 7px 14px; border-radius: 5px; border: 1px solid var(--app-border); background: var(--app-surface); color: var(--app-muted); }
+    .decision-submit { font-size: 12px; padding: 7px 16px; border-radius: 5px; border: none; background: var(--green); color: white; font-weight: 600; }
+
+    /* ─── NOTIFICATION ────────────────────────────────────────────── */
+    .notif-toast { background: var(--app-surface); border: 1px solid var(--app-border); border-radius: 10px; padding: 14px 18px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); display: flex; align-items: flex-start; gap: 12px; max-width: 360px; }
+    .notif-icon { width: 36px; height: 36px; border-radius: 8px; background: #fef3c7; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+    .notif-title { font-size: 13px; font-weight: 600; color: var(--app-text); margin-bottom: 3px; }
+    .notif-body { font-size: 12px; color: var(--app-muted); line-height: 1.4; }
+    .notif-time { font-size: 10.5px; color: #94a3b8; margin-top: 6px; }
+    .notif-actions { display: flex; gap: 8px; margin-top: 10px; }
+    .notif-btn { font-size: 11.5px; padding: 5px 12px; border-radius: 5px; border: 1px solid var(--app-border); background: var(--app-surface); color: var(--app-text); font-weight: 500; }
+    .notif-btn.primary { background: var(--app-primary); border-color: var(--app-primary); color: white; }
+
+    /* ─── OVERLAY PATTERN ─────────────────────────────────────────── */
+    .modal-overlay { position: absolute; inset: 0; background: rgba(15,23,42,0.6); display: flex; align-items: center; justify-content: center; z-index: 10; }
+    .modal-card { background: white; border-radius: 10px; padding: 24px; width: 340px; box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
+    .modal-title { font-size: 15px; font-weight: 700; color: var(--app-text); margin-bottom: 6px; }
+    .modal-sub { font-size: 12px; color: var(--app-muted); margin-bottom: 20px; line-height: 1.5; }
+    .modal-form-row { display: flex; gap: 10px; margin-bottom: 10px; }
+    .modal-field { flex: 1; height: 32px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 5px; }
+    .modal-actions { display: flex; gap: 8px; justify-content: flex-end; margin-top: 16px; }
+    .modal-btn { font-size: 12px; padding: 7px 14px; border-radius: 5px; border: 1px solid var(--app-border); background: var(--app-surface); color: var(--app-muted); }
+    .modal-btn.primary { background: #f59e0b; border-color: #f59e0b; color: white; font-weight: 600; }
+
+    /* ─── NEW TAB PATTERN ─────────────────────────────────────────── */
+    .browser-chrome { background: #e8eaed; }
+    .browser-tab-bar { display: flex; align-items: flex-end; padding: 8px 12px 0; gap: 2px; }
+    .browser-tab { padding: 7px 16px 8px; font-size: 11.5px; border-radius: 8px 8px 0 0; display: flex; align-items: center; gap: 6px; background: #d5d8de; color: #5f6368; max-width: 180px; }
+    .browser-tab.active { background: #f8fafc; color: var(--app-text); font-weight: 500; }
+    .tab-favicon { width: 12px; height: 12px; border-radius: 2px; background: #cbd5e1; flex-shrink: 0; }
+    .tab-favicon.blue { background: #93c5fd; }
+    .tab-favicon.amber { background: #fcd34d; }
+    .tab-close { margin-left: auto; color: #9aa0a6; font-size: 13px; }
+    .browser-url-bar { background: #f8fafc; border-top: 1px solid #d8dde4; padding: 6px 12px; }
+    .browser-url-input { background: white; border: 1px solid #dadde2; border-radius: 20px; padding: 4px 14px; font-size: 11.5px; color: var(--app-muted); display: flex; align-items: center; gap: 6px; }
+    .browser-url-lock { color: #188038; font-size: 10px; }
+    .browser-content { background: #f1f5f9; }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════════════════════
+     BEFORE — workflow diagram
+════════════════════════════════════════════════════════════════════ -->
+<div id="before" class="mockup" style="width:1100px;height:440px;background:#fafaf8;">
+  <div class="flow-page">
+    <div class="flow-title" style="color:#94a3b8;">Interview &amp; Assessment Review — Before</div>
+    <div class="flow-row">
+
+      <div class="flow-step">
+        <div class="flow-step-box" style="background:#f1f5f9;border:1px solid #e2e8f0;">
+          <div style="font-size:13px;font-weight:700;color:#64748b;margin-bottom:4px;">Global/IRAD</div>
+          <div class="flow-step-label" style="color:#475569;">Notified via<br>Email / Teams</div>
+          <div class="flow-step-sub" style="color:#94a3b8;">No in-app tracking</div>
+        </div>
+      </div>
+      <div class="flow-arrow">→</div>
+
+      <div class="flow-step">
+        <div class="flow-step-box" style="background:#f1f5f9;border:1px solid #e2e8f0;">
+          <div style="font-size:13px;font-weight:700;color:#64748b;margin-bottom:4px;">Global/IRAD</div>
+          <div class="flow-step-label" style="color:#475569;">Open case,<br>find documents</div>
+          <div class="flow-step-sub" style="color:#94a3b8;">Documents tab</div>
+        </div>
+      </div>
+      <div class="flow-arrow">→</div>
+
+      <div class="flow-step">
+        <div class="flow-step-box" style="background:#fff7ed;border:1px solid #fed7aa;">
+          <div style="font-size:13px;font-weight:700;color:#b45309;margin-bottom:4px;">Global → Desktop</div>
+          <div class="flow-step-label" style="color:#9a3412;">Download<br>interview +<br>assessment</div>
+          <div class="flow-step-sub" style="color:#c2410c;">Manual download</div>
+        </div>
+      </div>
+      <div class="flow-arrow">→</div>
+
+      <div class="flow-step">
+        <div class="flow-step-box" style="background:#fff7ed;border:1px solid #fed7aa;">
+          <div style="font-size:13px;font-weight:700;color:#b45309;margin-bottom:4px;">Adobe Acrobat</div>
+          <div class="flow-step-label" style="color:#9a3412;">Review &amp; edit<br>offline</div>
+          <div class="flow-step-sub" style="color:#c2410c;">External tool</div>
+        </div>
+      </div>
+      <div class="flow-arrow">→</div>
+
+      <div class="flow-step">
+        <div class="flow-step-box" style="background:#fef2f2;border:1px solid #fecaca;">
+          <div style="font-size:13px;font-weight:700;color:#b91c1c;margin-bottom:4px;">Global/IRAD</div>
+          <div class="flow-step-label" style="color:#991b1b;">Re-upload<br>to case contents</div>
+          <div class="flow-step-sub" style="color:#b91c1c;">Manual step</div>
+        </div>
+      </div>
+      <div class="flow-arrow">→</div>
+
+      <div class="flow-step">
+        <div class="flow-step-box" style="background:#fef2f2;border:1px solid #fecaca;">
+          <div style="font-size:13px;font-weight:700;color:#b91c1c;margin-bottom:4px;">Email / In-person</div>
+          <div class="flow-step-label" style="color:#991b1b;">Concur or<br>send notes<br>to officer</div>
+          <div class="flow-step-sub" style="color:#b91c1c;">Undocumented</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="flow-pain">
+      <div class="pain-tag">⚠ 4+ tools required</div>
+      <div class="pain-tag">⚠ Download / edit / re-upload cycle</div>
+      <div class="pain-tag">⚠ Decisions undocumented in Global</div>
+      <div class="pain-tag">⚠ No audit trail</div>
+      <div class="pain-tag">⚠ Context switching on every review</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════════════════
+     AFTER — workflow diagram
+════════════════════════════════════════════════════════════════════ -->
+<div id="after" class="mockup" style="width:1100px;height:440px;background:#f8faf8;">
+  <div class="flow-page">
+    <div class="flow-title" style="color:#16a34a;">Interview &amp; Assessment Review — After</div>
+    <div class="flow-row" style="justify-content:center;gap:0;max-width:980px;margin:0 auto;">
+
+      <div class="flow-step">
+        <div class="flow-step-box" style="background:#f0fdf4;border:1px solid #86efac;max-width:140px;">
+          <div style="font-size:12px;font-weight:700;color:#15803d;margin-bottom:4px;">Global/IRAD</div>
+          <div class="flow-step-label" style="color:#15803d;">Case ready<br>in queue</div>
+          <div class="flow-step-sub" style="color:#4ade80;">In-app notification</div>
+        </div>
+      </div>
+      <div class="flow-arrow" style="color:#86efac;">→</div>
+
+      <div class="flow-step">
+        <div class="flow-step-box" style="background:#f0fdf4;border:1px solid #86efac;max-width:140px;">
+          <div style="font-size:12px;font-weight:700;color:#15803d;margin-bottom:4px;">Global/IRAD</div>
+          <div class="flow-step-label" style="color:#15803d;">Open case,<br>check contents</div>
+          <div class="flow-step-sub" style="color:#4ade80;">Adjudications tab</div>
+        </div>
+      </div>
+      <div class="flow-arrow" style="color:#86efac;">→</div>
+
+      <div class="flow-step">
+        <div class="flow-step-box" style="background:#f0fdf4;border:2px solid #16a34a;max-width:140px;">
+          <div style="font-size:12px;font-weight:700;color:#15803d;margin-bottom:4px;">GINA</div>
+          <div class="flow-step-label" style="color:#15803d;">Enter Supervisor<br>Review Mode</div>
+          <div class="flow-step-sub" style="color:#4ade80;">One click</div>
+        </div>
+      </div>
+      <div class="flow-arrow" style="color:#86efac;">→</div>
+
+      <div class="flow-step">
+        <div class="flow-step-box" style="background:#f0fdf4;border:2px solid #16a34a;max-width:140px;">
+          <div style="font-size:12px;font-weight:700;color:#15803d;margin-bottom:4px;">GINA</div>
+          <div class="flow-step-label" style="color:#15803d;">Review interview<br>+ forms in-app</div>
+          <div class="flow-step-sub" style="color:#4ade80;">No download needed</div>
+        </div>
+      </div>
+      <div class="flow-arrow" style="color:#86efac;">→</div>
+
+      <div class="flow-step">
+        <div class="flow-step-box" style="background:#f0fdf4;border:2px solid #16a34a;max-width:140px;">
+          <div style="font-size:12px;font-weight:700;color:#15803d;margin-bottom:4px;">GINA</div>
+          <div class="flow-step-label" style="color:#15803d;">Concur /<br>Not Concur</div>
+          <div class="flow-step-sub" style="color:#4ade80;">In-app decision</div>
+        </div>
+      </div>
+      <div class="flow-arrow" style="color:#86efac;">→</div>
+
+      <div class="flow-step">
+        <div class="flow-step-box" style="background:#dcfce7;border:2px solid #16a34a;max-width:140px;">
+          <div style="font-size:12px;font-weight:700;color:#14532d;margin-bottom:4px;">Global/IRAD</div>
+          <div class="flow-step-label" style="color:#14532d;">Bulk export +<br>fill review card</div>
+          <div class="flow-step-sub" style="color:#16a34a;">Auto-documented</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="flow-pain" style="justify-content:center;gap:12px;margin-top:28px;">
+      <div class="pain-tag" style="background:#dcfce7;color:#15803d;">✓ Review stays in-app — no downloads</div>
+      <div class="pain-tag" style="background:#dcfce7;color:#15803d;">✓ Decision documented automatically</div>
+      <div class="pain-tag" style="background:#dcfce7;color:#15803d;">✓ Officer notified through the system</div>
+      <div class="pain-tag" style="background:#dcfce7;color:#15803d;">✓ Bulk export replaces manual re-upload</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════════════════
+     EXPLORE: Overlay pattern
+════════════════════════════════════════════════════════════════════ -->
+<div id="explore-overlay" class="mockup" style="width:720px;height:420px;position:relative;">
+  <!-- Dimmed app behind -->
+  <div class="app" style="opacity:0.35;filter:blur(1px);position:absolute;inset:0;">
+    <div class="sidebar">
+      <div class="sidebar-logo"><div class="sidebar-logo-name">CRS</div></div>
+      <div class="sidebar-nav">
+        <div class="nav-item active">Case Queue</div>
+        <div class="nav-item">Interviews</div>
+      </div>
+    </div>
+    <div class="main">
+      <div class="topbar"><div class="breadcrumb"><span>Cases</span><span class="sep">›</span><span class="crumb-active">INT-2024-0847</span></div></div>
+      <div class="content-area">
+        <div class="case-hdr"><div><div class="case-hdr-num">INT-2024-0847</div><div class="case-hdr-name">Ahmad K.</div></div></div>
+        <div class="doc-line heading"></div>
+        <div class="doc-line l"></div><div class="doc-line m"></div><div class="doc-line full"></div>
+      </div>
+    </div>
+  </div>
+  <!-- Modal overlay -->
+  <div class="modal-overlay">
+    <div class="modal-card">
+      <div class="modal-title">Enter Review Mode</div>
+      <div class="modal-sub">You're about to begin reviewing case INT-2024-0847. This will open the review tools for this case.</div>
+      <div class="modal-form-row"><div class="modal-field"></div><div class="modal-field"></div></div>
+      <div class="modal-form-row"><div class="modal-field" style="flex:2;"></div></div>
+      <div class="modal-actions">
+        <button class="modal-btn">Cancel</button>
+        <button class="modal-btn primary">Begin Review</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════════════════
+     EXPLORE: New Tab pattern
+════════════════════════════════════════════════════════════════════ -->
+<div id="explore-newtab" class="mockup" style="width:720px;height:420px;background:#e8eaed;">
+  <div class="browser-chrome" style="height:100%;display:flex;flex-direction:column;">
+    <div class="browser-tab-bar">
+      <div class="browser-tab">
+        <div class="tab-favicon blue"></div>
+        <span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">Case Queue — CRS</span>
+        <span class="tab-close">×</span>
+      </div>
+      <div class="browser-tab active">
+        <div class="tab-favicon amber"></div>
+        <span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">Review Mode — INT-2024-0847</span>
+        <span class="tab-close">×</span>
+      </div>
+      <div style="padding:8px 10px;color:#9aa0a6;font-size:18px;align-self:center;line-height:1;">+</div>
+    </div>
+    <div class="browser-url-bar">
+      <div class="browser-url-input">
+        <span class="browser-url-lock">🔒</span>
+        <span>crs.uscis.gov/review/INT-2024-0847</span>
+      </div>
+    </div>
+    <div class="browser-content" style="flex:1;">
+      <div class="app" style="height:100%;">
+        <div class="sidebar">
+          <div class="sidebar-logo"><div class="sidebar-logo-name">CRS</div><div class="sidebar-logo-sub">Review Mode</div></div>
+          <div class="sidebar-nav">
+            <div class="nav-item active" style="color:#fcd34d;border-left-color:#fcd34d;">⊙ Case INT-0847</div>
+            <div class="nav-item">Documents</div>
+            <div class="nav-item">Notes</div>
+          </div>
+        </div>
+        <div class="main">
+          <div class="review-banner">
+            <div class="review-badge">Review Mode</div>
+            <div class="review-banner-text">INT-2024-0847 · Ahmad K.</div>
+            <div class="review-banner-space"></div>
+            <div class="review-exit-btn">Exit &amp; Return to Queue</div>
+          </div>
+          <div class="content-area" style="padding:16px;">
+            <div class="doc-line heading"></div>
+            <div class="doc-line l"></div>
+            <div class="doc-line m"></div>
+            <div class="doc-line full"></div>
+            <div class="doc-line s"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════════════════
+     EXPLORE: Mode Toggle (selected) ✓
+════════════════════════════════════════════════════════════════════ -->
+<div id="explore-modetoggle" class="mockup" style="width:720px;height:420px;">
+  <div class="app" style="height:100%;">
+    <div class="sidebar">
+      <div class="sidebar-logo">
+        <div class="sidebar-logo-name">CRS</div>
+        <div class="sidebar-logo-sub">Case Review System</div>
+      </div>
+      <div class="sidebar-nav">
+        <div class="sidebar-section">Navigation</div>
+        <div class="nav-item"><div class="nav-dot"></div>Dashboard</div>
+        <div class="nav-item active"><div class="nav-dot active"></div>Case Queue</div>
+        <div class="nav-item"><div class="nav-dot"></div>Interviews</div>
+      </div>
+    </div>
+    <div class="main">
+      <div class="topbar">
+        <div class="breadcrumb"><span>Cases</span><span class="sep">›</span><span class="crumb-active">INT-2024-0847</span></div>
+        <div class="topbar-space"></div>
+        <!-- Mode toggle -->
+        <div style="display:flex;align-items:center;gap:8px;background:#fffbeb;border:1px solid #fbbf24;border-radius:6px;padding:5px 10px;">
+          <span style="font-size:10px;font-weight:700;color:#92400e;text-transform:uppercase;letter-spacing:0.07em;">Review Mode</span>
+          <div style="width:32px;height:18px;background:#f59e0b;border-radius:9px;position:relative;">
+            <div style="width:14px;height:14px;background:white;border-radius:50%;position:absolute;right:2px;top:2px;"></div>
+          </div>
+        </div>
+      </div>
+      <div class="review-banner">
+        <div class="review-badge">Review Mode Active</div>
+        <div class="review-banner-text">Reviewing case INT-2024-0847</div>
+        <div class="review-banner-space"></div>
+        <div class="review-exit-btn">Exit Review Mode</div>
+      </div>
+      <div class="review-toolbar">
+        <span class="toolbar-label">Actions</span>
+        <button class="toolbar-btn">Add Note</button>
+        <button class="toolbar-btn">Flag</button>
+        <div class="toolbar-divider"></div>
+        <div class="toolbar-space"></div>
+        <button class="toolbar-btn toolbar-btn-notconcur">Not Concur</button>
+        <button class="toolbar-btn toolbar-btn-concur">✓ Concur</button>
+      </div>
+      <div class="content-area" style="padding:16px;">
+        <div class="doc-line heading"></div>
+        <div class="doc-line l"></div>
+        <div class="doc-line m"></div>
+        <div class="doc-line full"></div>
+        <div class="doc-line s"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════════════════
+     DESIGN: Primary UI (full review mode active)
+════════════════════════════════════════════════════════════════════ -->
+<div id="design-primary" class="mockup" style="width:1200px;height:700px;">
+  <div class="app" style="height:100%;">
+    <div class="sidebar">
+      <div class="sidebar-logo">
+        <div class="sidebar-logo-name">CRS</div>
+        <div class="sidebar-logo-sub">Case Review System</div>
+      </div>
+      <div class="sidebar-nav">
+        <div class="sidebar-section">Main</div>
+        <div class="nav-item"><div class="nav-dot"></div>Dashboard</div>
+        <div class="nav-item active"><div class="nav-dot active"></div>Case Queue</div>
+        <div class="nav-item"><div class="nav-dot"></div>Interviews</div>
+        <div class="sidebar-section">Reports</div>
+        <div class="nav-item"><div class="nav-dot"></div>My Reviews</div>
+        <div class="nav-item"><div class="nav-dot"></div>Reports</div>
+        <div class="sidebar-section">Admin</div>
+        <div class="nav-item"><div class="nav-dot"></div>Settings</div>
+      </div>
+    </div>
+    <div class="main">
+      <div class="topbar">
+        <div class="breadcrumb">
+          <span>Cases</span><span class="sep">›</span>
+          <span>Interviews</span><span class="sep">›</span>
+          <span class="crumb-active">INT-2024-0847</span>
+        </div>
+        <div class="topbar-space"></div>
+        <div style="display:flex;align-items:center;gap:8px;background:#fffbeb;border:1px solid #fbbf24;border-radius:6px;padding:5px 10px;margin-right:12px;">
+          <span style="font-size:10px;font-weight:700;color:#92400e;text-transform:uppercase;letter-spacing:0.07em;">Review Mode</span>
+          <div style="width:32px;height:18px;background:#f59e0b;border-radius:9px;position:relative;">
+            <div style="width:14px;height:14px;background:white;border-radius:50%;position:absolute;right:2px;top:2px;"></div>
+          </div>
+        </div>
+        <div class="topbar-avatar">JR</div>
+      </div>
+      <div class="review-banner">
+        <div class="review-badge">Review Mode Active</div>
+        <div class="review-banner-text">Reviewing: INT-2024-0847 · Ahmad Karimi (redacted)</div>
+        <div class="review-banner-space"></div>
+        <div class="review-exit-btn">Exit Review Mode</div>
+      </div>
+      <div class="review-toolbar">
+        <span class="toolbar-label">Review Actions</span>
+        <button class="toolbar-btn">📎 Documents</button>
+        <button class="toolbar-btn">📝 Add Note</button>
+        <button class="toolbar-btn">⚑ Flag</button>
+        <div class="toolbar-divider"></div>
+        <div class="toolbar-space"></div>
+        <button class="toolbar-btn toolbar-btn-notconcur">✕ Not Concur</button>
+        <button class="toolbar-btn toolbar-btn-concur">✓ Concur</button>
+      </div>
+      <div class="content-area">
+        <div class="case-hdr">
+          <div>
+            <div class="case-hdr-num">Interview Case #INT-2024-0847</div>
+            <div class="case-hdr-name">Ahmad K. — Asylum Interview Review</div>
+          </div>
+          <div class="case-hdr-space"></div>
+          <div class="case-meta-row">
+            <span class="badge badge-review">In Review</span>
+            <span class="badge badge-pending">Pending Decision</span>
+          </div>
+        </div>
+        <div class="content-flex">
+          <div class="doc-viewer card">
+            <div class="doc-tab-bar">
+              <div class="doc-tab active">I-589 Form</div>
+              <div class="doc-tab">Interview Notes</div>
+              <div class="doc-tab">Supporting Docs</div>
+              <div class="doc-tab">History</div>
+            </div>
+            <div class="doc-body">
+              <div class="doc-section-title">Application for Asylum and Withholding of Removal</div>
+              <div class="doc-field-row">
+                <div class="doc-field">
+                  <div class="doc-field-label">Last Name</div>
+                  <div class="doc-field-box">Karimi [redacted]</div>
+                </div>
+                <div class="doc-field">
+                  <div class="doc-field-label">First Name</div>
+                  <div class="doc-field-box">Ahmad [redacted]</div>
+                </div>
+                <div class="doc-field">
+                  <div class="doc-field-label">Date of Birth</div>
+                  <div class="doc-field-box">██/██/19██</div>
+                </div>
+              </div>
+              <div class="doc-field-row">
+                <div class="doc-field">
+                  <div class="doc-field-label">Country of Birth</div>
+                  <div class="doc-field-box">Afghanistan</div>
+                </div>
+                <div class="doc-field">
+                  <div class="doc-field-label">Date of Interview</div>
+                  <div class="doc-field-box">January 18, 2024</div>
+                </div>
+              </div>
+              <div style="margin-top:16px;">
+                <div class="doc-field-label" style="margin-bottom:8px;">Basis for Asylum Claim</div>
+                <div class="doc-line full"></div>
+                <div class="doc-line l"></div>
+                <div class="doc-line m"></div>
+                <div class="doc-line full"></div>
+                <div class="doc-line s"></div>
+                <div class="doc-line l"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="context-panel card">
+            <div class="context-panel-hdr">
+              <div class="context-panel-title">Case Context</div>
+            </div>
+            <div class="context-field">
+              <div class="context-label">Case Number</div>
+              <div class="context-value">INT-2024-0847</div>
+            </div>
+            <div class="context-field">
+              <div class="context-label">Assigned Officer</div>
+              <div class="context-value">J. Martinez</div>
+            </div>
+            <div class="context-field">
+              <div class="context-label">Interview Date</div>
+              <div class="context-value">Jan 18, 2024</div>
+            </div>
+            <div class="context-field">
+              <div class="context-label">Country of Origin</div>
+              <div class="context-value">Afghanistan</div>
+            </div>
+            <div class="context-field">
+              <div class="context-label">Prior Reviews</div>
+              <div class="context-value">2 reviews</div>
+            </div>
+            <div class="context-field">
+              <div class="context-label">Status</div>
+              <div class="context-value" style="display:flex;align-items:center;gap:6px;">
+                <span style="width:6px;height:6px;background:#f59e0b;border-radius:50%;display:inline-block;"></span>
+                Pending Review
+              </div>
+            </div>
+            <div class="context-highlight">
+              <div class="context-highlight-text">Officer notes available — 3 attachments</div>
+            </div>
+            <div class="context-link">View full case record →</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════════════════
+     DESIGN: Concur / Not Concur flow
+════════════════════════════════════════════════════════════════════ -->
+<div id="design-concur" class="mockup" style="width:720px;height:480px;">
+  <div class="app" style="height:100%;">
+    <div class="sidebar" style="width:150px;min-width:150px;">
+      <div class="sidebar-logo"><div class="sidebar-logo-name">CRS</div></div>
+      <div class="sidebar-nav">
+        <div class="nav-item active" style="font-size:11px;"><div class="nav-dot active"></div>Case Queue</div>
+        <div class="nav-item" style="font-size:11px;"><div class="nav-dot"></div>Interviews</div>
+      </div>
+    </div>
+    <div class="main">
+      <div class="review-banner">
+        <div class="review-badge">Review Mode</div>
+        <div class="review-banner-text">INT-2024-0847</div>
+        <div class="review-banner-space"></div>
+        <div class="review-exit-btn">Exit</div>
+      </div>
+      <div class="review-toolbar">
+        <div class="toolbar-space"></div>
+        <button class="toolbar-btn toolbar-btn-notconcur">✕ Not Concur</button>
+        <button class="toolbar-btn toolbar-btn-concur">✓ Concur</button>
+      </div>
+      <div style="flex:1;padding:20px;background:var(--app-bg);display:flex;flex-direction:column;gap:14px;">
+        <div class="doc-line heading" style="width:40%;"></div>
+        <div class="doc-line l"></div>
+        <div class="doc-line m"></div>
+        <div class="doc-line full"></div>
+        <div class="doc-line s"></div>
+        <!-- Decision panel slides in from bottom -->
+        <div class="decision-panel" style="border-radius:8px;margin-top:auto;">
+          <div class="decision-title">Record Your Decision</div>
+          <div class="decision-row">
+            <div class="decision-btn decision-btn-concur selected">
+              <span class="decision-icon">✓</span>
+              <div>
+                <div class="decision-label" style="color:white;">Concur</div>
+                <div class="decision-sub">Officer's recommendation is supported</div>
+              </div>
+            </div>
+            <div class="decision-btn decision-btn-notconcur">
+              <span class="decision-icon">✕</span>
+              <div>
+                <div class="decision-label" style="color:var(--red);">Not Concur</div>
+                <div class="decision-sub" style="color:var(--app-muted);">Return case with supervisor notes</div>
+              </div>
+            </div>
+          </div>
+          <div class="decision-comment">
+            <div class="decision-comment-label">Optional Notes</div>
+            <div class="decision-comment-box">Review complete. Supporting documents verified, testimony consistent with country conditions report.</div>
+          </div>
+          <div class="decision-actions">
+            <button class="decision-cancel">Cancel</button>
+            <button class="decision-submit">Submit Decision →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════════════════
+     DESIGN: Case Context Panel
+════════════════════════════════════════════════════════════════════ -->
+<div id="design-context" class="mockup" style="width:720px;height:480px;">
+  <div class="app" style="height:100%;">
+    <div class="sidebar" style="width:150px;min-width:150px;">
+      <div class="sidebar-logo"><div class="sidebar-logo-name">CRS</div></div>
+      <div class="sidebar-nav">
+        <div class="nav-item active" style="font-size:11px;"><div class="nav-dot active"></div>Case Queue</div>
+        <div class="nav-item" style="font-size:11px;"><div class="nav-dot"></div>Interviews</div>
+      </div>
+    </div>
+    <div class="main">
+      <div class="review-banner">
+        <div class="review-badge">Review Mode</div>
+        <div class="review-banner-text">INT-2024-0847 · Ahmad K.</div>
+        <div class="review-banner-space"></div>
+        <div class="review-exit-btn">Exit</div>
+      </div>
+      <div class="content-area" style="padding:16px;flex-direction:row;gap:14px;">
+        <!-- Blurred doc area -->
+        <div style="flex:1;display:flex;flex-direction:column;gap:10px;opacity:0.4;">
+          <div class="doc-line heading"></div>
+          <div class="doc-line l"></div>
+          <div class="doc-line m"></div>
+          <div class="doc-line full"></div>
+          <div class="doc-line s"></div>
+          <div class="doc-line l"></div>
+          <div class="doc-line m"></div>
+          <div class="doc-line full"></div>
+        </div>
+        <!-- Context panel — highlighted -->
+        <div class="context-panel card" style="width:220px;min-width:220px;box-shadow:0 0 0 2px #f59e0b,0 4px 20px rgba(245,158,11,0.2);">
+          <div class="context-panel-hdr" style="background:#fffbeb;border-bottom-color:#fbbf24;">
+            <div class="context-panel-title" style="color:#92400e;">⊙ Case Context</div>
+          </div>
+          <div class="context-field">
+            <div class="context-label">Case Number</div>
+            <div class="context-value">INT-2024-0847</div>
+          </div>
+          <div class="context-field">
+            <div class="context-label">Assigned Officer</div>
+            <div class="context-value">J. Martinez</div>
+          </div>
+          <div class="context-field">
+            <div class="context-label">Interview Date</div>
+            <div class="context-value">Jan 18, 2024</div>
+          </div>
+          <div class="context-field">
+            <div class="context-label">Country of Origin</div>
+            <div class="context-value">Afghanistan</div>
+          </div>
+          <div class="context-field">
+            <div class="context-label">Prior Reviews</div>
+            <div class="context-value">2 reviews</div>
+          </div>
+          <div class="context-field">
+            <div class="context-label">Current Status</div>
+            <div class="context-value" style="display:flex;align-items:center;gap:5px;">
+              <span style="width:6px;height:6px;background:#f59e0b;border-radius:50%;display:inline-block;"></span>
+              Pending Review
+            </div>
+          </div>
+          <div class="context-highlight">
+            <div class="context-highlight-text">📎 3 attachments from officer</div>
+          </div>
+          <div class="context-link" style="font-size:11px;">View full case →</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════════════════
+     DESIGN: Officer Notification Pattern
+════════════════════════════════════════════════════════════════════ -->
+<div id="design-notification" class="mockup" style="width:720px;height:480px;background:#f1f5f9;">
+  <div style="height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px;gap:20px;">
+    <!-- Main notification toast -->
+    <div class="notif-toast" style="width:380px;">
+      <div class="notif-icon">📋</div>
+      <div style="flex:1;">
+        <div class="notif-title">Supervisor Review Complete</div>
+        <div class="notif-body">Your review of case <strong>INT-2024-0847</strong> has been reviewed by Supervisor J. Rodriguez.</div>
+        <div style="margin-top:8px;display:flex;align-items:center;gap:6px;">
+          <span style="font-size:11px;font-weight:700;padding:2px 7px;border-radius:3px;background:#dcfce7;color:#15803d;">Concurred</span>
+          <span style="font-size:11px;color:#94a3b8;">No changes required</span>
+        </div>
+        <div class="notif-time">Today at 2:47 PM</div>
+        <div class="notif-actions">
+          <button class="notif-btn primary">View Case</button>
+          <button class="notif-btn">Dismiss</button>
+        </div>
+      </div>
+    </div>
+    <!-- Secondary notification (not-concur example) -->
+    <div class="notif-toast" style="width:380px;opacity:0.65;transform:scale(0.95);">
+      <div class="notif-icon" style="background:#fee2e2;">📝</div>
+      <div style="flex:1;">
+        <div class="notif-title">Supervisor Feedback Received</div>
+        <div class="notif-body">Supervisor requested revisions on case <strong>INT-2024-0512</strong>.</div>
+        <div style="margin-top:8px;display:flex;align-items:center;gap:6px;">
+          <span style="font-size:11px;font-weight:700;padding:2px 7px;border-radius:3px;background:#fee2e2;color:#b91c1c;">Not Concurred</span>
+        </div>
+        <div class="notif-time">Yesterday at 9:12 AM</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

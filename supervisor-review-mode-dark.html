@@ -117,11 +117,11 @@
 
     /* HERO */
     .hero {
-      min-height: 70vh;
+      min-height: 40vh;
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
-      padding: 8rem 3rem 5rem;
+      padding: 6rem 3rem 3rem;
       max-width: 1200px;
       margin: 0 auto;
     }
@@ -149,7 +149,7 @@
       animation: fadeUp 0.5s ease 0.2s forwards;
     }
     .hero-title {
-      font-size: clamp(3.5rem, 9vw, 8rem);
+      font-size: clamp(2.5rem, 5vw, 5rem);
       font-weight: 600;
       line-height: 0.95;
       letter-spacing: -0.03em;
@@ -288,49 +288,67 @@
 
     /* FLOW DIAGRAM */
     .flow-diagram {
-      max-width: 960px;
-      margin: 0 auto 6rem;
-      padding: 0 3rem;
+      margin: 0 0 6rem;
+      padding: 5rem 3rem;
+      background: rgba(232,228,220,0.03);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .flow-diagram-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .flow-diagram-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 3rem;
     }
     .flow-inner {
       display: grid;
-      grid-template-columns: 1fr 48px 1fr;
+      grid-template-columns: 1fr 60px 1fr;
       gap: 0;
-      border: 1px solid var(--border);
-      border-radius: 4px;
+      border-radius: 6px;
       overflow: hidden;
     }
     .flow-col {
-      padding: 2.5rem 2.5rem;
+      padding: 2.5rem 3rem;
     }
     .flow-col:first-child {
-      border-right: 1px solid var(--border);
+      background: rgba(232,228,220,0.03);
+      border: 1px solid var(--border);
+      border-radius: 6px 0 0 6px;
+    }
+    .flow-col:last-child {
+      background: rgba(77,122,94,0.12);
+      border: 1px solid rgba(77,122,94,0.3);
+      border-radius: 0 6px 6px 0;
     }
     .flow-col-label {
       font-size: 0.65rem;
       letter-spacing: 0.14em;
       text-transform: uppercase;
       font-weight: 600;
-      margin-bottom: 1.75rem;
+      margin-bottom: 2rem;
     }
     .flow-col-label.before { color: var(--muted); }
     .flow-col-label.after  { color: var(--accent2); }
     .flow-steps {
       display: flex;
       flex-direction: column;
-      gap: 0.9rem;
+      gap: 1rem;
     }
     .flow-step {
-      font-size: 0.875rem;
+      font-size: 0.9rem;
       line-height: 1.5;
       color: var(--muted);
       display: flex;
-      gap: 0.85rem;
+      gap: 1rem;
       align-items: baseline;
     }
     .flow-step-num {
       font-size: 0.62rem;
-      color: rgba(232,228,220,0.3);
+      color: rgba(232,228,220,0.25);
       flex-shrink: 0;
       letter-spacing: 0.06em;
       padding-top: 0.15rem;
@@ -341,20 +359,20 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background: rgba(232,228,220,0.03);
     }
     .flow-arrow {
-      font-size: 1.2rem;
-      color: var(--accent);
-      opacity: 0.5;
+      font-size: 1.1rem;
+      color: var(--muted);
+      opacity: 0.4;
     }
     .flow-result {
-      margin-top: 1.5rem;
-      padding: 0.6rem 0.9rem;
-      border: 1px solid rgba(77,122,94,0.3);
+      margin-top: 2rem;
+      padding: 0.65rem 1rem;
       border-radius: 3px;
       font-size: 0.75rem;
-      color: var(--accent2);
+      font-weight: 600;
+      color: #fff;
+      background: var(--accent2);
       letter-spacing: 0.05em;
       display: inline-block;
     }
@@ -443,35 +461,151 @@
     }
     .img-placeholder {
       width: 100%;
-      aspect-ratio: 16 / 7;
-      border: 1px dashed rgba(232,228,220,0.18);
+      aspect-ratio: 16 / 9;
       border-radius: 4px;
-      background: #ffffff;
+      background: #d0cdc8;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 1rem;
+      gap: 0.75rem;
       padding: 2rem;
     }
     .img-placeholder-label {
       font-size: 0.65rem;
       letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: var(--accent);
+      color: rgba(15,15,17,0.45);
     }
     .img-placeholder-prompt {
       font-size: 0.8rem;
-      color: var(--muted);
+      color: rgba(15,15,17,0.3);
       text-align: center;
-      max-width: 640px;
-      line-height: 1.7;
+      max-width: 480px;
+      line-height: 1.6;
       font-style: italic;
     }
     .img-placeholder-dims {
       font-size: 0.65rem;
-      color: rgba(232,228,220,0.25);
+      color: rgba(15,15,17,0.25);
       letter-spacing: 0.08em;
+    }
+
+    /* PARALLAX WRAPPER */
+    .parallax-wrap {
+      overflow: hidden;
+      border-radius: 4px;
+      position: relative;
+    }
+    .parallax-wrap > * {
+      display: block;
+      width: 100%;
+      will-change: transform;
+    }
+    .parallax-wrap > img {
+      height: 115%;
+      object-fit: cover;
+      object-position: top;
+      margin-top: 0;
+    }
+
+    /* HERO IMAGE SLOT */
+    .hero-img-slot {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 3rem 6rem;
+    }
+    .hero-img-slot .parallax-wrap {
+      border-radius: 8px;
+      box-shadow: 0 40px 100px rgba(0,0,0,0.55), 0 0 0 1px rgba(232,228,220,0.07);
+    }
+    .hero-img-slot .img-placeholder {
+      aspect-ratio: 16 / 9;
+    }
+
+    /* FEATURE CALLOUT STRIP (3-up staggered) */
+    .feature-callout {
+      max-width: 1200px;
+      margin: 0 auto 6rem;
+      padding: 0 3rem;
+    }
+    .feature-callout-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 1.5rem;
+      align-items: start;
+    }
+    .feature-card {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .feature-card:nth-child(2) {
+      margin-top: 3rem;
+    }
+    .feature-card .parallax-wrap {
+      border-radius: 4px;
+    }
+    .feature-card .img-placeholder {
+      aspect-ratio: 4 / 3;
+    }
+    .feature-card-label {
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--fg);
+    }
+    .feature-card-desc {
+      font-size: 0.82rem;
+      line-height: 1.65;
+      color: var(--muted);
+    }
+
+    /* PROCESS ARTIFACT ROW */
+    .process-artifacts {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 3rem 3rem 6rem;
+    }
+    .process-artifacts-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+    }
+    .process-artifacts-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 1.25rem;
+    }
+    .artifact-card {
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+    }
+    .artifact-card .img-placeholder {
+      aspect-ratio: 4 / 3;
+    }
+    .artifact-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: rgba(232,228,220,0.35);
+    }
+
+    /* FINAL POLISH SHOT */
+    .final-shot {
+      max-width: 1100px;
+      margin: 0 auto 8rem;
+      padding: 0 3rem;
+    }
+    .final-shot .parallax-wrap {
+      border-radius: 8px;
+      box-shadow: 0 40px 100px rgba(0,0,0,0.55), 0 0 0 1px rgba(232,228,220,0.07);
+    }
+    .final-shot .img-placeholder {
+      border-radius: 8px;
+      aspect-ratio: 16 / 9;
     }
 
     /* QUOTE STRIP */
@@ -660,10 +794,11 @@
       .meta-wrap { padding: 0 1.5rem 4rem; }
       .meta-bar { flex-wrap: wrap; gap: 1.5rem; padding: 1.5rem; }
       .prose { padding: 0 1.5rem 4rem; }
-      .flow-diagram { padding: 0 1.5rem; margin-bottom: 4rem; }
+      .flow-diagram { padding: 3rem 1.5rem; margin-bottom: 4rem; }
       .flow-inner { grid-template-columns: 1fr; }
       .flow-col { padding: 2rem 1.5rem; }
-      .flow-col:first-child { border-right: none; border-bottom: 1px solid var(--border); }
+      .flow-col:first-child { border-radius: 6px 6px 0 0; border-bottom: none; }
+      .flow-col:last-child { border-radius: 0 0 6px 6px; }
       .flow-divider { display: none; }
       .stats-strip { padding: 4rem 1.5rem; margin-bottom: 4rem; }
       .stats-inner { grid-template-columns: 1fr; gap: 2.5rem; }
@@ -679,6 +814,13 @@
       .conclusion-section { padding: 4rem 1.5rem; }
       .cs-next { padding: 3rem 1.5rem 6rem; }
       footer { padding: 1.5rem; flex-direction: column; gap: 0.5rem; text-align: center; }
+      .hero-img-slot { padding: 0 1.5rem 4rem; }
+      .feature-callout { padding: 0 1.5rem; margin-bottom: 4rem; }
+      .feature-callout-grid { grid-template-columns: 1fr; }
+      .feature-card:nth-child(2) { margin-top: 0; }
+      .process-artifacts { padding: 2rem 1.5rem 4rem; }
+      .process-artifacts-grid { grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+      .final-shot { padding: 0 1.5rem; margin-bottom: 5rem; }
     }
   </style>
 </head>
@@ -731,10 +873,11 @@
     </div>
   </div>
 
-  <!-- NDA NOTICE -->
-  <div class="nda-notice">
-    <span class="nda-icon">⊘</span>
-    <span>This work is covered by NDA. Product visuals cannot be shown publicly.</span>
+  <!-- HERO IMAGE SLOT -->
+  <div class="hero-img-slot">
+    <div class="parallax-wrap">
+      <img src="img/hero-final-ui.jpg" alt="Supervisor Review Mode — full interface" />
+    </div>
   </div>
 
   <!-- PROBLEM -->
@@ -751,17 +894,12 @@
     </div>
   </section>
 
-  <!-- IMAGE 01 -->
-  <div class="img-break">
-    <div class="img-placeholder">
-      <div class="img-placeholder-label">Image 01 — The Problem</div>
-      <div class="img-placeholder-prompt">Dark mode enterprise web application, multiple overlapping browser windows showing PDF viewer, spreadsheet, and form fields simultaneously, chaotic layered UI, desaturated muted colors, shallow depth of field, soft focus, ultra-wide screenshot composition, professional UI design --ar 16:7 --style raw --v 6</div>
-      <div class="img-placeholder-dims">16:7 · Recommended 1920×840</div>
-    </div>
-  </div>
-
   <!-- BEFORE / AFTER FLOW -->
   <div class="flow-diagram">
+    <div class="flow-diagram-inner">
+    <div class="flow-diagram-header">
+      <div class="section-eyebrow" style="margin-bottom:0;">The Opportunity</div>
+    </div>
     <div class="flow-inner">
       <div class="flow-col">
         <div class="flow-col-label before">Before</div>
@@ -810,6 +948,7 @@
         <div class="flow-result">Five steps → Three. No context switching.</div>
       </div>
     </div>
+    </div>
   </div>
 
   <!-- STATS -->
@@ -830,12 +969,31 @@
     </div>
   </div>
 
-  <!-- IMAGE 02 -->
-  <div class="img-break">
-    <div class="img-placeholder">
-      <div class="img-placeholder-label">Image 02 — Research</div>
-      <div class="img-placeholder-prompt">Abstract UX wireframe flow diagram on a dark background, interconnected nodes and arrows representing a user journey, glowing blue-grey lines, minimal flat design, top-down view, professional product design artifact, deep shadow, cinematic lighting --ar 16:7 --style raw --v 6</div>
-      <div class="img-placeholder-dims">16:7 · Recommended 1920×840</div>
+  <!-- FEATURE CALLOUT STRIP -->
+  <div class="feature-callout">
+    <div class="section-eyebrow">Key Screens</div>
+    <div class="feature-callout-grid">
+      <div class="feature-card">
+        <div class="parallax-wrap">
+          <img src="img/feature-mode-toggle.png" alt="Supervisor Review Mode toggle" />
+        </div>
+        <div class="feature-card-label">Supervisor Review Mode Toggle</div>
+        <div class="feature-card-desc">Transforms the existing interface in-context rather than replacing it — same case, different tools.</div>
+      </div>
+      <div class="feature-card">
+        <div class="parallax-wrap">
+          <img src="img/feature-concur-flow.png" alt="Concur / Not Concur decision flow" />
+        </div>
+        <div class="feature-card-label">Decision Flow</div>
+        <div class="feature-card-desc">A deliberate modal action — the design made the consequence feel proportional to what it is in the real world.</div>
+      </div>
+      <div class="feature-card">
+        <div class="parallax-wrap">
+          <img src="img/feature-notification.png" alt="Officer notification" />
+        </div>
+        <div class="feature-card-label">Automatic Notification</div>
+        <div class="feature-card-desc">Officer notification baked into the concur flow — eliminating a manual follow-up step entirely.</div>
+      </div>
     </div>
   </div>
 
@@ -904,6 +1062,40 @@
     </div>
   </section>
 
+  <!-- PROCESS ARTIFACT ROW -->
+  <div class="process-artifacts">
+    <div class="process-artifacts-label">Process Artifacts</div>
+    <div class="process-artifacts-grid">
+      <div class="artifact-card">
+        <div class="parallax-wrap">
+          <div class="img-placeholder">
+            <div class="img-placeholder-label">User Flow</div>
+            <div class="img-placeholder-dims">4:3</div>
+          </div>
+        </div>
+        <div class="artifact-label">Research → User Flow Map</div>
+      </div>
+      <div class="artifact-card">
+        <div class="parallax-wrap">
+          <div class="img-placeholder">
+            <div class="img-placeholder-label">Prototype</div>
+            <div class="img-placeholder-dims">4:3</div>
+          </div>
+        </div>
+        <div class="artifact-label">Exploration → 3 Pattern Variants</div>
+      </div>
+      <div class="artifact-card">
+        <div class="parallax-wrap">
+          <div class="img-placeholder">
+            <div class="img-placeholder-label">Testing</div>
+            <div class="img-placeholder-dims">4:3</div>
+          </div>
+        </div>
+        <div class="artifact-label">Usability Testing → A/B Findings</div>
+      </div>
+    </div>
+  </div>
+
   <!-- QUOTES -->
   <div class="quote-strip">
     <div class="quotes-inner">
@@ -925,12 +1117,14 @@
     </div>
   </div>
 
-  <!-- IMAGE 03 -->
-  <div class="img-break">
-    <div class="img-placeholder">
-      <div class="img-placeholder-label">Image 03 — Resolution</div>
-      <div class="img-placeholder-prompt">Clean dark mode enterprise dashboard UI, single focused modal dialog with clear action buttons, warm orange accent color, minimal typography, ample whitespace, soft inner glow, blurred background interface, polished SaaS product design, ultra-wide composition --ar 16:7 --style raw --v 6</div>
-      <div class="img-placeholder-dims">16:7 · Recommended 1920×840</div>
+  <!-- FINAL POLISH SHOT -->
+  <div class="final-shot">
+    <div class="parallax-wrap">
+      <div class="img-placeholder">
+        <div class="img-placeholder-label">Final Product — Polished Shot</div>
+        <div class="img-placeholder-prompt">The finished design at its best angle</div>
+        <div class="img-placeholder-dims">16:9 · Recommended 2560×1440</div>
+      </div>
     </div>
   </div>
 
@@ -1062,12 +1256,27 @@
       });
     }, { threshold: 0.05 });
 
-    document.querySelectorAll('.prose, .flow-inner, .stat, .process-phase, .quote-block, .decision-card, .conclusion-section, .cs-next-card').forEach((el, i) => {
+    document.querySelectorAll('.prose, .flow-inner, .stat, .process-phase, .quote-block, .decision-card, .conclusion-section, .cs-next-card, .feature-card, .artifact-card, .final-shot').forEach((el, i) => {
       el.style.opacity = '0';
       el.style.transform = 'translateY(14px)';
       el.style.transition = `opacity 0.55s ease ${i * 0.04}s, transform 0.55s ease ${i * 0.04}s`;
       revealObserver.observe(el);
     });
+
+    // Scroll parallax — image wrappers
+    const parallaxWraps = document.querySelectorAll('.parallax-wrap');
+    function updateParallax() {
+      parallaxWraps.forEach(wrap => {
+        const inner = wrap.firstElementChild;
+        if (!inner) return;
+        const rect = wrap.getBoundingClientRect();
+        const progress = (window.innerHeight - rect.top) / (window.innerHeight + rect.height);
+        const offset = (progress - 0.5) * 50;
+        inner.style.transform = `translateY(${offset}px)`;
+      });
+    }
+    window.addEventListener('scroll', updateParallax, { passive: true });
+    updateParallax();
   </script>
 
 </body>
