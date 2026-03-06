@@ -1,0 +1,458 @@
+/* ============================================================
+   CASE STUDY SHARED STYLESHEET
+   Shared by all case study pages. Edit once, updates everywhere.
+   ============================================================ */
+
+:root {
+  --bg: #f5f0e8;
+  --fg: #1a1814;
+  --muted: rgba(26,24,20,0.55);
+  --faint: rgba(26,24,20,0.04);
+  --accent: #c4703f;
+  --accent2: #4d7a5e;
+  --border: rgba(26,24,20,0.12);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: 'Instrument Sans', sans-serif;
+  font-weight: 400;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* GRAIN OVERLAY */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.18;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
+  mix-blend-mode: multiply;
+}
+
+/* GRADIENT BG */
+.bg-gradient {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 65% 55% at 5% 0%,   rgba(255, 195, 140, 0.45) 0%, transparent 55%),
+    radial-gradient(ellipse 55% 45% at 85% 5%,  rgba(180, 220, 185, 0.4) 0%, transparent 50%),
+    radial-gradient(ellipse 50% 45% at 100% 55%, rgba(160, 205, 240, 0.3) 0%, transparent 50%),
+    radial-gradient(ellipse 60% 50% at 15% 90%, rgba(255, 175, 185, 0.3) 0%, transparent 55%),
+    radial-gradient(ellipse 55% 45% at 60% 100%,rgba(200, 180, 240, 0.25) 0%, transparent 50%),
+    #f5f0e8;
+}
+
+nav, section, footer, .cs-next, .cs-hero, .cs-image-wrap {
+  position: relative;
+  z-index: 2;
+}
+
+/* ============================================================
+   NAV
+   ============================================================ */
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 3rem;
+}
+.nav-logo {
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.04em;
+  color: var(--fg);
+  text-decoration: none;
+}
+.nav-links {
+  display: flex;
+  gap: 2.5rem;
+  list-style: none;
+}
+.nav-links a {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--fg); }
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+footer {
+  padding: 1.5rem 3rem;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+footer p { font-size: 0.75rem; color: var(--muted); }
+
+/* ============================================================
+   ANIMATIONS
+   ============================================================ */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================================================
+   CASE STUDY HERO
+   ============================================================ */
+.cs-hero {
+  min-height: 38vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 0 3rem 5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.cs-back {
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 2.5rem;
+  transition: color 0.2s;
+  opacity: 0;
+  animation: fadeUp 0.5s ease 0.1s forwards;
+}
+.cs-back:hover { color: var(--fg); }
+
+.cs-title {
+  font-family: 'Instrument Sans', sans-serif;
+  font-size: clamp(2rem, 4.5vw, 4rem);
+  font-weight: 600;
+  line-height: 1.06;
+  letter-spacing: -0.025em;
+  margin-bottom: 1.25rem;
+  opacity: 0;
+  animation: fadeUp 0.6s ease 0.2s forwards;
+}
+.cs-title em {
+  font-family: 'Lora', serif;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--accent);
+}
+
+.cs-summary {
+  font-size: 1.05rem;
+  line-height: 1.75;
+  color: var(--muted);
+  max-width: 600px;
+  margin-bottom: 2.5rem;
+  opacity: 0;
+  animation: fadeUp 0.6s ease 0.3s forwards;
+}
+
+.cs-meta-bar {
+  display: flex;
+  gap: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border);
+  opacity: 0;
+  animation: fadeUp 0.6s ease 0.4s forwards;
+}
+.cs-meta-item { display: flex; flex-direction: column; gap: 0.3rem; }
+.cs-meta-label {
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.cs-meta-value {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--fg);
+}
+
+/* ============================================================
+   HERO IMAGE
+   ============================================================ */
+.cs-image-wrap {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 3rem;
+}
+
+.cs-image {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 4px;
+  background: var(--faint);
+  border: 1px solid var(--border);
+  overflow: hidden;
+  margin: 3rem 0;
+}
+.cs-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ============================================================
+   CONTENT SECTIONS
+   ============================================================ */
+.cs-section {
+  padding: 5rem 3rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.cs-section + .cs-section {
+  padding-top: 0;
+}
+
+.cs-section-label {
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 2.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.cs-section-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+/* PROBLEM */
+.cs-problem {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: start;
+}
+.cs-problem-statement {
+  font-size: clamp(1.3rem, 2.2vw, 1.75rem);
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+}
+.cs-problem-statement em {
+  font-family: 'Lora', serif;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--accent);
+}
+.cs-problem-body {
+  font-size: 0.95rem;
+  line-height: 1.85;
+  color: var(--muted);
+}
+.cs-problem-body p + p { margin-top: 1rem; }
+
+/* RESULTS */
+.cs-results {
+  background: var(--faint);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 3.5rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+.cs-stat-number {
+  font-size: clamp(2.5rem, 4vw, 3.5rem);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  color: var(--fg);
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+.cs-stat-number span { color: var(--accent); }
+.cs-stat-label {
+  font-size: 0.85rem;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+/* PROCESS */
+.cs-process-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.cs-process-phase {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 3rem;
+  padding: 2.5rem 0;
+  border-bottom: 1px solid var(--border);
+  align-items: start;
+}
+.cs-process-phase:first-child { border-top: 1px solid var(--border); }
+.cs-phase-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent2);
+  padding-top: 0.2rem;
+}
+.cs-phase-body {
+  font-size: 0.95rem;
+  line-height: 1.8;
+  color: var(--muted);
+}
+.cs-phase-body strong {
+  color: var(--fg);
+  font-weight: 500;
+}
+
+/* INLINE IMAGES within sections */
+.cs-inline-image {
+  width: 100%;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+  overflow: hidden;
+  margin: 2rem 0;
+}
+.cs-inline-image img {
+  width: 100%;
+  display: block;
+}
+
+/* QUOTES */
+.cs-quotes {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.cs-quote {
+  border-left: 2px solid var(--accent);
+  padding: 1.25rem 0 1.25rem 2rem;
+}
+.cs-quote-text {
+  font-family: 'Lora', serif;
+  font-style: italic;
+  font-size: clamp(1rem, 1.5vw, 1.2rem);
+  line-height: 1.6;
+  color: var(--fg);
+  margin-bottom: 0.75rem;
+}
+.cs-quote-attr {
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* CONCLUSION */
+.cs-conclusion {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: start;
+}
+.cs-conclusion-heading {
+  font-size: clamp(1.5rem, 2.5vw, 2.2rem);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+.cs-conclusion-heading em {
+  font-family: 'Lora', serif;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--accent);
+}
+.cs-conclusion-body {
+  font-size: 0.95rem;
+  line-height: 1.85;
+  color: var(--muted);
+}
+.cs-conclusion-body p + p { margin-top: 1rem; }
+
+/* NEXT PROJECT */
+.cs-next {
+  padding: 4rem 3rem 8rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.cs-next-inner {
+  border-top: 1px solid var(--border);
+  padding-top: 3rem;
+}
+.cs-next-label {
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 1.5rem;
+}
+.cs-next-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-decoration: none;
+  color: var(--fg);
+  padding: 2rem;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  transition: border-color 0.2s, background 0.2s;
+}
+.cs-next-card:hover {
+  border-color: rgba(26,24,20,0.25);
+  background: var(--faint);
+}
+.cs-next-card-title {
+  font-size: 1.1rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+.cs-next-card-sub {
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin-top: 0.25rem;
+}
+.cs-next-arrow {
+  font-size: 1.5rem;
+  color: var(--muted);
+  transition: transform 0.2s, color 0.2s;
+}
+.cs-next-card:hover .cs-next-arrow {
+  transform: translateX(4px);
+  color: var(--fg);
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 860px) {
+  nav { padding: 1.5rem; }
+  .cs-hero { padding: 0 1.5rem 4rem; }
+  .cs-meta-bar { flex-wrap: wrap; gap: 1.5rem; }
+  .cs-image-wrap { padding: 0 1.5rem; }
+  .cs-section { padding: 4rem 1.5rem; }
+  .cs-problem { grid-template-columns: 1fr; gap: 2rem; }
+  .cs-results { grid-template-columns: 1fr; padding: 2rem; gap: 1.5rem; }
+  .cs-process-phase { grid-template-columns: 1fr; gap: 0.75rem; }
+  .cs-conclusion { grid-template-columns: 1fr; gap: 2rem; }
+  .cs-next { padding: 3rem 1.5rem 6rem; }
+  footer { padding: 1.5rem; flex-direction: column; gap: 0.5rem; text-align: center; }
+}
