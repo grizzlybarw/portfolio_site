@@ -333,6 +333,8 @@ footer p { font-size: 0.75rem; color: var(--muted); }
   display: flex;
   flex-direction: column;
   max-width: 780px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* Each phase: bold top rule, breaks left via negative margin on header */
