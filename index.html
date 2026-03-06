@@ -7,6 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet" />
+  <script type="module" src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs"></script>
   <style>
     :root {
       --bg: #f5f0e8;
@@ -97,6 +98,7 @@
       padding: 0 3rem 6rem;
       max-width: 1200px;
       margin: 0 auto;
+      position: relative;
     }
 
     .hero-eyebrow {
@@ -369,6 +371,7 @@
       grid-template-columns: 1fr 1fr;
       gap: 6rem;
       align-items: start;
+      position: relative;
     }
 
     .contact-heading {
@@ -426,6 +429,50 @@
     }
     footer p { font-size: 0.75rem; color: var(--muted); }
 
+    /* LOTTIE ANIMATIONS */
+    .lottie-hero {
+      position: absolute;
+      top: 0;
+      right: 1rem;
+      width: 200px;
+      height: 200px;
+      pointer-events: none;
+      opacity: 0.35;
+      z-index: 1;
+    }
+
+    .lottie-contact {
+      position: absolute;
+      bottom: 0;
+      left: 3rem;
+      width: 130px;
+      height: 130px;
+      pointer-events: none;
+      opacity: 0.22;
+      z-index: 1;
+    }
+
+    .nav-logo-wrap {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .lottie-nav {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 64px;
+      height: 64px;
+      pointer-events: none;
+      opacity: 0;
+      z-index: 3;
+      transition: opacity 0.15s ease;
+    }
+
+    .nav-logo-wrap:hover .lottie-nav { opacity: 1; }
+
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(18px); }
       to   { opacity: 1; transform: translateY(0); }
@@ -450,7 +497,10 @@
   <div class="bg-gradient"></div>
 
   <nav>
-    <a href="#" class="nav-logo">Dan Gruskin</a>
+    <div class="nav-logo-wrap">
+      <a href="#" class="nav-logo">Dan Gruskin</a>
+      <dotlottie-player id="lottie-nav" class="lottie-nav" src="https://lottie.host/8babf0f9-4a9c-4035-a039-7e49de0c1c92/8LPNbHrrkG.lottie" speed="1"></dotlottie-player>
+    </div>
     <ul class="nav-links">
       <li><a href="#work">Work</a></li>
       <li><a href="#about">About</a></li>
@@ -459,6 +509,7 @@
   </nav>
 
   <section class="hero">
+    <dotlottie-player class="lottie-hero" src="https://lottie.host/a401a275-b551-49f2-aa92-243eb5a73415/h4abFPlcPk.lottie" autoplay loop speed="0.7"></dotlottie-player>
     <div class="hero-eyebrow">Senior Product Designer — San Diego, CA</div>
     <h1 class="hero-headline">
       I design for <span class="swap-wrapper"><em class="swap-text" id="swapText">high-stakes moments</em></span><br>and the people who<br><em>can't work without them.</em>
@@ -613,6 +664,7 @@
 
   <section class="contact" id="contact">
     <div class="contact-inner">
+      <dotlottie-player class="lottie-contact" src="https://lottie.host/5a7feae3-e920-47df-9e0f-3ebca0dfc381/vb2OPXosP1.lottie" autoplay loop speed="0.6"></dotlottie-player>
       <div>
         <h2 class="contact-heading">
           Let's work
@@ -704,6 +756,19 @@
       el.style.transition = `opacity 0.5s ease ${i * 0.07}s, transform 0.5s ease ${i * 0.07}s`;
       observer.observe(el);
     });
+
+    // Nav logo hover animation
+    const navAnim = document.getElementById('lottie-nav');
+    const navWrap = document.querySelector('.nav-logo-wrap');
+    if (navWrap && navAnim) {
+      navWrap.addEventListener('mouseenter', () => {
+        navAnim.seek(0);
+        navAnim.play();
+      });
+      navWrap.addEventListener('mouseleave', () => {
+        navAnim.stop();
+      });
+    }
 
     document.querySelectorAll('.about-left, .about-right, .contact-inner').forEach((el, i) => {
       el.style.opacity = '0';
