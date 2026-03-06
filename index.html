@@ -165,6 +165,100 @@ nav {
 /* Hide lottie nav elements — not used in redesign */
 .lottie-nav { display: none; }
 .nav-logo-wrap { display: contents; }
+
+/* HERO */
+.hero {
+  min-height: 70vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 6rem 3rem 6rem;
+  border-bottom: 2px solid var(--ink);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-eyebrow {
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--sage);
+  font-weight: 700;
+  margin-bottom: 2rem;
+  clip-path: inset(100% 0 0 0);
+  transition: clip-path 0.6s cubic-bezier(0.16,1,0.3,1) 0.1s;
+}
+.hero-eyebrow.revealed { clip-path: inset(0% 0 0 0); }
+
+.hero-headline {
+  font-family: 'Instrument Sans', sans-serif;
+  font-size: clamp(3.5rem, 7vw, 7rem);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  max-width: 1100px;
+}
+
+.hero-line {
+  display: block;
+  overflow: hidden;
+}
+
+.hero-line-inner {
+  display: block;
+  clip-path: inset(100% 0 0 0);
+  transition: clip-path 0.7s cubic-bezier(0.16,1,0.3,1);
+}
+.hero-line-inner.revealed { clip-path: inset(0% 0 0 0); }
+
+.swap-text {
+  display: inline-block;
+  background: var(--terracotta);
+  color: #fff;
+  padding: 0.02em 0.25em;
+  border-radius: 2px;
+  transition: opacity 0.3s ease, transform 0.3s ease, background 0.4s ease;
+}
+.swap-wrapper { display: inline; }
+
+.hero-rule {
+  width: 100%;
+  height: 3px;
+  background: var(--marigold);
+  margin: 3rem 0 2.5rem;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.8s cubic-bezier(0.16,1,0.3,1) 0.8s;
+}
+.hero-rule.revealed { transform: scaleX(1); }
+
+.hero-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  clip-path: inset(100% 0 0 0);
+  transition: clip-path 0.6s cubic-bezier(0.16,1,0.3,1) 1s;
+}
+.hero-bottom.revealed { clip-path: inset(0% 0 0 0); }
+
+.hero-sub {
+  font-size: 1rem;
+  line-height: 1.75;
+  color: rgba(26,24,20,0.75);
+  max-width: 420px;
+}
+
+.hero-meta {
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+.hero-meta span { font-size: 0.75rem; color: rgba(26,24,20,0.55); letter-spacing: 0.04em; }
+.hero-meta strong { font-weight: 600; color: var(--ink); font-size: 0.85rem; }
+
+/* Hide old lottie hero */
+.lottie-hero, .lottie-contact { display: none; }
   </style>
 </head>
 <body>
@@ -191,12 +285,15 @@ nav {
   </nav>
 
   <section class="hero">
-    <dotlottie-player class="lottie-hero" src="https://lottie.host/a401a275-b551-49f2-aa92-243eb5a73415/h4abFPlcPk.lottie" autoplay loop speed="0.7"></dotlottie-player>
-    <div class="hero-eyebrow">Senior Product Designer — San Diego, CA</div>
+    <div class="hero-eyebrow" id="heroEyebrow">Senior Product Designer — San Diego, CA</div>
     <h1 class="hero-headline">
-      I design for<br><span class="swap-wrapper"><em class="swap-text" id="swapText">high-stakes moments</em></span><br>and the people who<br><em>can't work without them.</em>
+      <span class="hero-line"><span class="hero-line-inner">I design for</span></span>
+      <span class="hero-line"><span class="hero-line-inner"><span class="swap-wrapper"><span class="swap-text" id="swapText">high-stakes moments</span></span></span></span>
+      <span class="hero-line"><span class="hero-line-inner">and the people who</span></span>
+      <span class="hero-line"><span class="hero-line-inner"><em style="font-family:'Lora',serif;font-style:italic;font-weight:400;">can't work without them.</em></span></span>
     </h1>
-    <div class="hero-bottom">
+    <div class="hero-rule" id="heroRule"></div>
+    <div class="hero-bottom" id="heroBottom">
       <p class="hero-sub">
         15+ years across civic tech, clean energy SaaS, and consumer brands. I design with research, ship with craft, and thrive where the problem space is genuinely hard.
       </p>
@@ -483,28 +580,39 @@ nav {
       requestAnimationFrame(animateBg);
     })();
 
-    // Word swap animation
-    const swapText = document.getElementById('swapText');
-    const phrases = ['high-stakes moments', 'messy systems', 'complex workflows'];
-    const colors = ['#d4875a', '#7b9e87', '#8a7fc0'];
-    let current = 0;
+    // --- HERO REVEAL ---
+    window.addEventListener('load', () => {
+      const eyebrow = document.getElementById('heroEyebrow');
+      const rule = document.getElementById('heroRule');
+      const bottom = document.getElementById('heroBottom');
+      const lines = document.querySelectorAll('.hero-line-inner');
 
-    if (swapText) {
-      swapText.style.background = colors[0];
+      if (eyebrow) setTimeout(() => eyebrow.classList.add('revealed'), 80);
+      lines.forEach((line, i) => {
+        setTimeout(() => line.classList.add('revealed'), 100 + i * 100);
+      });
+      if (rule) setTimeout(() => rule.classList.add('revealed'), 700);
+      if (bottom) setTimeout(() => bottom.classList.add('revealed'), 900);
+    });
 
+    // --- WORD SWAP ---
+    const swapEl = document.getElementById('swapText');
+    const swapPhrases = ['high-stakes moments', 'messy systems', 'complex workflows'];
+    const swapColors = ['#D4550A', '#2D8C4E', '#E8A820'];
+    let swapIdx = 0;
+    if (swapEl) {
+      swapEl.style.background = swapColors[0];
       setInterval(() => {
-        swapText.classList.add('out');
+        swapEl.style.opacity = '0';
+        swapEl.style.transform = 'translateY(-8px)';
         setTimeout(() => {
-          current = (current + 1) % phrases.length;
-          swapText.textContent = phrases[current];
-          swapText.style.background = colors[current];
-          swapText.classList.remove('out');
-          swapText.classList.add('in');
-          requestAnimationFrame(() => requestAnimationFrame(() => {
-            swapText.classList.remove('in');
-          }));
-        }, 350);
-      }, 2500);
+          swapIdx = (swapIdx + 1) % swapPhrases.length;
+          swapEl.textContent = swapPhrases[swapIdx];
+          swapEl.style.background = swapColors[swapIdx];
+          swapEl.style.opacity = '1';
+          swapEl.style.transform = 'translateY(0)';
+        }, 300);
+      }, 2800);
     }
 
     // Scroll reveal — use separate transform so parallax doesn't conflict
