@@ -99,7 +99,7 @@
 
   // Standard up-reveal
   document.querySelectorAll(
-    '.cs-image, .cs-problem, .cs-results, .cs-inline-image, .cs-quote, .cs-conclusion, .cs-next-card, .feature-card'
+    '.cs-image, .cs-problem, .cs-results, .cs-results-strip, .cs-inline-image, .cs-quote, .cs-conclusion, .cs-next-card, .feature-card'
   ).forEach((el, i) => {
     el.style.opacity = '0';
     el.style.transform = 'translateY(14px)';
