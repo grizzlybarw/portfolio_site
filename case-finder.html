@@ -20,11 +20,20 @@
 </head>
 <body>
 
+  <div class="scroll-progress" id="scroll-progress"></div>
   <div class="bg-gradient"></div>
 
   <!-- HERO -->
   <section class="cs-hero">
+    <div class="cs-hero-accent-line"></div>
     <a href="index.html#work" class="cs-back">← Work</a>
+    <div class="cs-hero-tag">
+      <span>Product Design</span>
+      <span class="cs-hero-tag-sep">·</span>
+      <span>Civic Tech</span>
+      <span class="cs-hero-tag-sep">·</span>
+      <span>Information Architecture</span>
+    </div>
     <h1 class="cs-title">Case<br><em>Finder</em></h1>
     <p class="cs-summary">Giving officers a fast, flexible way to search and reference previous cases — reducing lookup time by 40% and surfacing organizational insights that were invisible before.</p>
     <p class="cs-confidential">*This case study is based on confidential work. All sensitive details and data have been modified, abstracted, or removed. Visuals shown are conceptual representations.</p>
@@ -93,42 +102,77 @@
   <section class="cs-section">
     <div class="cs-section-label">Process</div>
     <div class="cs-process-stack">
+
       <div class="cs-process-phase">
-        <div class="cs-phase-label">Research &amp; Analysis</div>
+        <div class="cs-phase-header">
+          <div class="cs-phase-num-block" aria-hidden="true">01</div>
+          <div class="cs-phase-label">Research &amp; Analysis</div>
+        </div>
         <div class="cs-phase-body">
           I interviewed 4 officers about their current workflow — specifically how they used reference materials, where those materials came from, and how they stored and searched for information in the moment. The picture that emerged was consistent: everyone had developed their own system because the shared one didn't work. From those sessions I distilled a north star problem statement that became the lens for everything that followed.
         </div>
       </div>
+
+      <div class="cs-phase-connector" aria-hidden="true"></div>
+
       <div class="cs-process-phase">
-        <div class="cs-phase-label">Workshops</div>
+        <div class="cs-phase-header">
+          <div class="cs-phase-num-block" aria-hidden="true">02</div>
+          <div class="cs-phase-label">Workshops</div>
+        </div>
         <div class="cs-phase-body">
           I facilitated workshops with subject matter experts to nail down which data fields were both useful to officers and technically feasible to surface. This sounds like a small detail, but when you're building what is essentially a highly specific search table, the content in that table is the product. Getting this wrong would have made everything else irrelevant.
         </div>
       </div>
+
+      <div class="cs-phase-connector" aria-hidden="true"></div>
+
       <div class="cs-process-phase">
-        <div class="cs-phase-label">Prototyping</div>
+        <div class="cs-phase-header">
+          <div class="cs-phase-num-block" aria-hidden="true">03</div>
+          <div class="cs-phase-label">Prototyping</div>
+        </div>
         <div class="cs-phase-body">
           I created multiple high-fidelity prototypes to present to leadership. Leadership feedback was a critical gate — without their buy-in on the direction, this feature wouldn't have shipped. Making the designs concrete enough to critique early meant the conversations were specific and productive rather than theoretical.
         </div>
       </div>
+
+      <div class="cs-phase-connector" aria-hidden="true"></div>
+
       <div class="cs-process-phase">
-        <div class="cs-phase-label">Usability Testing</div>
+        <div class="cs-phase-header">
+          <div class="cs-phase-num-block" aria-hidden="true">04</div>
+          <div class="cs-phase-label">Usability Testing</div>
+        </div>
         <div class="cs-phase-body">
           I tested the designs with officers directly — asking how useful they'd find the tool in practice, getting reactions to different filter variants, and verifying that the table data was actually helpful. The sessions confirmed the core direction and surfaced smaller refinements. Officers were direct about what worked and what didn't, which made the feedback easy to act on.
         </div>
       </div>
+
+      <div class="cs-phase-connector" aria-hidden="true"></div>
+
       <div class="cs-process-phase">
-        <div class="cs-phase-label">Component Creation &amp; Handoff</div>
+        <div class="cs-phase-header">
+          <div class="cs-phase-num-block" aria-hidden="true">05</div>
+          <div class="cs-phase-label">Component Creation &amp; Handoff</div>
+        </div>
         <div class="cs-phase-body">
           With the final design locked, I cleaned up all components and contributed them to our internal design system — documented, annotated, and ready for handoff. Every section and interaction state was documented before development began, which kept implementation questions to a minimum.
         </div>
       </div>
+
+      <div class="cs-phase-connector" aria-hidden="true"></div>
+
       <div class="cs-process-phase">
-        <div class="cs-phase-label">Launch</div>
+        <div class="cs-phase-header">
+          <div class="cs-phase-num-block" aria-hidden="true">06</div>
+          <div class="cs-phase-label">Launch</div>
+        </div>
         <div class="cs-phase-body">
           I coordinated the rollout with stakeholders and worked directly with users during the launch. Adoption is always the hardest part — people are creatures of habit, and the offline workarounds had been comfortable. Getting officers into the new system required patience and presence, not just a good product.
         </div>
       </div>
+
     </div>
   </section>
 
@@ -136,7 +180,7 @@
   <section class="cs-section">
     <div class="cs-section-label">What Users Said</div>
     <div class="cs-quotes">
-      <div class="cs-quote">
+      <div class="cs-quote cs-quote--hero">
         <div class="cs-quote-text">"I like this, I like this part — this is really cool. I could see this being really useful."</div>
         <div class="cs-quote-attr">Officer User — referencing the filter functionality</div>
       </div>
