@@ -47,9 +47,80 @@ body::before {
 }
 
 nav, section, footer { position: relative; z-index: 2; }
+
+/* CURSOR */
+.cursor-dot,
+.cursor-orb,
+.cursor-trail {
+  position: fixed;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+}
+
+.cursor-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--marigold);
+  z-index: 10000;
+  transition: width 0.15s, height 0.15s, background 0.3s;
+}
+
+.cursor-orb {
+  width: 32px;
+  height: 32px;
+  border: 2px solid var(--marigold);
+  background: rgba(232, 168, 32, 0.12);
+  z-index: 9998;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: width 0.25s cubic-bezier(0.34,1.56,0.64,1),
+              height 0.25s cubic-bezier(0.34,1.56,0.64,1),
+              border-color 0.3s,
+              background 0.3s;
+}
+
+.cursor-label {
+  font-size: 0.55rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink);
+  opacity: 0;
+  transition: opacity 0.2s;
+  white-space: nowrap;
+}
+
+.cursor-orb.expanded {
+  width: 80px;
+  height: 80px;
+}
+.cursor-orb.expanded .cursor-label { opacity: 1; }
+
+.cursor-orb.shrunk {
+  width: 16px;
+  height: 16px;
+}
+
+.cursor-trail {
+  width: 6px;
+  height: 6px;
+  background: var(--marigold);
+  z-index: 9997;
+  opacity: 0;
+}
   </style>
 </head>
 <body>
+
+  <!-- Custom cursor -->
+  <div class="cursor-dot" id="cursorDot"></div>
+  <div class="cursor-orb" id="cursorOrb"><span class="cursor-label" id="cursorLabel"></span></div>
+  <div class="cursor-trail" id="trail1"></div>
+  <div class="cursor-trail" id="trail2"></div>
+  <div class="cursor-trail" id="trail3"></div>
 
   <div class="bg-gradient"></div>
 
@@ -256,6 +327,92 @@ nav, section, footer { position: relative; z-index: 2; }
   </footer>
 
   <script>
+    // --- CUSTOM CURSOR ---
+    (function() {
+      const dot = document.getElementById('cursorDot');
+      const orb = document.getElementById('cursorOrb');
+      const label = document.getElementById('cursorLabel');
+      const trails = [
+        document.getElementById('trail1'),
+        document.getElementById('trail2'),
+        document.getElementById('trail3'),
+      ];
+      const trailDelays = [40, 80, 120];
+      const trailHistory = [];
+
+      let mouseX = 0, mouseY = 0;
+      let orbX = 0, orbY = 0;
+
+      document.addEventListener('mousemove', e => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        if (dot) { dot.style.left = mouseX + 'px'; dot.style.top = mouseY + 'px'; }
+        trailHistory.push({ x: mouseX, y: mouseY, t: Date.now() });
+        if (trailHistory.length > 30) trailHistory.shift();
+      });
+
+      (function animateOrb() {
+        orbX += (mouseX - orbX) * 0.12;
+        orbY += (mouseY - orbY) * 0.12;
+        if (orb) { orb.style.left = orbX + 'px'; orb.style.top = orbY + 'px'; }
+
+        const now = Date.now();
+        trails.forEach((trail, i) => {
+          if (!trail) return;
+          const delay = trailDelays[i];
+          let best = null;
+          for (let j = trailHistory.length - 1; j >= 0; j--) {
+            if (now - trailHistory[j].t >= delay) { best = trailHistory[j]; break; }
+          }
+          if (best) {
+            trail.style.left = best.x + 'px';
+            trail.style.top = best.y + 'px';
+            trail.style.opacity = String(0.35 - i * 0.1);
+          }
+        });
+
+        requestAnimationFrame(animateOrb);
+      })();
+
+      // Color by section
+      const sectionColors = { work: 'var(--terracotta)', about: 'var(--sage)', contact: 'var(--plum)' };
+      function setCursorColor(color) {
+        if (dot) dot.style.background = color;
+        if (orb) { orb.style.borderColor = color; }
+        trails.forEach(t => { if (t) t.style.background = color; });
+      }
+
+      const sectionEls = document.querySelectorAll('section[id]');
+      if (sectionEls.length) {
+        const secObserver = new IntersectionObserver(entries => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              setCursorColor(sectionColors[entry.target.id] || 'var(--marigold)');
+            }
+          });
+        }, { threshold: 0.3 });
+        sectionEls.forEach(s => secObserver.observe(s));
+      }
+
+      // Card hover: expand orb with label
+      document.querySelectorAll('.case-card').forEach(card => {
+        card.addEventListener('mouseenter', () => {
+          if (orb) orb.classList.add('expanded');
+          if (label) label.textContent = 'Open';
+        });
+        card.addEventListener('mouseleave', () => {
+          if (orb) orb.classList.remove('expanded');
+          if (label) label.textContent = '';
+        });
+      });
+
+      // Link hover: shrink orb
+      document.querySelectorAll('a:not(.case-card), button').forEach(el => {
+        el.addEventListener('mouseenter', () => { if (orb) orb.classList.add('shrunk'); });
+        el.addEventListener('mouseleave', () => { if (orb) orb.classList.remove('shrunk'); });
+      });
+    })();
+
     // Mouse parallax on background
     const bg = document.querySelector('.bg-gradient');
     let tx = 0, ty = 0, cx = 0, cy = 0;
