@@ -7,7 +7,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet" />
-  <script type="module" src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs"></script>
   <style>
     :root {
   --cream: #F5F0E8;
@@ -581,7 +580,6 @@ footer p { font-size: 0.75rem; color: rgba(255,255,255,0.45); }
   <nav>
     <div class="nav-logo-wrap">
       <a href="#" class="nav-logo">Dan Gruskin</a>
-      <dotlottie-player id="lottie-nav" class="lottie-nav" src="https://lottie.host/8babf0f9-4a9c-4035-a039-7e49de0c1c92/8LPNbHrrkG.lottie" speed="1"></dotlottie-player>
     </div>
     <ul class="nav-links">
       <li><a href="#work">Work</a></li>
@@ -955,17 +953,6 @@ footer p { font-size: 0.75rem; color: rgba(255,255,255,0.45); }
       });
     }, { threshold: 0.5 });
     document.querySelectorAll('.section-label').forEach(el => labelRevealObs.observe(el));
-
-    // Scroll reveal for non-card elements
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.style.opacity = '1';
-          entry.target.style.transform = 'translateY(0)';
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.08 });
 
   </script>
 
