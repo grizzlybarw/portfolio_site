@@ -378,6 +378,74 @@ nav {
 .case-tags-row { display: flex; gap: 0.6rem; flex-wrap: wrap; }
 .tag { font-size: 0.7rem; color: rgba(26,24,20,0.55); }
 .tag + .tag::before { content: '·'; margin-right: 0.6rem; }
+
+/* ABOUT */
+.about {
+  padding: 8rem 3rem;
+  background: var(--terracotta);
+  color: #fff;
+}
+
+.about-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6rem;
+  align-items: start;
+}
+
+/* Override section-label for white bg context */
+.about .section-label {
+  border-color: rgba(255,255,255,0.6);
+  color: rgba(255,255,255,0.9);
+}
+.about .section-label.revealed {
+  color: var(--terracotta);
+}
+.about .section-label::before {
+  background: #fff;
+}
+
+.about-heading {
+  font-size: clamp(1.8rem, 3vw, 3rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin-bottom: 1.5rem;
+  color: #fff;
+}
+.about-heading em {
+  font-family: 'Lora', serif;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--marigold);
+}
+
+.about-body {
+  font-size: 0.95rem;
+  line-height: 1.85;
+  color: rgba(255,255,255,0.82);
+}
+.about-body p + p { margin-top: 1rem; }
+
+.about-list { list-style: none; display: flex; flex-direction: column; }
+.about-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 1.1rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.22);
+  font-size: 0.9rem;
+  gap: 1rem;
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path 0.55s cubic-bezier(0.16,1,0.3,1);
+}
+.about-list li:first-child { border-top: 1px solid rgba(255,255,255,0.22); }
+.about-list li.revealed { clip-path: inset(0 0% 0 0); }
+.about-list .role { font-weight: 600; flex-shrink: 0; color: #fff; }
+.about-list .co { color: rgba(255,255,255,0.65); font-size: 0.85rem; flex: 1; text-align: center; }
+.about-list .yr { color: rgba(255,255,255,0.55); font-size: 0.8rem; letter-spacing: 0.04em; flex-shrink: 0; }
   </style>
 </head>
 <body>
@@ -523,40 +591,26 @@ nav {
   </section>
 
   <section class="about" id="about">
-    <div class="about-left">
-      <div class="section-label">About</div>
-      <h2 class="about-heading">
-        Just a guy who<br>learned Photoshop<br>and turned it into<br><em>a career.</em>
-      </h2>
-      <div class="about-body">
-        <p>I started in web dev and print, moved through creative direction, and landed in product design because that's where design actually changes how people work.</p>
-        <p>Today I build tools for asylum and refugee case management — the kind of work where good design isn't a nice-to-have. Previously GridX and Taylor Guitars. Always looking for the next hard problem.</p>
+    <div class="about-inner">
+      <div class="about-left">
+        <div class="section-label" data-label="About">About</div>
+        <h2 class="about-heading">
+          Just a guy who<br>learned Photoshop<br>and turned it into<br><em>a career.</em>
+        </h2>
+        <div class="about-body">
+          <p>I started in web dev and print, moved through creative direction, and landed in product design because that's where design actually changes how people work.</p>
+          <p>Today I build tools for asylum and refugee case management — the kind of work where good design isn't a nice-to-have. Previously GridX and Taylor Guitars. Always looking for the next hard problem.</p>
+        </div>
       </div>
-    </div>
-    <div class="about-right">
-      <div class="section-label">Experience</div>
-      <ul class="about-list">
-        <li>
-          <span class="role">Senior Product Designer</span>
-          <span class="co">Civic Tech</span>
-          <span class="yr">2022 — Now</span>
-        </li>
-        <li>
-          <span class="role">Product Designer</span>
-          <span class="co">GridX</span>
-          <span class="yr">2019 — 2022</span>
-        </li>
-        <li>
-          <span class="role">Creative Director</span>
-          <span class="co">Taylor Guitars</span>
-          <span class="yr">2014 — 2019</span>
-        </li>
-        <li>
-          <span class="role">Designer / Developer</span>
-          <span class="co">Various</span>
-          <span class="yr">2008 — 2014</span>
-        </li>
-      </ul>
+      <div class="about-right">
+        <div class="section-label" data-label="Experience">Experience</div>
+        <ul class="about-list" id="aboutList">
+          <li><span class="role">Senior Product Designer</span><span class="co">Civic Tech</span><span class="yr">2022 — Now</span></li>
+          <li><span class="role">Product Designer</span><span class="co">GridX</span><span class="yr">2019 — 2022</span></li>
+          <li><span class="role">Creative Director</span><span class="co">Taylor Guitars</span><span class="yr">2014 — 2019</span></li>
+          <li><span class="role">Designer / Developer</span><span class="co">Various</span><span class="yr">2008 — 2014</span></li>
+        </ul>
+      </div>
     </div>
   </section>
 
@@ -771,6 +825,23 @@ nav {
     }, { threshold: 0.08 });
     document.querySelectorAll('.case-card').forEach(card => cardRevealObs.observe(card));
 
+    // --- ABOUT LIST STAGGER REVEAL ---
+    const aboutList = document.getElementById('aboutList');
+    if (aboutList) {
+      const aboutListObs = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const items = entry.target.querySelectorAll('li');
+            items.forEach((item, i) => {
+              setTimeout(() => item.classList.add('revealed'), i * 70);
+            });
+            aboutListObs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.2 });
+      aboutListObs.observe(aboutList);
+    }
+
     // Section label reveal
     const labelRevealObs = new IntersectionObserver(entries => {
       entries.forEach(entry => {
@@ -806,12 +877,6 @@ nav {
       });
     }
 
-    document.querySelectorAll('.about-left, .about-right, .contact-inner').forEach((el, i) => {
-      el.style.opacity = '0';
-      el.style.transform = 'translateY(12px)';
-      el.style.transition = `opacity 0.5s ease ${i * 0.1}s, transform 0.5s ease ${i * 0.1}s`;
-      observer.observe(el);
-    });
   </script>
 
 </body>
