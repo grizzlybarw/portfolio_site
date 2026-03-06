@@ -332,6 +332,7 @@ footer p { font-size: 0.75rem; color: var(--muted); }
 .cs-process-stack {
   display: flex;
   flex-direction: column;
+  max-width: 780px;
 }
 
 /* Each phase: bold top rule, breaks left via negative margin on header */
