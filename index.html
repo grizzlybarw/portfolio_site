@@ -446,6 +446,81 @@ nav {
 .about-list .role { font-weight: 600; flex-shrink: 0; color: #fff; }
 .about-list .co { color: rgba(255,255,255,0.65); font-size: 0.85rem; flex: 1; text-align: center; }
 .about-list .yr { color: rgba(255,255,255,0.55); font-size: 0.8rem; letter-spacing: 0.04em; flex-shrink: 0; }
+
+/* CONTACT */
+.contact {
+  padding: 8rem 3rem;
+  background: var(--plum);
+  color: #fff;
+}
+
+.contact-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6rem;
+  align-items: start;
+}
+
+/* Override section-label inside contact */
+.contact .section-label {
+  border-color: rgba(255,255,255,0.4);
+  color: rgba(255,255,255,0.8);
+  margin-bottom: 2rem;
+}
+.contact .section-label.revealed { color: var(--plum); }
+.contact .section-label::before { background: rgba(255,255,255,0.9); }
+
+.contact-heading {
+  font-size: clamp(2.5rem, 5vw, 5rem);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  color: #fff;
+}
+.contact-heading em {
+  font-family: 'Lora', serif;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--marigold);
+  display: block;
+}
+
+.contact-right {
+  padding-top: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.contact-body {
+  font-size: 0.95rem;
+  line-height: 1.8;
+  color: rgba(255,255,255,0.75);
+}
+
+.contact-links { display: flex; flex-direction: column; }
+
+.contact-link {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+  text-decoration: none;
+  color: #fff;
+  transition: background 0.2s ease, padding-left 0.2s ease, padding-right 0.2s ease;
+}
+.contact-link:first-child { border-top: 1px solid rgba(255,255,255,0.2); }
+.contact-link:hover {
+  background: rgba(255,255,255,0.1);
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+}
+
+.contact-link-label { font-size: 0.85rem; font-weight: 600; }
+.contact-link-value { font-size: 0.8rem; color: rgba(255,255,255,0.6); }
   </style>
 </head>
 <body>
@@ -616,8 +691,8 @@ nav {
 
   <section class="contact" id="contact">
     <div class="contact-inner">
-      <dotlottie-player class="lottie-contact" src="https://lottie.host/5a7feae3-e920-47df-9e0f-3ebca0dfc381/vb2OPXosP1.lottie" autoplay loop speed="0.6"></dotlottie-player>
       <div>
+        <div class="section-label" data-label="Contact">Contact</div>
         <h2 class="contact-heading">
           Let's work
           <em>together.</em>
@@ -628,9 +703,9 @@ nav {
           I'm actively looking for my next role at a fast-moving startup. If you're building something that matters and need a designer who can lead, research, and ship — let's talk.
         </p>
         <div class="contact-links">
-          <a href="/cdn-cgi/l/email-protection#c5a1a4ab85a1a4aba2b7b0b6aeacabeba6aaa8" class="contact-link">
+          <a href="mailto:dan@dangruskin.com" class="contact-link">
             <span class="contact-link-label">Email</span>
-            <span class="contact-link-value"><span class="__cf_email__" data-cfemail="aacecbc4eacecbc4cdd8dfd9c1c3c484c9c5c7">[email&#160;protected]</span></span>
+            <span class="contact-link-value">dan@dangruskin.com</span>
           </a>
           <a href="https://linkedin.com/in/dangruskin" target="_blank" class="contact-link">
             <span class="contact-link-label">LinkedIn</span>
