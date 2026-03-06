@@ -108,12 +108,19 @@
     observer.observe(el);
   });
 
-  // Process phases: slide in from left
+  // Process phases: slide in from left (connectors fade up)
   document.querySelectorAll('.cs-process-phase').forEach((el, i) => {
     el.style.opacity = '0';
-    el.style.transform = 'translateX(-20px)';
+    el.style.transform = 'translateX(-24px)';
     const delay = Math.min(i * 0.07, 0.35);
-    el.style.transition = `opacity 0.55s ease ${delay}s, transform 0.55s ease ${delay}s, background 0.3s ease`;
+    el.style.transition = `opacity 0.55s ease ${delay}s, transform 0.55s ease ${delay}s, background 0.25s ease`;
+    observer.observe(el);
+  });
+
+  document.querySelectorAll('.cs-phase-connector').forEach((el, i) => {
+    el.style.opacity = '0';
+    const delay = Math.min(i * 0.07 + 0.04, 0.38);
+    el.style.transition = `opacity 0.4s ease ${delay}s`;
     observer.observe(el);
   });
 

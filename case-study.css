@@ -326,77 +326,114 @@ footer p { font-size: 0.75rem; color: var(--muted); }
   line-height: 1.5;
 }
 
-/* PROCESS */
+/* ============================================================
+   PROCESS — Bauhaus grid-breaking layout
+   ============================================================ */
 .cs-process-stack {
   display: flex;
   flex-direction: column;
-  gap: 0;
 }
+
+/* Each phase: bold top rule, breaks left via negative margin on header */
 .cs-process-phase {
   position: relative;
-  display: grid;
-  grid-template-columns: 200px 1fr;
-  gap: 3rem;
-  padding: 2.5rem 0;
-  border-bottom: 1px solid var(--border);
-  align-items: start;
-  overflow: hidden;
-  transition: background 0.3s ease;
-  border-radius: 2px;
+  padding: 2.75rem 0 2.75rem 0;
+  border-top: 2px solid var(--fg);
+  transition: background 0.25s ease;
 }
-.cs-process-phase:first-child { border-top: 1px solid var(--border); }
-.cs-process-phase:hover { background: rgba(196, 112, 63, 0.03); }
-
-.cs-process-phase::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 2px;
-  background: var(--accent2);
-  transform: scaleY(0);
-  transform-origin: top;
-  transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+.cs-process-phase:last-child {
+  border-bottom: 2px solid var(--fg);
 }
-.cs-process-phase.is-visible::before {
-  transform: scaleY(1);
+.cs-process-phase:hover {
+  background: rgba(196, 112, 63, 0.028);
 }
 
-.cs-phase-num {
-  position: absolute;
-  right: -0.25rem;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 7rem;
+/* Header row: colored number block + large label, breaks left of the grid */
+.cs-phase-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.25rem;
+  margin-left: -3rem;   /* break out of section padding */
+  margin-bottom: 1.25rem;
+}
+
+/* Colored square badge */
+.cs-phase-num-block {
+  width: 2.75rem;
+  height: 2.75rem;
+  min-width: 2.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
   font-weight: 700;
-  letter-spacing: -0.05em;
-  line-height: 1;
-  color: var(--accent);
-  opacity: 0.055;
-  pointer-events: none;
-  user-select: none;
+  letter-spacing: 0.06em;
+  color: #fff;
+  background: var(--accent);
+  flex-shrink: 0;
   font-feature-settings: 'tnum';
+  transition: transform 0.25s ease;
+}
+.cs-process-phase:hover .cs-phase-num-block {
+  transform: scale(1.08);
+}
+/* Alternate badge color every other phase */
+.cs-process-phase:nth-child(even) .cs-phase-num-block {
+  background: var(--accent2);
 }
 
+/* Large bold uppercase phase title */
 .cs-phase-label {
-  font-size: 0.82rem;
-  font-weight: 600;
-  letter-spacing: 0.06em;
+  font-size: 1.2rem;
+  font-weight: 700;
   text-transform: uppercase;
-  color: var(--accent2);
-  padding-top: 0.2rem;
-  padding-left: 0.65rem;
-  border-left: 2px solid var(--accent2);
+  letter-spacing: -0.01em;
+  color: var(--fg);
+  line-height: 1.1;
+  padding-top: 0.65rem;
+  border-left: none;
+  padding-left: 0;
 }
+
+/* Body text indented to align under label */
 .cs-phase-body {
   font-size: 0.95rem;
   line-height: 1.8;
   color: var(--muted);
+  padding-left: 1rem;  /* 2.75rem block + 1.25rem gap - 3rem margin = 1rem */
 }
 .cs-phase-body strong {
   color: var(--fg);
   font-weight: 500;
+}
+
+/* Arrow connector between phases */
+.cs-phase-connector {
+  position: relative;
+  height: 3rem;
+  margin-left: -3rem;
+}
+/* vertical stem */
+.cs-phase-connector::before {
+  content: '';
+  position: absolute;
+  left: 1.375rem;         /* center of 2.75rem badge */
+  top: 0;
+  height: calc(100% - 10px);
+  width: 2px;
+  background: var(--accent);
+  transform: translateX(-50%);
+}
+/* arrowhead */
+.cs-phase-connector::after {
+  content: '';
+  position: absolute;
+  left: 1.375rem;
+  bottom: 0;
+  transform: translateX(-50%);
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 10px solid var(--accent);
 }
 
 /* KEY SCREENS FEATURE CALLOUT */
@@ -573,7 +610,10 @@ footer p { font-size: 0.75rem; color: var(--muted); }
   .cs-problem { grid-template-columns: 1fr; gap: 2rem; }
   .cs-results { grid-template-columns: 1fr; padding: 2rem; gap: 1.5rem; }
   .cs-hero { padding: 0 1.5rem 4rem; }
-  .cs-phase-num { font-size: 4.5rem; opacity: 0.04; }
+  .cs-phase-header { margin-left: -1.5rem; }
+  .cs-phase-connector { margin-left: -1.5rem; }
+  .cs-phase-body { padding-left: 0; }
+  .cs-phase-label { font-size: 1rem; }
   .feature-callout { padding: 0 1.5rem; }
   .feature-callout-grid { grid-template-columns: 1fr; }
   .feature-card--offset { margin-top: 0; }
