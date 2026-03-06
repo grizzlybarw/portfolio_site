@@ -26,6 +26,17 @@
   `;
   document.body.appendChild(footer);
 
+  /* --- SCROLL PROGRESS -------------------------------------- */
+  const progress = document.getElementById('scroll-progress');
+  if (progress) {
+    function updateProgress() {
+      const scrolled = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight);
+      progress.style.width = (Math.min(scrolled, 1) * 100) + '%';
+    }
+    window.addEventListener('scroll', updateProgress, { passive: true });
+    updateProgress();
+  }
+
   /* --- BACKGROUND PARALLAX ---------------------------------- */
   const bg = document.querySelector('.bg-gradient');
   let tx = 0, ty = 0, cx = 0, cy = 0;
@@ -42,23 +53,67 @@
     requestAnimationFrame(animateBg);
   })();
 
+  /* --- STAT COUNTERS ---------------------------------------- */
+  function animateCounter(el) {
+    const span = el.querySelector('span');
+    const suffix = span ? span.outerHTML : '';
+    const raw = el.textContent.replace(/,/g, '').replace(/[^0-9]/g, '');
+    const target = parseInt(raw, 10);
+    if (isNaN(target)) return;
+    const useComma = target >= 1000;
+    const duration = 1400;
+    const startTime = performance.now();
+    function easeOutCubic(t) { return 1 - Math.pow(1 - t, 3); }
+    function step(now) {
+      const t = Math.min((now - startTime) / duration, 1);
+      const value = Math.round(easeOutCubic(t) * target);
+      el.innerHTML = (useComma ? value.toLocaleString() : value) + suffix;
+      if (t < 1) requestAnimationFrame(step);
+      else el.innerHTML = (useComma ? target.toLocaleString() : target) + suffix;
+    }
+    requestAnimationFrame(step);
+  }
+
+  const statObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        animateCounter(entry.target);
+        statObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.5 });
+
+  document.querySelectorAll('.cs-stat-number').forEach(el => statObserver.observe(el));
+
   /* --- SCROLL REVEAL ---------------------------------------- */
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.style.opacity = '1';
-        entry.target.style.transform = 'translateY(0)';
+        entry.target.style.transform = 'translate(0, 0)';
+        entry.target.classList.add('is-visible');
         observer.unobserve(entry.target);
       }
     });
   }, { threshold: 0.05 });
 
+  // Standard up-reveal
   document.querySelectorAll(
-    '.cs-image, .cs-problem, .cs-results, .cs-process-phase, .cs-inline-image, .cs-quote, .cs-conclusion, .cs-next-card'
+    '.cs-image, .cs-problem, .cs-results, .cs-inline-image, .cs-quote, .cs-conclusion, .cs-next-card, .feature-card'
   ).forEach((el, i) => {
     el.style.opacity = '0';
     el.style.transform = 'translateY(14px)';
-    el.style.transition = `opacity 0.5s ease ${i * 0.05}s, transform 0.5s ease ${i * 0.05}s`;
+    const delay = Math.min(i * 0.05, 0.25);
+    el.style.transition = `opacity 0.5s ease ${delay}s, transform 0.5s ease ${delay}s`;
+    observer.observe(el);
+  });
+
+  // Process phases: slide in from left
+  document.querySelectorAll('.cs-process-phase').forEach((el, i) => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateX(-20px)';
+    const delay = Math.min(i * 0.07, 0.35);
+    el.style.transition = `opacity 0.55s ease ${delay}s, transform 0.55s ease ${delay}s, background 0.3s ease`;
     observer.observe(el);
   });
 
