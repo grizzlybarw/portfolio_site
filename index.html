@@ -259,6 +259,125 @@ nav {
 
 /* Hide old lottie hero */
 .lottie-hero, .lottie-contact { display: none; }
+
+/* WORK SECTION */
+.work {
+  padding: 6rem 3rem;
+}
+
+/* Section label pill */
+.section-label {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.4rem 1rem;
+  margin-bottom: 4rem;
+  border: 2px solid var(--terracotta);
+  border-radius: 2px;
+  color: var(--terracotta);
+  position: relative;
+  overflow: hidden;
+}
+.section-label::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--terracotta);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.5s cubic-bezier(0.16,1,0.3,1);
+  z-index: 0;
+}
+.section-label span,
+.section-label {
+  position: relative;
+  z-index: 1;
+}
+.section-label.revealed { color: #fff; }
+.section-label.revealed::before { transform: scaleX(1); }
+
+/* Asymmetric rows */
+.case-grid { display: flex; flex-direction: column; gap: 1.5rem; }
+
+.case-row {
+  display: grid;
+  gap: 1.5rem;
+}
+.case-row--wide-left  { grid-template-columns: 65fr 35fr; }
+.case-row--equal      { grid-template-columns: 1fr 1fr; }
+.case-row--wide-right { grid-template-columns: 35fr 65fr; }
+
+/* Cards */
+.case-card {
+  text-decoration: none;
+  color: var(--ink);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transition: box-shadow 0.3s ease;
+  will-change: transform;
+}
+
+/* Oversized stroke number */
+.case-num-bg {
+  position: absolute;
+  top: -0.25em;
+  left: -0.1em;
+  font-size: clamp(8rem, 14vw, 16rem);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.05em;
+  color: transparent;
+  -webkit-text-stroke: 2px var(--card-accent);
+  opacity: 0.12;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 0;
+  user-select: none;
+}
+.case-card:hover .case-num-bg { opacity: 0.65; }
+
+.case-thumb {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+  border: 2px solid transparent;
+  transition: border-color 0.3s ease;
+}
+.case-card:hover .case-thumb { border-color: var(--card-accent); }
+
+.case-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+.case-card:hover .case-thumb img { transform: scale(1.04); }
+
+.case-meta {
+  padding: 1rem 0 0;
+  position: relative;
+  z-index: 1;
+}
+
+.case-title {
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+  margin-bottom: 0.4rem;
+  transition: color 0.2s;
+}
+.case-card:hover .case-title { color: var(--card-accent); }
+
+.case-tags-row { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+.tag { font-size: 0.7rem; color: rgba(26,24,20,0.55); }
+.tag + .tag::before { content: '·'; margin-right: 0.6rem; }
   </style>
 </head>
 <body>
@@ -307,98 +426,98 @@ nav {
   </section>
 
   <section class="work" id="work">
-    <div class="section-label">Selected Work</div>
+    <div class="section-label" data-label="Selected Work">Selected Work</div>
     <div class="case-grid">
 
-      <a href="supervisor-review-mode.html" class="case-card">
-        <div class="case-thumb">
-          <img src="img/thumbnails/supervisor-review-mode.jpg" alt="Supervisor Review Mode" />
-          <div class="thumb-overlay"><span class="thumb-tag">Civic Tech</span></div>
-        </div>
-        <div class="case-meta">
-          <div class="case-title">Supervisor Review Mode</div>
-          <div class="case-num">01</div>
-        </div>
-        <div class="case-tags-row">
-          <span class="tag">Workflow Design</span>
-          <span class="tag">Enterprise UX</span>
-        </div>
-      </a>
+      <!-- Row 1: 65% + 35% -->
+      <div class="case-row case-row--wide-left">
+        <a href="supervisor-review-mode.html" class="case-card" data-accent="#D4550A">
+          <div class="case-num-bg">01</div>
+          <div class="case-thumb">
+            <img src="img/thumbnails/supervisor-review-mode.jpg" alt="Supervisor Review Mode" />
+          </div>
+          <div class="case-meta">
+            <div class="case-title">Supervisor Review Mode</div>
+            <div class="case-tags-row">
+              <span class="tag">Workflow Design</span>
+              <span class="tag">Enterprise UX</span>
+            </div>
+          </div>
+        </a>
+        <a href="case-finder.html" class="case-card" data-accent="#2D8C4E">
+          <div class="case-num-bg">02</div>
+          <div class="case-thumb">
+            <img src="img/thumbnails/case-finder.avif" alt="Case Finder" />
+          </div>
+          <div class="case-meta">
+            <div class="case-title">Case Finder</div>
+            <div class="case-tags-row">
+              <span class="tag">Search & Filter</span>
+              <span class="tag">Information Architecture</span>
+            </div>
+          </div>
+        </a>
+      </div>
 
-      <a href="case-finder.html" class="case-card">
-        <div class="case-thumb">
-          <img src="img/thumbnails/case-finder.avif" alt="Case Finder" />
-          <div class="thumb-overlay"><span class="thumb-tag">Civic Tech</span></div>
-        </div>
-        <div class="case-meta">
-          <div class="case-title">Case Finder</div>
-          <div class="case-num">02</div>
-        </div>
-        <div class="case-tags-row">
-          <span class="tag">Search & Filter</span>
-          <span class="tag">Information Architecture</span>
-        </div>
-      </a>
+      <!-- Row 2: equal halves -->
+      <div class="case-row case-row--equal">
+        <a href="empower.html" class="case-card" data-accent="#E8A820">
+          <div class="case-num-bg">03</div>
+          <div class="case-thumb">
+            <img src="img/thumbnails/empower-thumbnails.jpg" alt="GridX Empower Re-imagined" />
+          </div>
+          <div class="case-meta">
+            <div class="case-title">GridX Empower Re-imagined</div>
+            <div class="case-tags-row">
+              <span class="tag">SaaS</span>
+              <span class="tag">Product Strategy</span>
+            </div>
+          </div>
+        </a>
+        <a href="gridx-touchscreen.html" class="case-card" data-accent="#5C2D6E">
+          <div class="case-num-bg">04</div>
+          <div class="case-thumb">
+            <img src="img/thumbnails/gridx-touchscreen-thumbnails.jpg" alt="GridX Interactive Touchscreen Demo" />
+          </div>
+          <div class="case-meta">
+            <div class="case-title">GridX Interactive Touchscreen Demo</div>
+            <div class="case-tags-row">
+              <span class="tag">Interactive</span>
+              <span class="tag">Sales Enablement</span>
+            </div>
+          </div>
+        </a>
+      </div>
 
-      <a href="empower.html" class="case-card">
-        <div class="case-thumb">
-          <img src="img/thumbnails/empower-thumbnails.jpg" alt="GridX Empower Re-imagined" />
-          <div class="thumb-overlay"><span class="thumb-tag">Clean Energy</span></div>
-        </div>
-        <div class="case-meta">
-          <div class="case-title">GridX Empower Re-imagined</div>
-          <div class="case-num">03</div>
-        </div>
-        <div class="case-tags-row">
-          <span class="tag">SaaS</span>
-          <span class="tag">Product Strategy</span>
-        </div>
-      </a>
-
-      <a href="gridx-touchscreen.html" class="case-card">
-        <div class="case-thumb">
-          <img src="img/thumbnails/gridx-touchscreen-thumbnails.jpg" alt="GridX Interactive Touchscreen Demo" />
-          <div class="thumb-overlay"><span class="thumb-tag">Clean Energy</span></div>
-        </div>
-        <div class="case-meta">
-          <div class="case-title">GridX Interactive Touchscreen Demo</div>
-          <div class="case-num">04</div>
-        </div>
-        <div class="case-tags-row">
-          <span class="tag">Interactive</span>
-          <span class="tag">Sales Enablement</span>
-        </div>
-      </a>
-
-      <a href="taylor-series-pages.html" class="case-card">
-        <div class="case-thumb">
-          <img src="img/thumbnails/series-page-thumbnail.jpg" alt="Taylor Guitars Series Pages" />
-          <div class="thumb-overlay"><span class="thumb-tag">Consumer Brand</span></div>
-        </div>
-        <div class="case-meta">
-          <div class="case-title">Taylor Guitars Series Pages</div>
-          <div class="case-num">05</div>
-        </div>
-        <div class="case-tags-row">
-          <span class="tag">E-commerce</span>
-          <span class="tag">Content Design</span>
-        </div>
-      </a>
-
-      <a href="taylor-sustainability-hub.html" class="case-card">
-        <div class="case-thumb">
-          <img src="img/thumbnails/sustainability-hub-thumbnail.jpg" alt="Taylor Sustainability Hub" />
-          <div class="thumb-overlay"><span class="thumb-tag">Consumer Brand</span></div>
-        </div>
-        <div class="case-meta">
-          <div class="case-title">Taylor Sustainability Hub</div>
-          <div class="case-num">06</div>
-        </div>
-        <div class="case-tags-row">
-          <span class="tag">Editorial Design</span>
-          <span class="tag">Brand</span>
-        </div>
-      </a>
+      <!-- Row 3: 35% + 65% (flipped) -->
+      <div class="case-row case-row--wide-right">
+        <a href="taylor-series-pages.html" class="case-card" data-accent="#2D8C4E">
+          <div class="case-num-bg">05</div>
+          <div class="case-thumb">
+            <img src="img/thumbnails/series-page-thumbnail.jpg" alt="Taylor Guitars Series Pages" />
+          </div>
+          <div class="case-meta">
+            <div class="case-title">Taylor Guitars Series Pages</div>
+            <div class="case-tags-row">
+              <span class="tag">E-commerce</span>
+              <span class="tag">Content Design</span>
+            </div>
+          </div>
+        </a>
+        <a href="taylor-sustainability-hub.html" class="case-card" data-accent="#D4550A">
+          <div class="case-num-bg">06</div>
+          <div class="case-thumb">
+            <img src="img/thumbnails/sustainability-hub-thumbnail.jpg" alt="Taylor Sustainability Hub" />
+          </div>
+          <div class="case-meta">
+            <div class="case-title">Taylor Sustainability Hub</div>
+            <div class="case-tags-row">
+              <span class="tag">Editorial Design</span>
+              <span class="tag">Brand</span>
+            </div>
+          </div>
+        </a>
+      </div>
 
     </div>
   </section>
@@ -615,7 +734,55 @@ nav {
       }, 2800);
     }
 
-    // Scroll reveal — use separate transform so parallax doesn't conflict
+    // --- CASE CARDS: accent color, parallax tilt, scroll reveal ---
+    document.querySelectorAll('.case-card').forEach((card, i) => {
+      const accent = card.dataset.accent || '#D4550A';
+      card.style.setProperty('--card-accent', accent);
+
+      // Perspective tilt on mousemove
+      card.addEventListener('mousemove', e => {
+        const rect = card.getBoundingClientRect();
+        const cx = rect.left + rect.width / 2;
+        const cy = rect.top + rect.height / 2;
+        const dx = (e.clientX - cx) / (rect.width / 2);
+        const dy = (e.clientY - cy) / (rect.height / 2);
+        card.style.transform = `perspective(800px) rotateY(${dx * 4}deg) rotateX(${-dy * 3}deg) translateZ(4px)`;
+        card.style.boxShadow = `${-dx * 10}px ${dy * 10}px 28px rgba(0,0,0,0.13)`;
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = '';
+        card.style.boxShadow = '';
+      });
+
+      // Scroll reveal via clip-path
+      card.style.clipPath = 'inset(10% 0 0 0)';
+      card.style.opacity = '0';
+      card.style.transition = `clip-path 0.6s cubic-bezier(0.16,1,0.3,1) ${i * 0.06}s, opacity 0.5s ease ${i * 0.06}s, transform 0.3s ease, box-shadow 0.3s ease`;
+    });
+
+    const cardRevealObs = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.clipPath = 'inset(0% 0 0 0)';
+          entry.target.style.opacity = '1';
+          cardRevealObs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.case-card').forEach(card => cardRevealObs.observe(card));
+
+    // Section label reveal
+    const labelRevealObs = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+          labelRevealObs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.5 });
+    document.querySelectorAll('.section-label').forEach(el => labelRevealObs.observe(el));
+
+    // Scroll reveal for non-card elements
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -625,13 +792,6 @@ nav {
         }
       });
     }, { threshold: 0.08 });
-
-    document.querySelectorAll('.case-card').forEach((el, i) => {
-      el.style.opacity = '0';
-      el.style.transform = 'translateY(16px)';
-      el.style.transition = `opacity 0.5s ease ${i * 0.07}s, transform 0.5s ease ${i * 0.07}s`;
-      observer.observe(el);
-    });
 
     // Nav logo hover animation
     const navAnim = document.getElementById('lottie-nav');
