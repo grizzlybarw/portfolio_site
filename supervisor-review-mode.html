@@ -8,43 +8,284 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="case-study.css" />
+  <style>
+    /* ---- SPLIT HERO — Supervisor Review Mode ---- */
+    .split-hero {
+      position: relative;
+      display: grid;
+      grid-template-columns: 42% 58%;
+      min-height: 100vh;
+      overflow: hidden;
+      z-index: 2;
+    }
+
+    .split-hero-left {
+      background: #f5f0e8;
+      padding: 5rem 3.5rem 4.5rem 3rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      position: relative;
+      z-index: 3;
+    }
+
+    .split-hero-right {
+      background:
+        linear-gradient(
+          160deg,
+          #d4824a 0%,
+          #c4703f 25%,
+          #a85a2e 55%,
+          #8c4420 78%,
+          #6b2e12 100%
+        );
+      position: relative;
+      z-index: 2;
+    }
+
+    .split-hero-right::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+      background-size: 180px 180px;
+      opacity: 0.07;
+      mix-blend-mode: overlay;
+      pointer-events: none;
+    }
+
+    /* Floating screenshot — breaks the grid */
+    .split-hero-img {
+      position: absolute;
+      left: 34%;
+      right: 4rem;
+      top: 20%;
+      transform: none;
+      z-index: 20;
+      border-radius: 6px;
+      overflow: hidden;
+      box-shadow:
+        0 4px 8px rgba(0,0,0,0.08),
+        0 16px 48px rgba(0,0,0,0.22),
+        0 36px 90px rgba(0,0,0,0.28);
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.5s forwards;
+    }
+    .split-hero-img img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* Left panel text */
+    .sh-top {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sh-back {
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      color: rgba(26,24,20,0.5);
+      text-decoration: none;
+      margin-bottom: 2.5rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: color 0.2s;
+      opacity: 0;
+      animation: fadeUp 0.5s ease 0.1s forwards;
+    }
+    .sh-back:hover { color: #1a1814; }
+
+    .sh-eyebrow {
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #c4703f;
+      margin-bottom: 1rem;
+      opacity: 0;
+      animation: fadeUp 0.5s ease 0.18s forwards;
+    }
+
+    .sh-title {
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: clamp(2.4rem, 4vw, 3.75rem);
+      font-weight: 700;
+      line-height: 1.04;
+      letter-spacing: -0.03em;
+      color: #1a1814;
+      margin-bottom: 1.75rem;
+      opacity: 0;
+      animation: fadeUp 0.6s ease 0.28s forwards;
+    }
+    .sh-title em {
+      font-family: 'Lora', serif;
+      font-style: italic;
+      font-weight: 400;
+      color: #c4703f;
+      display: block;
+    }
+
+    .sh-summary {
+      font-size: 0.88rem;
+      line-height: 1.78;
+      color: rgba(26,24,20,0.58);
+      max-width: 340px;
+      opacity: 0;
+      animation: fadeUp 0.6s ease 0.36s forwards;
+    }
+
+    /* Bottom meta strip */
+    .sh-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(26,24,20,0.12);
+      opacity: 0;
+      animation: fadeUp 0.6s ease 0.46s forwards;
+    }
+
+    .sh-meta-row {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+    }
+
+    .sh-meta-label {
+      font-size: 0.64rem;
+      font-weight: 600;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      color: #c4703f;
+      min-width: 72px;
+      flex-shrink: 0;
+    }
+
+    .sh-meta-value {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: #1a1814;
+    }
+
+    .cs-nda-note {
+      margin-top: 1.5rem;
+      margin-left: 1.25rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.78rem;
+      color: rgba(26,24,20,0.5);
+      background: rgba(26,24,20,0.04);
+      border: 1px solid rgba(26,24,20,0.1);
+      border-radius: 4px;
+      padding: 0.6rem 1rem;
+    }
+    .cs-nda-icon {
+      font-size: 0.9rem;
+      opacity: 0.4;
+    }
+
+    .cs-testing-quotes {
+      margin-top: 1.25rem;
+      margin-left: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .cs-testing-quote {
+      font-size: 0.875rem;
+      font-style: italic;
+      color: rgba(26,24,20,0.65);
+      padding: 0.75rem 1rem 0.75rem 1.25rem;
+      border-left: 2px solid #c4703f;
+      line-height: 1.6;
+    }
+
+    .cs-phase-img {
+      margin-top: 1.75rem;
+      margin-left: 1.25rem;
+      border-radius: 4px;
+      overflow: hidden;
+      border: 1px solid rgba(26,24,20,0.1);
+    }
+    .cs-phase-img img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    @media (max-width: 900px) {
+      .split-hero {
+        grid-template-columns: 1fr;
+        min-height: auto;
+      }
+      .split-hero-right { display: none; }
+      .split-hero-img {
+        position: static;
+        transform: none;
+        margin: 0;
+        border-radius: 0;
+        box-shadow: none;
+        opacity: 1;
+        animation: none;
+      }
+      .split-hero-left {
+        padding: 3.5rem 1.5rem;
+      }
+    }
+  </style>
 </head>
 <body>
 
   <div class="scroll-progress" id="scroll-progress"></div>
   <div class="bg-gradient"></div>
 
-  <!-- HERO -->
-  <section class="cs-hero">
-    <div class="cs-hero-accent-line"></div>
-    <a href="index.html#work" class="cs-back">← Work</a>
-    <h1 class="cs-title">Supervisor<br><em>Review Mode</em></h1>
-    <p class="cs-summary">Replacing a fragmented offline process with a streamlined, cloud-based review environment — so supervisors could focus on the cases, not the paperwork.</p>
-    <div class="cs-meta-bar">
-      <div class="cs-meta-item">
-        <span class="cs-meta-label">Role</span>
-        <span class="cs-meta-value">Product Designer</span>
+  <!-- SPLIT HERO -->
+  <div class="split-hero">
+
+    <!-- Left text panel -->
+    <div class="split-hero-left">
+      <div class="sh-top">
+        <a href="index.html#work" class="sh-back">← Work</a>
+        <div class="sh-eyebrow">Case Study</div>
+        <h1 class="sh-title">
+          Supervisor
+          <em>Review Mode</em>
+        </h1>
+        <p class="sh-summary">Moved the entire supervisor case review workflow from Adobe Acrobat and local desktops into a cloud-based application.</p>
       </div>
-      <div class="cs-meta-item">
-        <span class="cs-meta-label">Team</span>
-        <span class="cs-meta-value">Designer, PM, Engineering, Stakeholders</span>
-      </div>
-      <div class="cs-meta-item">
-        <span class="cs-meta-label">Timeline</span>
-        <span class="cs-meta-value">4 Months</span>
-      </div>
-      <div class="cs-meta-item">
-        <span class="cs-meta-label">Domain</span>
-        <span class="cs-meta-value">Civic Tech · Enterprise UX</span>
+      <div class="sh-meta">
+        <div class="sh-meta-row">
+          <span class="sh-meta-label">Role</span>
+          <span class="sh-meta-value">Product Designer</span>
+        </div>
+        <div class="sh-meta-row">
+          <span class="sh-meta-label">Team</span>
+          <span class="sh-meta-value">Designer, PM, Engineering, Stakeholders</span>
+        </div>
+        <div class="sh-meta-row">
+          <span class="sh-meta-label">Timeline</span>
+          <span class="sh-meta-value">4 Months</span>
+        </div>
+        <div class="sh-meta-row">
+          <span class="sh-meta-label">Domain</span>
+          <span class="sh-meta-value">Civic Tech · Enterprise UX</span>
+        </div>
       </div>
     </div>
-  </section>
 
-  <!-- HERO IMAGE -->
-  <div class="cs-image-wrap">
-    <div class="cs-image">
+    <!-- Right bold color panel -->
+    <div class="split-hero-right"></div>
+
+    <!-- Floating product screenshot — breaks the grid -->
+    <div class="split-hero-img">
       <img src="img/hero-final-ui.jpg" alt="Supervisor Review Mode — full interface" />
     </div>
+
   </div>
 
   <!-- PROBLEM -->
@@ -52,12 +293,12 @@
     <div class="cs-section-label">The Problem</div>
     <div class="cs-problem">
       <div class="cs-problem-statement">
-        Supervisors were managing asylum cases using<em> Adobe Acrobat and a folder on their desktop.</em>
+        Supervisors reviewed asylum cases using<em> Adobe Acrobat, local file folders, and manual tracking.</em>
       </div>
       <div class="cs-problem-body">
-        <p>The review process required supervisors to download interview recordings, open forms in Acrobat, annotate and edit locally, then manually track every document across an offline filing system. Every review was a context-switch away from the app where their work actually lived.</p>
-        <p>Beyond the inefficiency, the cognitive overhead was real. Missed steps, version confusion, and lost files were risks in a domain where accuracy genuinely matters — these are asylum and refugee cases, not expense reports.</p>
-        <p>The opportunity was clear: bring the entire review workflow into the application and give supervisors the tools they needed without disrupting how officers worked around them.</p>
+        <p>Each review required downloading documents, editing in Acrobat, saving locally, and manually tracking versions across a desktop filing system. The entire process happened outside the application where cases actually lived.</p>
+        <p>This created real risk: missed steps, version confusion, and lost files — in a domain where accuracy directly affects asylum and refugee outcomes.</p>
+        <p>The goal was to bring the full review workflow into the application without disrupting how officers worked around supervisors.</p>
       </div>
     </div>
   </section>
@@ -68,46 +309,18 @@
     <div class="cs-results">
       <div class="cs-stat">
         <div class="cs-stat-number">1,200<span>+</span></div>
-        <div class="cs-stat-label">Sessions in month two — well above projections for a new workflow tool</div>
+        <div class="cs-stat-label">Sessions in month two, above projections</div>
       </div>
       <div class="cs-stat">
         <div class="cs-stat-number">22<span>%</span></div>
-        <div class="cs-stat-label">Month-over-month usage growth, sustained across the first quarter</div>
+        <div class="cs-stat-label">Month-over-month growth, sustained through Q1</div>
       </div>
       <div class="cs-stat">
         <div class="cs-stat-number">83<span>%</span></div>
-        <div class="cs-stat-label">Users completing the intended happy path on their first session</div>
+        <div class="cs-stat-label">First-session happy path completion</div>
       </div>
     </div>
   </section>
-
-  <!-- KEY SCREENS -->
-  <div class="feature-callout">
-    <div class="cs-section-label">Key Screens</div>
-    <div class="feature-callout-grid">
-      <div class="feature-card">
-        <div class="feature-card-img">
-          <img src="img/feature-mode-toggle.png" alt="Supervisor Review Mode toggle" />
-        </div>
-        <div class="feature-card-label">Supervisor Review Mode Toggle</div>
-        <div class="feature-card-desc">Transforms the existing interface in-context rather than replacing it — same case, different tools.</div>
-      </div>
-      <div class="feature-card feature-card--offset">
-        <div class="feature-card-img">
-          <img src="img/feature-concur-flow.png" alt="Concur / Not Concur decision flow" />
-        </div>
-        <div class="feature-card-label">Decision Flow</div>
-        <div class="feature-card-desc">A deliberate modal action — the design made the consequence feel proportional to what it is in the real world.</div>
-      </div>
-      <div class="feature-card">
-        <div class="feature-card-img">
-          <img src="img/feature-notification.png" alt="Officer notification" />
-        </div>
-        <div class="feature-card-label">Automatic Notification</div>
-        <div class="feature-card-desc">Officer notification baked into the concur flow — eliminating a manual follow-up step entirely.</div>
-      </div>
-    </div>
-  </div>
 
   <!-- PROCESS -->
   <section class="cs-section">
@@ -120,7 +333,10 @@
           <div class="cs-phase-label">Research &amp; Analysis</div>
         </div>
         <div class="cs-phase-body">
-          I interviewed 7 supervisors to map what was actually happening — not what the process was supposed to be. The gap was significant. Users had developed their own workarounds: personal naming conventions, duplicate backups, handwritten checklists. I translated these sessions into user flows that identified every tool being used, every handoff point, and every place the process broke down. Those flows became the foundation for everything that followed — and the primary artifact I used to build alignment with leadership.
+          Interviewed 7 supervisors to map the actual process, not the documented one. The gap was significant — users had built their own workarounds: personal naming conventions, duplicate backups, handwritten checklists. I translated these into user flows showing every tool, handoff point, and breakdown. These flows became the primary artifact for aligning with leadership.
+        </div>
+        <div class="cs-phase-img">
+          <img src="img/process-user-flow.png" alt="User flow diagram mapping the existing supervisor review process across tools and handoff points" />
         </div>
       </div>
 
@@ -132,7 +348,10 @@
           <div class="cs-phase-label">Workshops</div>
         </div>
         <div class="cs-phase-body">
-          I ran three targeted workshops rather than one big alignment meeting. <strong>With leadership:</strong> grounding the project in outcomes, not features — what does success look like six months post-launch? <strong>With engineering:</strong> mapping technical constraints early, so the design wouldn't run into walls late. <strong>With a cross-functional design group:</strong> rapid ideation on solutions, stress-testing assumptions before committing to a direction. The three-workshop structure compressed what often becomes months of misalignment into two weeks.
+          Three targeted workshops instead of one alignment meeting. <strong>Leadership:</strong> defining outcomes, not features. <strong>Engineering:</strong> mapping technical constraints early. <strong>Cross-functional design group:</strong> rapid ideation and stress-testing assumptions. Compressed months of alignment into two weeks.
+        </div>
+        <div class="cs-phase-img">
+          <img src="img/process-workshops.png" alt="Workshop output — collaborative feature prioritization matrix across five user personas" />
         </div>
       </div>
 
@@ -144,7 +363,11 @@
           <div class="cs-phase-label">Prototyping</div>
         </div>
         <div class="cs-phase-body">
-          I built a high-fidelity prototype early — not to look finished, but to make the decisions real enough to critique. The key design challenge was the mode itself: supervisors needed to enter a distinct review context without losing their place in the main application. I explored three patterns for this (overlay, new tab, contextual panel) before landing on a mode toggle that transformed the existing interface rather than replacing it. Leadership feedback tightened the scope; the prototype made those conversations specific.
+          Built a high-fidelity prototype early to make design decisions concrete enough to critique. The core challenge: supervisors needed a distinct review context without losing their place in the application. I explored three patterns (overlay, new tab, contextual panel) and landed on a mode toggle that transformed the existing interface in place. The prototype made scope conversations with leadership specific rather than abstract.
+        </div>
+        <div class="cs-nda-note">
+          <span class="cs-nda-icon">⌒</span>
+          The prototype is not shown here. This project involves sensitive casework data and is covered under NDA.
         </div>
       </div>
 
@@ -156,7 +379,16 @@
           <div class="cs-phase-label">Usability Testing</div>
         </div>
         <div class="cs-phase-body">
-          Four users, one task: complete a review using the new system. We also A/B tested three specific features during these sessions — the placement of the review toolbar, the concur/not-concur decision flow, and the notification pattern for officers. The sessions surfaced two changes that weren't on our radar: supervisors wanted to see case context at a glance without switching views, and the toolbar was being missed on first load. Both were addressed before handoff.
+          Four users, one task: complete a full review. Alongside the overall experience, we A/B tested three design decisions: three-column vs. single-column layout, filled vs. unfilled backgrounds for answered fields, and whether to include interview content inline. We also used the sessions to run discovery on a separate upcoming project.
+        </div>
+        <div class="cs-nda-note">
+          <span class="cs-nda-icon">⌒</span>
+          Session artifacts are under NDA. Key quotes from testing:
+        </div>
+        <div class="cs-testing-quotes">
+          <div class="cs-testing-quote">"I prefer the columns, definitely the columns, makes it feel more like the form and it's easier for me to see more info at once"</div>
+          <div class="cs-testing-quote">"The grey is actually kind of nice - particularly when scrolling quickly like case review it's much harder to miss something"</div>
+          <div class="cs-testing-quote">"It is helpful to me, because usually I have both screens open to view both (assessment and interview) and have to go between them"</div>
         </div>
       </div>
 
@@ -168,7 +400,7 @@
           <div class="cs-phase-label">Design System &amp; Handoff</div>
         </div>
         <div class="cs-phase-body">
-          The final design was broken into documented components and contributed to our internal design system — not just dropped in, but named, annotated, and reviewed with the engineering team before development began. Handoff included state documentation for every interactive element and a component map that engineering could reference during implementation. This reduced back-and-forth significantly during the build phase.
+          Broke the final design into documented components and contributed them to our internal design system. Handoff included state documentation for every interactive element and a component map for engineering. This cut back-and-forth significantly during the build.
         </div>
       </div>
 
@@ -180,12 +412,40 @@
           <div class="cs-phase-label">Launch</div>
         </div>
         <div class="cs-phase-body">
-          We've historically struggled with adoption on new features — users default to what they know. For this launch I worked with stakeholders to design the rollout itself: a phased approach with a pilot group, in-app guidance for first sessions, and a feedback channel that surfaced issues in real time. The 1,200+ sessions in month two weren't an accident — they were the result of treating launch as part of the design problem.
+          Adoption had historically been a problem — users default to what they know. I worked with stakeholders to design the rollout: phased release with a pilot group, in-app guidance for first sessions, and a real-time feedback channel. 1,200+ sessions in month two.
         </div>
       </div>
 
     </div>
   </section>
+
+  <!-- KEY SCREENS -->
+  <div class="feature-callout">
+    <div class="cs-section-label">Key Screens</div>
+    <div class="feature-callout-grid">
+      <div class="feature-card">
+        <div class="feature-card-img">
+          <img src="img/feature-mode-toggle.png" alt="Supervisor Review Mode toggle" />
+        </div>
+        <div class="feature-card-label">Mode Toggle</div>
+        <div class="feature-card-desc">Transforms the interface in place — same case, different tools. No navigation required.</div>
+      </div>
+      <div class="feature-card feature-card--offset">
+        <div class="feature-card-img">
+          <img src="img/feature-concur-flow.png" alt="Concur / Not Concur decision flow" />
+        </div>
+        <div class="feature-card-label">Decision Flow</div>
+        <div class="feature-card-desc">Concur / Not Concur as a deliberate modal action. Weight of the UI matches the weight of the decision.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-card-img">
+          <img src="img/feature-notification.png" alt="Officer notification" />
+        </div>
+        <div class="feature-card-label">Automatic Notification</div>
+        <div class="feature-card-desc">Officer notification built into the concur flow. Eliminated a manual follow-up step.</div>
+      </div>
+    </div>
+  </div>
 
   <!-- USER QUOTES -->
   <section class="cs-section">
@@ -201,7 +461,7 @@
       </div>
       <div class="cs-quote">
         <div class="cs-quote-text">"Overall it's an improvement, but it's still not perfect and I still have to do a lot of other review tasks in other places."</div>
-        <div class="cs-quote-attr">Supervisor User — and the clearest signal of what to build next</div>
+        <div class="cs-quote-attr">Supervisor User — the starting point for the next phase</div>
       </div>
     </div>
   </section>
@@ -211,12 +471,12 @@
     <div class="cs-section-label">Takeaways</div>
     <div class="cs-conclusion">
       <div class="cs-conclusion-heading">
-        The best adoption metric is one you<em> earn before launch.</em>
+        Adoption was strong because<em> users shaped the product.</em>
       </div>
       <div class="cs-conclusion-body">
-        <p>The adoption numbers were strong, but they weren't a surprise — they were the result of involving real supervisors at every stage, from the first research sessions through the rollout itself. When users have shaped a product, they show up for it.</p>
-        <p>The critical quote — "still not perfect, still tasks elsewhere" — was the most useful thing to come out of the launch. It's now the starting point for the next phase of the feature. Good feedback doesn't mean everyone is happy. It means you understand exactly what's left to do.</p>
-        <p>If I were to run this project again, I'd push harder for a larger usability testing cohort. Four users caught real issues, but there were edge cases in supervisor workflows that only surfaced post-launch. More pre-launch exposure to the full range of users would have closed that gap.</p>
+        <p>Supervisors were involved at every stage — research, workshops, testing, rollout. When users have shaped a product, they show up for it.</p>
+        <p>The most useful post-launch signal: "still not perfect, still tasks elsewhere." That quote is now the starting point for the next phase.</p>
+        <p>What I'd change: a larger usability testing cohort. Four users caught real issues, but edge cases in supervisor workflows only surfaced post-launch.</p>
       </div>
     </div>
   </section>
