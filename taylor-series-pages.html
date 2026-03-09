@@ -14,44 +14,45 @@
   <div class="scroll-progress" id="scroll-progress"></div>
   <div class="bg-gradient"></div>
 
-  <!-- HERO -->
-  <section class="cs-hero">
-    <div class="cs-hero-accent-line"></div>
-    <a href="index.html#work" class="cs-back">← Work</a>
-    <div class="cs-hero-tag">
-      <span>UX/UI Design</span>
-      <span class="cs-hero-tag-sep">·</span>
-      <span>E-commerce</span>
-      <span class="cs-hero-tag-sep">·</span>
-      <span>Consumer Brand</span>
-    </div>
-    <h1 class="cs-title">Taylor Guitars<br><em>Series Pages</em></h1>
-    <p class="cs-summary">Redesigning the series pages that served as the main entry point for guitar buyers — eliminating analysis paralysis, doubling page views, and driving a 67% increase in clickthrough to product pages.</p>
-    <div class="cs-meta-bar">
-      <div class="cs-meta-item">
-        <span class="cs-meta-label">Role</span>
-        <span class="cs-meta-value">UX/UI Design &amp; Art Direction</span>
-      </div>
-      <div class="cs-meta-item">
-        <span class="cs-meta-label">Team</span>
-        <span class="cs-meta-value">Stakeholders, Agency Partners</span>
-      </div>
-      <div class="cs-meta-item">
-        <span class="cs-meta-label">Client</span>
-        <span class="cs-meta-value">Taylor Guitars</span>
-      </div>
-      <div class="cs-meta-item">
-        <span class="cs-meta-label">Domain</span>
-        <span class="cs-meta-value">E-commerce · Content Design</span>
-      </div>
-    </div>
-  </section>
+  <!-- SPLIT HERO -->
+  <div class="split-hero">
 
-  <!-- HERO IMAGE -->
-  <div class="cs-image-wrap">
-    <div class="cs-image">
+    <!-- Left text panel -->
+    <div class="split-hero-left">
+      <div class="sh-top">
+        <a href="index.html#work" class="sh-back">← Work</a>
+        <div class="sh-eyebrow">UX/UI Design · E-commerce · Consumer Brand</div>
+        <h1 class="sh-title">Taylor Guitars<em>Series Pages</em></h1>
+        <p class="sh-summary">Redesigning the series pages that served as the main entry point for guitar buyers — eliminating analysis paralysis, doubling page views, and driving a 67% increase in clickthrough to product pages.</p>
+      </div>
+      <div class="sh-meta">
+        <div class="sh-meta-row">
+          <span class="sh-meta-label">Role</span>
+          <span class="sh-meta-value">UX/UI Design &amp; Art Direction</span>
+        </div>
+        <div class="sh-meta-row">
+          <span class="sh-meta-label">Team</span>
+          <span class="sh-meta-value">Stakeholders, Agency Partners</span>
+        </div>
+        <div class="sh-meta-row">
+          <span class="sh-meta-label">Client</span>
+          <span class="sh-meta-value">Taylor Guitars</span>
+        </div>
+        <div class="sh-meta-row">
+          <span class="sh-meta-label">Domain</span>
+          <span class="sh-meta-value">E-commerce · Content Design</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right bold color panel -->
+    <div class="split-hero-right"></div>
+
+    <!-- Floating product screenshot — breaks the grid -->
+    <div class="split-hero-img">
       <img src="img/thumbnails/series-page-thumbnail.jpg" alt="Taylor Guitars Series Pages" />
     </div>
+
   </div>
 
   <!-- PROBLEM -->
@@ -101,6 +102,9 @@
         <div class="cs-phase-body">
           After initial research, I focused on understanding where users actually were in their buying journey — not where the business assumed they were. The research concluded that these pages needed to do three specific things: provide a high-level series overview, give easy access to specific models with clear imagery, and present multiple "outs" for users to dive deeper into what interested them. Journey mapping informed by two distinct personas — a style-focused newer player and an experienced collector who valued specs and tone — helped shape the module set. We empathized with fictional users because direct testing wasn't available at that stage.
         </div>
+        <div class="cs-phase-img">
+          <img src="img/taylor-series/journey-map-craig.jpg" alt="Craig M. journey map — tasks, emotions, and improvement opportunities at each stage of the guitar buying journey" />
+        </div>
       </div>
 
       <div class="cs-phase-connector" aria-hidden="true"></div>
@@ -125,6 +129,9 @@
         <div class="cs-phase-body">
           I led the art direction for the visual language of these pages — coordinating photoshoots for lifestyle and beauty imagery, directing the video content strategy, and managing the asset pipeline to ensure every module had what it needed before development began. Asset wrangling at scale is unglamorous work, but getting it right was the difference between a smooth build and a delayed launch.
         </div>
+        <div class="cs-phase-img">
+          <img src="img/taylor-series/series-art-direction.jpg" alt="Art direction output — lifestyle and beauty photography across guitar models, environments, and players" />
+        </div>
       </div>
 
       <div class="cs-phase-connector" aria-hidden="true"></div>
@@ -136,6 +143,9 @@
         </div>
         <div class="cs-phase-body">
           Working with agency partners, I wireframed and prototyped the new series page experience — developing new modules that hadn't existed on the site before. Each module was designed to solve a specific problem identified in the define phase: a model browser that let users quickly compare without navigating away, a feature section that communicated tonal character visually, and a "meet the series" summary that oriented users before they dove into specifics.
+        </div>
+        <div class="cs-phase-img">
+          <img src="img/taylor-series/series-pages-laptop.png" alt="Redesigned 700 Series page — full hero with lifestyle imagery, series overview, and model entry points" />
         </div>
       </div>
 
@@ -153,6 +163,34 @@
 
     </div>
   </section>
+
+  <!-- KEY SCREENS -->
+  <div class="feature-callout">
+    <div class="cs-section-label">Key Screens</div>
+    <div class="feature-callout-grid">
+      <div class="feature-card">
+        <div class="feature-card-img">
+          <img src="img/taylor-series/series-meet-the-series.png" alt="'Meet the Series' module — model browser with swatchable thumbnails and spec details for each guitar" />
+        </div>
+        <div class="feature-card-label">Model Browser</div>
+        <div class="feature-card-desc">A new module that hadn't existed on the site before. Users could browse models, compare specs, and navigate to product pages without leaving the series overview.</div>
+      </div>
+      <div class="feature-card feature-card--offset">
+        <div class="feature-card-img">
+          <img src="img/taylor-series/series-features.png" alt="Features section — lifestyle imagery paired with tonewood and construction callouts" />
+        </div>
+        <div class="feature-card-label">Features Section</div>
+        <div class="feature-card-desc">Features communicated through full-bleed lifestyle imagery and paired copy — translating tonal character and craftsmanship into language that resonated with both casual and experienced players.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-card-img">
+          <img src="img/taylor-series/series-browse.png" alt="'Browse the Series' with sidebar filter — shape, tonewood, electronics, and more" />
+        </div>
+        <div class="feature-card-label">Browse & Filter</div>
+        <div class="feature-card-desc">A filterable model grid giving spec-focused buyers a fast path to exactly what they were looking for — without disrupting the overview experience for users still exploring.</div>
+      </div>
+    </div>
+  </div>
 
   <!-- CONCLUSION -->
   <section class="cs-section">

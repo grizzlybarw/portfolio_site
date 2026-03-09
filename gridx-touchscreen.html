@@ -14,44 +14,45 @@
   <div class="scroll-progress" id="scroll-progress"></div>
   <div class="bg-gradient"></div>
 
-  <!-- HERO -->
-  <section class="cs-hero">
-    <div class="cs-hero-accent-line"></div>
-    <a href="index.html#work" class="cs-back">← Work</a>
-    <div class="cs-hero-tag">
-      <span>Experience Design</span>
-      <span class="cs-hero-tag-sep">·</span>
-      <span>Sales Enablement</span>
-      <span class="cs-hero-tag-sep">·</span>
-      <span>Clean Energy</span>
-    </div>
-    <h1 class="cs-title">GridX Interactive<br><em>Touchscreen Demo</em></h1>
-    <p class="cs-summary">A self-paced touchscreen web app for GridX conference booths — letting attendees explore product features on their own terms, while giving sales staff more meaningful conversations.</p>
-    <div class="cs-meta-bar">
-      <div class="cs-meta-item">
-        <span class="cs-meta-label">Role</span>
-        <span class="cs-meta-value">Lead Experience Designer</span>
-      </div>
-      <div class="cs-meta-item">
-        <span class="cs-meta-label">Venue</span>
-        <span class="cs-meta-value">Clean Energy Conferences</span>
-      </div>
-      <div class="cs-meta-item">
-        <span class="cs-meta-label">Audience</span>
-        <span class="cs-meta-value">Current &amp; Prospective Customers</span>
-      </div>
-      <div class="cs-meta-item">
-        <span class="cs-meta-label">Domain</span>
-        <span class="cs-meta-value">Clean Energy · Sales Enablement</span>
-      </div>
-    </div>
-  </section>
+  <!-- SPLIT HERO -->
+  <div class="split-hero">
 
-  <!-- HERO IMAGE -->
-  <div class="cs-image-wrap">
-    <div class="cs-image">
+    <!-- Left text panel -->
+    <div class="split-hero-left">
+      <div class="sh-top">
+        <a href="index.html#work" class="sh-back">← Work</a>
+        <div class="sh-eyebrow">Experience Design · Sales Enablement · Clean Energy</div>
+        <h1 class="sh-title">GridX Interactive<em>Touchscreen Demo</em></h1>
+        <p class="sh-summary">A self-paced touchscreen web app for GridX conference booths — letting attendees explore product features on their own terms, while giving sales staff more meaningful conversations.</p>
+      </div>
+      <div class="sh-meta">
+        <div class="sh-meta-row">
+          <span class="sh-meta-label">Role</span>
+          <span class="sh-meta-value">Lead Experience Designer</span>
+        </div>
+        <div class="sh-meta-row">
+          <span class="sh-meta-label">Venue</span>
+          <span class="sh-meta-value">Clean Energy Conferences</span>
+        </div>
+        <div class="sh-meta-row">
+          <span class="sh-meta-label">Audience</span>
+          <span class="sh-meta-value">Current &amp; Prospective Customers</span>
+        </div>
+        <div class="sh-meta-row">
+          <span class="sh-meta-label">Domain</span>
+          <span class="sh-meta-value">Clean Energy · Sales Enablement</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right bold color panel -->
+    <div class="split-hero-right"></div>
+
+    <!-- Floating product screenshot — breaks the grid -->
+    <div class="split-hero-img">
       <img src="img/thumbnails/gridx-touchscreen-thumbnails.jpg" alt="GridX Interactive Touchscreen Demo at conference booth" />
     </div>
+
   </div>
 
   <!-- PROBLEM -->
@@ -101,6 +102,9 @@
         <div class="cs-phase-body">
           I started with user behavior research focused on the in-booth conference experience — which I had first-hand knowledge of from attending our largest conference the previous year. I also conducted individual interviews with sales and marketing team members to understand what they actually needed the booth to do. Four key insights came out of those conversations: demos were too long and going to the wrong people; we were good at talking to folks we knew but poor at attracting strangers; people were avoiding the booth to dodge a hard sell; and a quick, visual product overview would do a lot of the heavy lifting.
         </div>
+        <div class="cs-phase-img">
+          <img src="img/touchscreen/gridx-sketching.jpg" alt="Notebook sketches mapping early demo concepts — Schedule a Demo, Browse Materials, and Analyze Demo flows" />
+        </div>
       </div>
 
       <div class="cs-phase-connector" aria-hidden="true"></div>
@@ -125,6 +129,9 @@
         <div class="cs-phase-body">
           I designed a clean, touch-optimized interface for the web app — large tap targets, simple navigation, and clear visual hierarchy that worked at a glance. The system supported tap and back navigation for quick topic switching and was built to scale across screen sizes without losing usability.
         </div>
+        <div class="cs-phase-img">
+          <img src="img/touchscreen/touchscreen-initial-flow.png" alt="Full Figma overview of the touchscreen demo — intro, demo choice, all four product feature sequences, and lead capture" />
+        </div>
       </div>
 
       <div class="cs-phase-connector" aria-hidden="true"></div>
@@ -136,6 +143,9 @@
         </div>
         <div class="cs-phase-body">
           I designed 'Deci' — a custom character to guide users through the experience with personality and warmth. The goal was to make a complex software platform feel approachable rather than intimidating. Deci provided visual continuity across the experience and gave the brand something to rally around. After the conference, Deci became the official GridX mascot used across marketing materials.
+        </div>
+        <div class="cs-phase-img">
+          <img src="img/touchscreen/deci-sketches.jpg" alt="Hand-drawn character explorations for Deci — poses and expressions developed before moving to digital illustration" />
         </div>
       </div>
 
@@ -161,10 +171,41 @@
         <div class="cs-phase-body">
           I managed the development cycle as PM for a hired developer and video editor, coordinated hardware selection for the booth, and redesigned the physical booth layout to integrate the touchscreen experience. The result launched at our next major conference and drew consistent traffic throughout.
         </div>
+        <div class="cs-phase-img">
+          <img src="img/touchscreen/gridx-booth.jpg" alt="The touchscreen kiosk live at a clean energy conference — Deci on screen, Deci plushies on the counter, PSEG award visible in the background" />
+        </div>
       </div>
 
     </div>
   </section>
+
+  <!-- KEY SCREENS -->
+  <div class="feature-callout">
+    <div class="cs-section-label">Key Screens</div>
+    <div class="feature-callout-grid">
+      <div class="feature-card">
+        <div class="feature-card-img">
+          <img src="img/touchscreen/feature-sequence-home.png" alt="Demo home screen — Deci alongside 'I'm interested in...' product menu" />
+        </div>
+        <div class="feature-card-label">Home Screen</div>
+        <div class="feature-card-desc">Deci greets attendees and presents the four product areas. Self-directed from the first tap — no salesperson required to get started.</div>
+      </div>
+      <div class="feature-card feature-card--offset">
+        <div class="feature-card-img">
+          <img src="img/touchscreen/feature-sequence-framer.jpg" alt="Feature walkthrough showing GridX Explore with 'See this feature' CTA and contextual sidebar" />
+        </div>
+        <div class="feature-card-label">Feature Walkthrough</div>
+        <div class="feature-card-desc">Each feature plays as a guided video with a contextual sidebar. Attendees explore the actual product UI — bill comparisons, rate analysis, EV savings — at their own pace.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-card-img">
+          <img src="img/touchscreen/form-sequence.png" alt="Lead capture form with Deci — triggered at demo completion to convert engaged attendees" />
+        </div>
+        <div class="feature-card-label">Lead Capture</div>
+        <div class="feature-card-desc">Deci delivers the lead capture form at completion — when attendees are most engaged. Warm handoff to sales built into the experience itself.</div>
+      </div>
+    </div>
+  </div>
 
   <!-- CONCLUSION -->
   <section class="cs-section">

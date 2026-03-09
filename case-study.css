@@ -53,7 +53,7 @@ body::before {
     #f5f0e8;
 }
 
-nav, section, footer, .cs-next, .cs-hero, .cs-image-wrap {
+nav, section, footer, .cs-next, .cs-hero, .cs-image-wrap, .split-hero {
   position: relative;
   z-index: 2;
 }
@@ -628,4 +628,245 @@ footer p { font-size: 0.75rem; color: var(--muted); }
   .cs-conclusion { grid-template-columns: 1fr; gap: 2rem; }
   .cs-next { padding: 3rem 1.5rem 6rem; }
   footer { padding: 1.5rem; flex-direction: column; gap: 0.5rem; text-align: center; }
+}
+
+/* ============================================================
+   SPLIT HERO
+   Used on all case study pages for the full-viewport hero.
+   ============================================================ */
+.split-hero {
+  display: grid;
+  grid-template-columns: 42% 58%;
+  min-height: 100vh;
+  overflow: hidden;
+  z-index: 2;
+}
+
+.split-hero-left {
+  background: #f5f0e8;
+  padding: 5rem 3.5rem 4.5rem 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  position: relative;
+  z-index: 3;
+}
+
+.split-hero-right {
+  background:
+    linear-gradient(
+      160deg,
+      #d4824a 0%,
+      #c4703f 25%,
+      #a85a2e 55%,
+      #8c4420 78%,
+      #6b2e12 100%
+    );
+  position: relative;
+  z-index: 2;
+}
+
+.split-hero-right::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
+  opacity: 0.07;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
+
+/* Floating screenshot — breaks the grid */
+.split-hero-img {
+  position: absolute;
+  left: 34%;
+  right: 4rem;
+  top: 20%;
+  z-index: 20;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow:
+    0 4px 8px rgba(0,0,0,0.08),
+    0 16px 48px rgba(0,0,0,0.22),
+    0 36px 90px rgba(0,0,0,0.28);
+  opacity: 0;
+  animation: fadeUp 0.8s ease 0.5s forwards;
+}
+.split-hero-img img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Left panel text */
+.sh-top {
+  display: flex;
+  flex-direction: column;
+}
+
+.sh-back {
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  color: rgba(26,24,20,0.5);
+  text-decoration: none;
+  margin-bottom: 2.5rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: color 0.2s;
+  opacity: 0;
+  animation: fadeUp 0.5s ease 0.1s forwards;
+}
+.sh-back:hover { color: #1a1814; }
+
+.sh-eyebrow {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #c4703f;
+  margin-bottom: 1rem;
+  opacity: 0;
+  animation: fadeUp 0.5s ease 0.18s forwards;
+}
+
+.sh-title {
+  font-family: 'Instrument Sans', sans-serif;
+  font-size: clamp(2.4rem, 4vw, 3.75rem);
+  font-weight: 700;
+  line-height: 1.04;
+  letter-spacing: -0.03em;
+  color: #1a1814;
+  margin-bottom: 1.75rem;
+  opacity: 0;
+  animation: fadeUp 0.6s ease 0.28s forwards;
+}
+.sh-title em {
+  font-family: 'Lora', serif;
+  font-style: italic;
+  font-weight: 400;
+  color: #c4703f;
+  display: block;
+}
+
+.sh-summary {
+  font-size: 0.88rem;
+  line-height: 1.78;
+  color: rgba(26,24,20,0.58);
+  max-width: 340px;
+  opacity: 0;
+  animation: fadeUp 0.6s ease 0.36s forwards;
+}
+
+.sh-confidential {
+  font-size: 0.75rem;
+  font-style: italic;
+  color: rgba(26,24,20,0.45);
+  margin-top: 0.75rem;
+  max-width: 340px;
+  line-height: 1.6;
+  opacity: 0;
+  animation: fadeUp 0.6s ease 0.4s forwards;
+}
+
+/* Bottom meta strip */
+.sh-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(26,24,20,0.12);
+  opacity: 0;
+  animation: fadeUp 0.6s ease 0.46s forwards;
+}
+
+.sh-meta-row {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+}
+
+.sh-meta-label {
+  font-size: 0.64rem;
+  font-weight: 600;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: #c4703f;
+  min-width: 72px;
+  flex-shrink: 0;
+}
+
+.sh-meta-value {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #1a1814;
+}
+
+.cs-nda-note {
+  margin-top: 1.5rem;
+  margin-left: 1.25rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.78rem;
+  color: rgba(26,24,20,0.5);
+  background: rgba(26,24,20,0.04);
+  border: 1px solid rgba(26,24,20,0.1);
+  border-radius: 4px;
+  padding: 0.6rem 1rem;
+}
+.cs-nda-icon {
+  font-size: 0.9rem;
+  opacity: 0.4;
+}
+
+.cs-testing-quotes {
+  margin-top: 1.25rem;
+  margin-left: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.cs-testing-quote {
+  font-size: 0.875rem;
+  font-style: italic;
+  color: rgba(26,24,20,0.65);
+  padding: 0.75rem 1rem 0.75rem 1.25rem;
+  border-left: 2px solid #c4703f;
+  line-height: 1.6;
+}
+
+.cs-phase-img {
+  margin-top: 1.75rem;
+  margin-left: 1.25rem;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid rgba(26,24,20,0.1);
+}
+.cs-phase-img img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+@media (max-width: 900px) {
+  .split-hero {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+  .split-hero-right { display: none; }
+  .split-hero-img {
+    position: static;
+    transform: none;
+    margin: 0;
+    border-radius: 0;
+    box-shadow: none;
+    opacity: 1;
+    animation: none;
+  }
+  .split-hero-left {
+    padding: 3.5rem 1.5rem;
+  }
 }

@@ -14,44 +14,45 @@
   <div class="scroll-progress" id="scroll-progress"></div>
   <div class="bg-gradient"></div>
 
-  <!-- HERO -->
-  <section class="cs-hero">
-    <div class="cs-hero-accent-line"></div>
-    <a href="index.html#work" class="cs-back">← Work</a>
-    <div class="cs-hero-tag">
-      <span>Experience Design</span>
-      <span class="cs-hero-tag-sep">·</span>
-      <span>Vision Work</span>
-      <span class="cs-hero-tag-sep">·</span>
-      <span>Clean Energy</span>
-    </div>
-    <h1 class="cs-title">GridX Empower<br><em>Re-imagined</em></h1>
-    <p class="cs-summary">A 2–5 year vision for GridX's Empower platform — introducing a campaign-driven, segmented widget system for utilities and a personalized, insight-rich experience for their customers.</p>
-    <div class="cs-meta-bar">
-      <div class="cs-meta-item">
-        <span class="cs-meta-label">Role</span>
-        <span class="cs-meta-value">Lead Experience Designer</span>
-      </div>
-      <div class="cs-meta-item">
-        <span class="cs-meta-label">Team</span>
-        <span class="cs-meta-value">Design, Product, Engineering, Executives</span>
-      </div>
-      <div class="cs-meta-item">
-        <span class="cs-meta-label">Type</span>
-        <span class="cs-meta-value">Vision / Strategy</span>
-      </div>
-      <div class="cs-meta-item">
-        <span class="cs-meta-label">Domain</span>
-        <span class="cs-meta-value">Clean Energy · SaaS</span>
-      </div>
-    </div>
-  </section>
+  <!-- SPLIT HERO -->
+  <div class="split-hero">
 
-  <!-- HERO IMAGE -->
-  <div class="cs-image-wrap">
-    <div class="cs-image">
+    <!-- Left text panel -->
+    <div class="split-hero-left">
+      <div class="sh-top">
+        <a href="index.html#work" class="sh-back">← Work</a>
+        <div class="sh-eyebrow">Experience Design · Vision Work · Clean Energy</div>
+        <h1 class="sh-title">GridX Empower<em>Re-imagined</em></h1>
+        <p class="sh-summary">A 2–5 year vision for GridX's Empower platform — introducing a campaign-driven, segmented widget system for utilities and a personalized, insight-rich experience for their customers.</p>
+      </div>
+      <div class="sh-meta">
+        <div class="sh-meta-row">
+          <span class="sh-meta-label">Role</span>
+          <span class="sh-meta-value">Lead Experience Designer</span>
+        </div>
+        <div class="sh-meta-row">
+          <span class="sh-meta-label">Team</span>
+          <span class="sh-meta-value">Design, Product, Engineering, Executives</span>
+        </div>
+        <div class="sh-meta-row">
+          <span class="sh-meta-label">Type</span>
+          <span class="sh-meta-value">Vision / Strategy</span>
+        </div>
+        <div class="sh-meta-row">
+          <span class="sh-meta-label">Domain</span>
+          <span class="sh-meta-value">Clean Energy · SaaS</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right bold color panel -->
+    <div class="split-hero-right"></div>
+
+    <!-- Floating product screenshot — breaks the grid -->
+    <div class="split-hero-img">
       <img src="img/thumbnails/empower-thumbnails.jpg" alt="GridX Empower Re-imagined interface" />
     </div>
+
   </div>
 
   <!-- PROBLEM -->
@@ -103,6 +104,9 @@
           <br /><br />
           I also established product constraints upfront: white-labelable, API-forward, and low-lift for utility IT teams to implement.
         </div>
+        <div class="cs-phase-img">
+          <img src="img/empower/empower-research.png" alt="Research workshop artifacts — stakeholder value mapping and synthesis across user types" />
+        </div>
       </div>
 
       <div class="cs-phase-connector" aria-hidden="true"></div>
@@ -127,6 +131,9 @@
         <div class="cs-phase-body">
           After going deep into the GridX API capabilities, I mapped the full information architecture for the reimagined platform. This 1,000-foot view revealed the natural structure of the product: a Campaign system for utilities to orchestrate widgets, an API explorer for education and custom widget creation, and a Widget Library — both pre-built and custom — as a potential marketplace. Getting this structure right before wireframing avoided expensive rework later.
         </div>
+        <div class="cs-phase-img">
+          <img src="img/empower/empower-ia.png" alt="Information architecture diagram mapping the full Empower platform — Campaigns, APIs explorer, and Widget Library" />
+        </div>
       </div>
 
       <div class="cs-phase-connector" aria-hidden="true"></div>
@@ -138,6 +145,9 @@
         </div>
         <div class="cs-phase-body">
           I created lightweight wireframes to validate information density and component structure before committing to high fidelity. I moved quickly from lo-fi to hi-fi — the goal wasn't to validate aesthetics, it was to confirm that the right information was in the right place. Speed mattered here because the real artifact was the prototype.
+        </div>
+        <div class="cs-phase-img">
+          <img src="img/empower/empower-wireframe.png" alt="Early wireframe explorations for the Empower platform — information density and component structure" />
         </div>
       </div>
 
@@ -155,6 +165,34 @@
 
     </div>
   </section>
+
+  <!-- KEY SCREENS -->
+  <div class="feature-callout">
+    <div class="cs-section-label">Key Screens</div>
+    <div class="feature-callout-grid">
+      <div class="feature-card">
+        <div class="feature-card-img">
+          <img src="img/empower/empower-campaigns.png" alt="Campaigns dashboard with Campaign Insights metrics and filterable campaign list" />
+        </div>
+        <div class="feature-card-label">Campaigns Dashboard</div>
+        <div class="feature-card-desc">Campaign Insights surface active campaigns, impressions, and engagement at a glance — with a filterable list and one-click campaign creation.</div>
+      </div>
+      <div class="feature-card feature-card--offset">
+        <div class="feature-card-img">
+          <img src="img/empower/empower-campaign-detail.jpg" alt="Campaign detail page with embed code and reporting analytics" />
+        </div>
+        <div class="feature-card-label">Campaign Detail & Reporting</div>
+        <div class="feature-card-desc">Each campaign surfaces embed code, live analytics dashboards, and a white-labeled widget preview — giving utilities everything to deploy and measure in one place.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-card-img">
+          <img src="img/empower/empower-widget-library.png" alt="Widget library with pre-built and custom widget cards" />
+        </div>
+        <div class="feature-card-label">Widget Library</div>
+        <div class="feature-card-desc">A browsable library of pre-built widgets — Cost Over Period, Rate Comparison, EV Purchase, Solar Adoption — each tagged by category and API, with a path to custom widget creation.</div>
+      </div>
+    </div>
+  </div>
 
   <!-- CONCLUSION -->
   <section class="cs-section">
