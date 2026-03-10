@@ -53,7 +53,8 @@
 
     <!-- Floating product screenshot — breaks the grid -->
     <div class="split-hero-img">
-      <img src="img/hero-final-ui.jpg" alt="Supervisor Review Mode — full interface" />
+      <img src="img/hero-final-ui.jpg" alt="Illustrative representation of the final interface — supervisor review mode active" />
+      <div class="split-hero-img-caption">Illustrative representation of the final interface — supervisor review mode active</div>
     </div>
 
   </div>
@@ -77,9 +78,10 @@
   <section class="cs-section">
     <div class="cs-section-label">Results</div>
     <div class="cs-results">
+      <div class="cs-results-preamble">All review work lived off-platform before launch — no digital baseline existed.</div>
       <div class="cs-stat">
         <div class="cs-stat-number">1,200<span>+</span></div>
-        <div class="cs-stat-label">Sessions in month two, above projections</div>
+        <div class="cs-stat-label">Sessions in month two across 75–100 supervisors — roughly 12–16 per person, above projections</div>
       </div>
       <div class="cs-stat">
         <div class="cs-stat-number">22<span>%</span></div>
@@ -87,7 +89,7 @@
       </div>
       <div class="cs-stat">
         <div class="cs-stat-number">83<span>%</span></div>
-        <div class="cs-stat-label">First-session happy path completion</div>
+        <div class="cs-stat-label">First-session happy path completion — onboarding was minimal and existed out of app due to tech constraints</div>
       </div>
     </div>
   </section>
@@ -103,7 +105,7 @@
           <div class="cs-phase-label">Research &amp; Analysis</div>
         </div>
         <div class="cs-phase-body">
-          Interviewed 7 supervisors to understand what was actually happening, not what the documentation said should be happening. The gap was significant. Users had built their own workarounds over the years — personal naming conventions, duplicate backups, handwritten checklists. Brilliant, honestly, but not exactly a sustainable system. I turned those conversations into user flows showing every tool, handoff, and breakdown point. Those flows ended up being the most useful artifact for getting leadership aligned — way more persuasive than a summary doc.
+          I interviewed 7 supervisors to understand what was actually happening, not what the documentation said should be happening. The gap was significant. Users had built their own workarounds over the years — personal naming conventions, duplicate backups, handwritten checklists. Brilliant, honestly, but not exactly a sustainable system. I turned those conversations into user flows showing every tool, handoff, and breakdown point. Those flows ended up being the most useful artifact for getting leadership aligned — way more persuasive than a summary doc.
         </div>
         <div class="cs-phase-img">
           <img src="img/process-user-flow.png" alt="User flow diagram mapping the existing supervisor review process across tools and handoff points" />
@@ -118,7 +120,7 @@
           <div class="cs-phase-label">Workshops</div>
         </div>
         <div class="cs-phase-body">
-          Ran three targeted workshops instead of one giant alignment meeting, which is almost always the wrong move. Leadership workshop focused on outcomes, not features. Engineering workshop surfaced technical constraints before they became surprises. A cross-functional design session for rapid ideation and stress-testing assumptions. Compressed what could have been months of back-and-forth into two weeks.
+          I ran three targeted workshops instead of one giant alignment meeting, which is almost always the wrong move. Leadership workshop focused on outcomes, not features. Engineering workshop surfaced technical constraints before they became surprises. A cross-functional design session for rapid ideation and stress-testing assumptions. Compressed what could have been months of back-and-forth into two weeks. I designed the frameworks for each session, recruited and organized the groups, and synthesized the outputs into a single leadership presentation that drove alignment on scope.
         </div>
         <div class="cs-phase-img">
           <img src="img/process-workshops.png" alt="Workshop output — collaborative feature prioritization matrix across five user personas" />
@@ -133,11 +135,17 @@
           <div class="cs-phase-label">Prototyping</div>
         </div>
         <div class="cs-phase-body">
-          Built a high-fidelity prototype early — not because the visuals needed to be perfect, but because abstract design conversations are much harder than concrete ones. The central challenge: supervisors needed a distinct review context without losing their place in the application. I explored three patterns (overlay, new tab, contextual panel) and landed on a mode toggle that transformed the existing interface in place. Suddenly the scope conversations with leadership got a lot more specific.
+          Before committing to a direction, I presented leadership with three solutions — ranging from a dedicated supervisor hub with its own navigation and tooling, to a lightweight mode toggle built into the existing interface. Leadership chose the leanest option. Resources and timeline made the more ambitious directions non-starters, and honestly, I still think they would have created a richer experience. But that constraint forced a useful clarity: the toggle had to work because it was the only bet we were making.
+          <br><br>
+          Built a high-fidelity prototype early — not because the visuals needed to be perfect, but because abstract design conversations tend to go nowhere. The core challenge: give supervisors a distinct review workspace without losing the overall context of the case. I explored three patterns.
+          <br><br>
+          The contextual overlay introduced visual competition with the document itself — supervisors were already context-switching constantly, and layering UI on top of content made it worse. New tab tested better for visual clarity but broke the spatial relationship between the case and the review — users lost their orientation and had to reestablish it by flipping back and forth. The contextual panel was the closest, carving out a dedicated space on screen for supervisor tasks, but added enough layout complexity that engineering flagged it as a significant build risk.
+          <br><br>
+          The mode toggle threaded the needle. Same case, same page, different tools. Supervisors always knew where they were. Once this was prototyped, the conversations with leadership got a lot more specific — suddenly we were debating real tradeoffs instead of talking in circles.
         </div>
-        <div class="cs-nda-note">
-          <span class="cs-nda-icon">⌒</span>
-          The prototype is not shown here. This project involves sensitive casework data and is covered under NDA.
+        <div class="cs-nda-note cs-nda-note--highlight">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+          The prototype is not shown here — this project involves sensitive casework data and is under NDA. Happy to walk through it in detail in a conversation.
         </div>
       </div>
 
@@ -149,10 +157,10 @@
           <div class="cs-phase-label">Usability Testing</div>
         </div>
         <div class="cs-phase-body">
-          Four users, one task: complete a full review. We also A/B tested three specific design decisions along the way — three-column vs. single-column layout, filled vs. unfilled backgrounds for answered fields, and whether interview content should be inline. We ran some discovery for an upcoming project in the same sessions because why waste a captive audience.
+          I wrote the research plan and built the test prototypes, then ran four users through one task: complete a full review. A/B tested three specific design decisions along the way — three-column vs. single-column layout, filled vs. unfilled backgrounds for answered fields, and whether interview content should be inline. We ran some discovery for an upcoming project in the same sessions because why waste a captive audience. I synthesized the findings and presented recommendations to leadership.
         </div>
-        <div class="cs-nda-note">
-          <span class="cs-nda-icon">⌒</span>
+        <div class="cs-nda-note cs-nda-note--highlight">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
           Session artifacts are under NDA. Key quotes from testing:
         </div>
         <div class="cs-testing-quotes">
@@ -170,7 +178,10 @@
           <div class="cs-phase-label">Design System &amp; Handoff</div>
         </div>
         <div class="cs-phase-body">
-          Broke the final design into documented components and contributed them to the internal design system. Handoff included state documentation for every interactive element and a component map for engineering. This is the unglamorous part that quietly makes builds go faster and reduces the number of Slack messages that start with "quick question."
+          I built out the full component documentation and contributed everything to the internal design system. Handoff included state documentation for every interactive element, CSS specs, and a component map for engineering. This is the unglamorous part that quietly makes builds go faster and reduces the number of Slack messages that start with "quick question." I'm also an active participant in mobs and pairing sessions — I truly believe in knocking down the wall between design and dev.
+        </div>
+        <div class="cs-phase-img">
+          <img src="img/handoff.png" alt="Figma handoff documentation — functionality specs, CSS values, and component states" />
         </div>
       </div>
 
@@ -182,7 +193,7 @@
           <div class="cs-phase-label">Launch</div>
         </div>
         <div class="cs-phase-body">
-          Adoption had historically been a problem — users default to what they know, and what they knew was Acrobat. I worked with stakeholders to design the rollout carefully: phased release with a pilot group, in-app guidance for first sessions, and a real-time feedback channel. 1,200+ sessions in month two.
+          Adoption had historically been a problem — users default to what they know, and what they knew was Acrobat. I partnered with stakeholders to design the rollout carefully: phased release with a pilot group, out-of-app onboarding materials for first sessions, and a real-time feedback channel. I developed the rollout messaging and job aids for end users — the materials that made the difference between supervisors opening the feature once and actually adopting it. 1,200+ sessions in month two.
         </div>
       </div>
 
@@ -198,21 +209,21 @@
           <img src="img/feature-mode-toggle.png" alt="Supervisor Review Mode toggle" />
         </div>
         <div class="feature-card-label">Mode Toggle</div>
-        <div class="feature-card-desc">Transforms the interface in place — same case, different tools. No navigation required.</div>
+        <div class="feature-card-desc">The entry point into a distinct review workspace. Toggling activates a separate supervisor record in the database, transforms the interface to surface submitted answers more clearly, and pulls interview content inline — eliminating the need to flip between screens. One interaction changes the context, the data layer, and the layout simultaneously.</div>
       </div>
       <div class="feature-card feature-card--offset">
         <div class="feature-card-img">
           <img src="img/feature-concur-flow.png" alt="Concur / Not Concur decision flow" />
         </div>
         <div class="feature-card-label">Decision Flow</div>
-        <div class="feature-card-desc">Concur / Not Concur as a deliberate modal action. Weight of the UI matches the weight of the decision.</div>
+        <div class="feature-card-desc">Concur / Not Concur as a deliberate modal action. The decision propagates through the entire system — updating the case task list and signaling to downstream processes that supervisor review is complete. Elevating this step in the UI gives the interaction weight appropriate to what it triggers.</div>
       </div>
       <div class="feature-card">
         <div class="feature-card-img">
           <img src="img/feature-notification.png" alt="Officer notification" />
         </div>
         <div class="feature-card-label">Automatic Notification</div>
-        <div class="feature-card-desc">Officer notification built into the concur flow. Eliminated a manual follow-up step.</div>
+        <div class="feature-card-desc">Built into the concur flow as a non-optional system trigger. Depending on the outcome, this pings the relevant systems to return a case to an office, resubmit for reinterview, or advance toward a final decision. In asylum case management, a missed handoff has real consequences. Making this automatic removed the risk entirely.</div>
       </div>
     </div>
   </div>
@@ -247,6 +258,7 @@
         <p>Supervisors were in the room at every stage — research, workshops, testing, rollout. That's not just a nice process principle. When people have shaped a product, they actually show up for it.</p>
         <p>The most useful signal post-launch: "still not perfect, still tasks elsewhere." That's not a complaint, that's a roadmap. That quote is now the starting point for the next phase.</p>
         <p>What I'd change: a larger usability testing cohort. Four users caught real issues, but some of the edge cases in supervisor workflows only showed up after launch. More voices earlier would have helped.</p>
+        <p>I pitched big and landed lean — that's not a failure, it's how you find out what's actually possible. The more ambitious solutions didn't ship, but they seeded the roadmap for what comes next. Pitching ideas you believe in, even when they don't make it through, is part of what makes the work worth doing.</p>
       </div>
     </div>
   </section>

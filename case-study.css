@@ -311,6 +311,16 @@ footer p { font-size: 0.75rem; color: var(--muted); }
   grid-template-columns: repeat(3, 1fr);
   gap: 2rem;
 }
+.cs-results-preamble {
+  grid-column: 1 / -1;
+  font-size: 0.8rem;
+  color: var(--muted);
+  font-style: italic;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 0.5rem;
+}
+
 .cs-stat-number {
   font-size: clamp(2.5rem, 4vw, 3.5rem);
   font-weight: 600;
@@ -697,6 +707,14 @@ footer p { font-size: 0.75rem; color: var(--muted); }
   height: auto;
   display: block;
 }
+.split-hero-img-caption {
+  padding: 0.5rem 0.75rem;
+  font-size: 0.68rem;
+  color: rgba(255,255,255,0.55);
+  letter-spacing: 0.03em;
+  background: rgba(0,0,0,0.25);
+  text-align: right;
+}
 
 /* Left panel text */
 .sh-top {
@@ -816,6 +834,19 @@ footer p { font-size: 0.75rem; color: var(--muted); }
   border-radius: 4px;
   padding: 0.6rem 1rem;
 }
+
+.cs-nda-note--highlight {
+  color: var(--fg);
+  background: rgba(196, 112, 63, 0.07);
+  border: 1px solid rgba(196, 112, 63, 0.3);
+  border-left: 3px solid var(--accent);
+  font-size: 0.82rem;
+  padding: 0.85rem 1.1rem;
+}
+.cs-nda-note--highlight svg {
+  color: var(--accent);
+  flex-shrink: 0;
+}
 .cs-nda-icon {
   font-size: 0.9rem;
   opacity: 0.4;
@@ -843,6 +874,7 @@ footer p { font-size: 0.75rem; color: var(--muted); }
   border-radius: 4px;
   overflow: hidden;
   border: 1px solid rgba(26,24,20,0.1);
+  position: relative;
 }
 .cs-phase-img img {
   width: 100%;
