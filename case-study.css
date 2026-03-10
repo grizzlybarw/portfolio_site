@@ -637,14 +637,13 @@ footer p { font-size: 0.75rem; color: var(--muted); }
 .split-hero {
   display: grid;
   grid-template-columns: 42% 58%;
-  min-height: 100vh;
   overflow: hidden;
   z-index: 2;
 }
 
 .split-hero-left {
   background: #f5f0e8;
-  padding: 5rem 3.5rem 4.5rem 3rem;
+  padding: 5rem 3.5rem 6rem 3rem;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -680,9 +679,9 @@ footer p { font-size: 0.75rem; color: var(--muted); }
 /* Floating screenshot — breaks the grid */
 .split-hero-img {
   position: absolute;
-  left: 34%;
-  right: 4rem;
-  top: 20%;
+  left: 38%;
+  right: 5.5rem;
+  top: 5rem;
   z-index: 20;
   border-radius: 6px;
   overflow: hidden;
