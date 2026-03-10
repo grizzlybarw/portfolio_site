@@ -296,10 +296,10 @@ footer p { font-size: 0.75rem; color: var(--muted); }
 }
 .cs-problem-body {
   font-size: 0.95rem;
-  line-height: 1.85;
+  line-height: 1.5;
   color: var(--muted);
 }
-.cs-problem-body p + p { margin-top: 1rem; }
+.cs-problem-body p + p { margin-top: 1.5rem; }
 
 /* RESULTS */
 .cs-results {
@@ -406,10 +406,11 @@ footer p { font-size: 0.75rem; color: var(--muted); }
 /* Body text indented to align under label */
 .cs-phase-body {
   font-size: 0.95rem;
-  line-height: 1.8;
+  line-height: 1.5;
   color: var(--muted);
   padding-left: 1.25rem;  /* num min-width 3rem + gap 1.25rem - header margin 3rem */
 }
+.cs-phase-body p + p { margin-top: 1.5rem; }
 .cs-phase-body strong {
   color: var(--fg);
   font-weight: 500;
@@ -558,10 +559,10 @@ footer p { font-size: 0.75rem; color: var(--muted); }
 }
 .cs-conclusion-body {
   font-size: 0.95rem;
-  line-height: 1.85;
+  line-height: 1.5;
   color: var(--muted);
 }
-.cs-conclusion-body p + p { margin-top: 1rem; }
+.cs-conclusion-body p + p { margin-top: 1.5rem; }
 
 /* NEXT PROJECT */
 .cs-next {
