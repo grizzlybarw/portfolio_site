@@ -31,16 +31,20 @@
           <span class="sh-meta-value">Lead Experience Designer</span>
         </div>
         <div class="sh-meta-row">
+          <span class="sh-meta-label">Year</span>
+          <span class="sh-meta-value">2024</span>
+        </div>
+        <div class="sh-meta-row">
+          <span class="sh-meta-label">Team</span>
+          <span class="sh-meta-value">Design, Marketing, Sales, Engineering</span>
+        </div>
+        <div class="sh-meta-row">
           <span class="sh-meta-label">Venue</span>
           <span class="sh-meta-value">Clean Energy Conferences</span>
         </div>
         <div class="sh-meta-row">
           <span class="sh-meta-label">Audience</span>
           <span class="sh-meta-value">Current &amp; Prospective Customers</span>
-        </div>
-        <div class="sh-meta-row">
-          <span class="sh-meta-label">Domain</span>
-          <span class="sh-meta-value">Clean Energy · Sales Enablement</span>
         </div>
       </div>
     </div>
@@ -63,8 +67,9 @@
         The GridX booth was great at talking to people who already knew GridX.<em> Everyone else kept walking.</em>
       </div>
       <div class="cs-problem-body">
+        <p>Conferences are expensive investments, and for a company in a high-growth period, every touchpoint needed to pull its weight. The marketing team — who owns the conference program — came to design with a clear mandate: get more leads and drive more organic booth traffic. Lead generation had historically been inconsistent; conversations happened, but contact information didn't reliably make it into the system. The opportunity was to fix that structurally — by building lead capture into the experience itself, rather than relying on a salesperson to remember to ask.</p>
         <p>At major clean energy conferences, the primary demo format was a 20–45 minute live walkthrough. That works well for existing customers who want to see what's new. For anyone unfamiliar with GridX, it was a hard sell that most people actively avoided. They'd clock the booth, clock the salesperson, and keep moving.</p>
-        <p>The opportunity was to build something anyone could use on their own terms — no salesperson required to get started. Something that communicated product value quickly, invited exploration, and warmed up prospects before a human conversation happened.</p>
+        <p>The goal was to build something anyone could use on their own terms — no salesperson required to get started. Something that communicated product value quickly, invited exploration, and warmed up prospects before a human conversation happened.</p>
         <p>My role at GridX was Lead Experience Designer, which meant I owned every touchpoint — software, marketing, physical booth. This project lived squarely at the intersection of all three.</p>
       </div>
     </div>
@@ -74,6 +79,7 @@
   <section class="cs-section">
     <div class="cs-section-label">Results</div>
     <div class="cs-results">
+      <div class="cs-results-preamble">Measured against the same conference the prior year. Figures sourced from sales team bookings and new prospect entries in the client management system.</div>
       <div class="cs-stat">
         <div class="cs-stat-number">24<span>%</span></div>
         <div class="cs-stat-label">Increase in booth traffic compared to prior events with live-demo-only format</div>
@@ -83,8 +89,8 @@
         <div class="cs-stat-label">Increase in full demo requests — better-informed attendees were more likely to commit</div>
       </div>
       <div class="cs-stat">
-        <div class="cs-stat-number">100<span>%</span></div>
-        <div class="cs-stat-label">Enjoyment of 'Deci' — our custom character who became the GridX mascot going forward</div>
+        <div class="cs-stat-number" style="font-size: clamp(1.6rem, 2.5vw, 2.2rem); letter-spacing: -0.02em; line-height: 1.1;">Mascot<br>Launch</div>
+        <div class="cs-stat-label">Deci was designed from day one as GridX's brand character — debuting at the conference with plush toys, sticker packs, and a starring role in the touchscreen demo, then extending into email, newsletters, and onboarding.</div>
       </div>
     </div>
   </section>
@@ -115,7 +121,10 @@
           <div class="cs-phase-label">Brainstorming &amp; Ideation</div>
         </div>
         <div class="cs-phase-body">
-          The direction came out of research pretty clearly: a self-directed interactive demo that was fast, approachable, and gave a compelling overview of what GridX did. The experience needed to work across screen sizes (large pedestal displays and iPads), require zero instruction to start, and hold up in a noisy, crowded event environment. We also decided early to build a reusable framework — not a one-time conference asset.
+          The prior format had two distinct failure modes. A live demo assumed attendees would stay for the full walkthrough — most didn't, and anyone who missed the beginning left without understanding the product. The looping slide deck was too broad: GridX had multiple product lines, and a deck covering all of them served none of them well. Relevant information got buried under solutions that didn't apply to the person watching.
+          <p>Three criteria came out of that diagnosis: show the right information at the right time — meaning attendees choose what's relevant to their business, not us; ensure they're seeing a current, accurate product demo rather than static slides; and reliably capture contact information for post-conference follow-up.</p>
+          <p>We considered a large-screen video installation as an alternative — simpler to produce, lower lift. But a video loop had the same core flaw as the slide deck: linear, passive, no self-selection. A touchscreen kiosk let attendees drive their own experience, and in a conference hall full of passive displays, that interactivity gave people a reason to stop.</p>
+          <p>We also made an early architectural decision to build the experience as a web app backed by a lightweight CMS — so marketing and sales could update content without developer involvement as products changed. The conference would be the first deployment, but the system was designed to outlast it: new features, new products, new content swapped in without rebuilding from scratch.</p>
         </div>
       </div>
 
@@ -142,7 +151,7 @@
           <div class="cs-phase-label">Character Design &amp; Animation</div>
         </div>
         <div class="cs-phase-body">
-          Designed 'Deci' — a custom character to guide users through the experience with some personality. The goal was to make a complex software platform feel approachable instead of intimidating, which is a real challenge when your product is B2B energy software. Deci provided visual continuity across the experience and gave the brand something to rally around. After the conference, Deci became the official GridX mascot used across marketing materials. Sometimes a navigation solution becomes a brand asset.
+          Designed 'Deci' — a custom character to guide users through the experience with some personality. The goal was to make a complex software platform feel approachable instead of intimidating, which is a real challenge when your product is B2B energy software. Deci provided visual continuity across the experience and gave the brand something to rally around. Deci was designed with the full brand rollout in mind — not just as a UI device, but as the character who would give GridX's brand a voice. The conference was the debut of a new rockstar.
         </div>
         <div class="cs-phase-img">
           <img src="img/touchscreen/deci-sketches.jpg" alt="Hand-drawn character explorations for Deci — poses and expressions developed before moving to digital illustration" />
@@ -169,7 +178,8 @@
           <div class="cs-phase-label">Engineering &amp; Launch</div>
         </div>
         <div class="cs-phase-body">
-          Managed the development cycle as PM for a hired developer and video editor, coordinated hardware selection, and redesigned the physical booth layout to integrate the touchscreen experience. The result launched at the next major conference and drew consistent traffic throughout the event.
+          The entire project — from kickoff to hardware on-site — ran eight weeks. Many assets weren't finalized until the final stretch, which meant development and QA ran in parallel with content production rather than sequentially. Shipping on time required tight coordination across every workstream simultaneously.
+          <p>Managed the full launch as both designer and project lead — coordinating across design, marketing, sales, and engineering, and managing two contracted specialists (developer and video editor). Oversaw hardware selection, worked with the marketing team on the Deci brand rollout including plush toys and sticker packs, and redesigned the physical booth layout to integrate the touchscreen experience. The result launched at the next major conference and drew consistent traffic throughout the event.</p>
         </div>
         <div class="cs-phase-img">
           <img src="img/touchscreen/gridx-booth.jpg" alt="The touchscreen kiosk live at a clean energy conference — Deci on screen, Deci plushies on the counter, PSEG award visible in the background" />
@@ -217,7 +227,7 @@
       <div class="cs-conclusion-body">
         <p>The interactive demo worked because it respected attendees' time. It didn't ask for anything upfront — it just offered something interesting to explore. That low-pressure entry turned passive observers into informed prospects, which made the downstream sales conversations dramatically more productive.</p>
         <p>The reusable framework ended up being a significant win. Instead of rebuilding from scratch for every conference, the team had a foundation to update and expand. Good design for one event; better design for every event after it.</p>
-        <p>And Deci — designed to solve a specific UX problem — became the company mascot. That's one of my favorite things to happen on a project.</p>
+        <p>And Deci — planned from day one as GridX's brand character — made their conference debut and went on to become the face of the company across email, newsletters, and onboarding. That's one of my favorite things to happen on a project.</p>
       </div>
     </div>
   </section>
