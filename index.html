@@ -165,7 +165,7 @@
       font-size: 1rem;
       line-height: 1.75;
       color: var(--muted);
-      max-width: 420px;
+      max-width: 600px;
     }
 
     .hero-meta {
@@ -262,15 +262,14 @@
       font-size: 0.7rem;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      background: rgba(245,240,232,0.9);
-      color: var(--fg);
+      background: rgba(26,24,20,0.72);
+      color: #fff;
       padding: 0.3rem 0.6rem;
       border-radius: 2px;
-      opacity: 0;
-      transform: translateY(4px);
-      transition: opacity 0.2s ease, transform 0.2s ease;
+      opacity: 1;
+      transition: background 0.2s ease;
     }
-    .case-card:hover .thumb-tag { opacity: 1; transform: translateY(0); }
+    .case-card:hover .thumb-tag { background: rgba(26,24,20,0.9); }
 
     .case-meta {
       display: flex;
@@ -304,6 +303,39 @@
     .tag + .tag::before {
       content: '·';
       margin-right: 0.6rem;
+    }
+
+    .case-desc {
+      font-size: 0.8rem;
+      line-height: 1.55;
+      color: var(--muted);
+      margin-top: 0.5rem;
+    }
+
+    .hero-sub-group {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1.25rem;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      background: var(--fg);
+      color: var(--bg);
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      border-radius: 3px;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .hero-cta:hover {
+      background: var(--accent);
+      transform: translateY(-1px);
     }
 
     /* ABOUT */
@@ -505,24 +537,29 @@
       <li><a href="#work">Work</a></li>
       <li><a href="#about">About</a></li>
       <li><a href="#contact">Contact</a></li>
+      <li><a href="resume.pdf" target="_blank">Resume ↗</a></li>
     </ul>
   </nav>
 
   <section class="hero">
     <dotlottie-player class="lottie-hero" src="https://lottie.host/a401a275-b551-49f2-aa92-243eb5a73415/h4abFPlcPk.lottie" autoplay loop speed="0.7"></dotlottie-player>
-    <div class="hero-eyebrow">Senior Product Designer — San Diego, CA</div>
+    <div class="hero-eyebrow">Senior Product Designer — San Diego, CA — Open to Remote</div>
     <h1 class="hero-headline">
       I design for<br><span class="swap-wrapper"><em class="swap-text" id="swapText">high-stakes moments</em></span><br>and the people who<br><em>can't work without them.</em>
     </h1>
     <div class="hero-bottom">
-      <p class="hero-sub">
-        15+ years turning hard problems into things people actually want to use. I've worked across civic tech, clean energy SaaS, and consumer brands — and I still get genuinely excited when a workflow stops making people miserable.
-      </p>
+      <div class="hero-sub-group">
+        <p class="hero-sub">
+          15+ years turning hard problems into things people actually want to use. I've worked across civic tech, clean energy SaaS, and consumer brands — and I still get genuinely excited when a workflow stops making people miserable.
+        </p>
+        <a href="#work" class="hero-cta">See my work ↓</a>
+      </div>
       <div class="hero-meta">
         <span>Currently</span>
-        <strong>Senior Product Designer, Civic Tech</strong>
+        <strong>Senior Product Designer, Civic Tech (confidential)</strong>
         <span style="margin-top:0.5rem">Open to</span>
-        <strong>Startups — Remote</strong>
+        <strong>Growth-stage companies — Remote</strong>
+      </div>
       </div>
     </div>
   </section>
@@ -544,6 +581,7 @@
           <span class="tag">Workflow Design</span>
           <span class="tag">Enterprise UX</span>
         </div>
+        <p class="case-desc">Moved asylum case reviews from Acrobat, local folders, and handwritten checklists into a cloud workflow — without breaking supervisors' existing mental models.</p>
       </a>
 
       <a href="case-finder.html" class="case-card">
@@ -559,6 +597,7 @@
           <span class="tag">Search & Filter</span>
           <span class="tag">Information Architecture</span>
         </div>
+        <p class="case-desc">Replaced manual, siloed reference lookups with a centralized search tool — ~40% faster case lookup for officers.</p>
       </a>
 
       <a href="empower.html" class="case-card">
@@ -574,6 +613,7 @@
           <span class="tag">SaaS</span>
           <span class="tag">Product Strategy</span>
         </div>
+        <p class="case-desc">Built the consumer-facing platform vision GridX was missing — a product layer for powerful energy APIs that utilities could actually put in front of customers.</p>
       </a>
 
       <a href="gridx-touchscreen.html" class="case-card">
@@ -589,6 +629,7 @@
           <span class="tag">Interactive</span>
           <span class="tag">Sales Enablement</span>
         </div>
+        <p class="case-desc">Replaced 45-minute live demos that repelled cold prospects with a self-paced touchscreen experience — 24% increase in booth traffic.</p>
       </a>
 
       <a href="taylor-series-pages.html" class="case-card">
@@ -604,6 +645,7 @@
           <span class="tag">E-commerce</span>
           <span class="tag">Content Design</span>
         </div>
+        <p class="case-desc">Solved analysis paralysis across hundreds of guitar models by redesigning the information hierarchy — 105% increase in page views post-launch.</p>
       </a>
 
       <a href="taylor-sustainability-hub.html" class="case-card">
@@ -619,6 +661,7 @@
           <span class="tag">Editorial Design</span>
           <span class="tag">Brand</span>
         </div>
+        <p class="case-desc">Centralized Taylor's scattered sustainability content into a single editorial destination — users explored multiple stories and pages per session.</p>
       </a>
 
     </div>
@@ -628,7 +671,7 @@
     <div class="about-left">
       <div class="section-label">About</div>
       <h2 class="about-heading">
-        Just a guy who<br>learned Photoshop<br>and turned it into<br><em>a career.</em>
+        I turn complex systems<br>into tools people trust<br><em>with their toughest tasks.</em>
       </h2>
       <div class="about-body">
         <p>I started in web dev and print, moved through creative direction, and landed in product design because that's where design actually changes how people work. Not always pretty, but always worth it.</p>
@@ -640,7 +683,7 @@
       <ul class="about-list">
         <li>
           <span class="role">Senior Product Designer</span>
-          <span class="co">Civic Tech</span>
+          <span class="co">Civic Tech (confidential)</span>
           <span class="yr">2022 — Now</span>
         </li>
         <li>
@@ -676,9 +719,9 @@
           I'm actively looking for my next role at a fast-moving startup. If you're building something that matters and need a designer who can lead, research, and ship — let's talk. I promise not to use the word 'synergy'.
         </p>
         <div class="contact-links">
-          <a href="/cdn-cgi/l/email-protection#c5a1a4ab85a1a4aba2b7b0b6aeacabeba6aaa8" class="contact-link">
+          <a href="mailto:dan@dangruskin.com" class="contact-link">
             <span class="contact-link-label">Email</span>
-            <span class="contact-link-value"><span class="__cf_email__" data-cfemail="aacecbc4eacecbc4cdd8dfd9c1c3c484c9c5c7">[email&#160;protected]</span></span>
+            <span class="contact-link-value">dan@dangruskin.com</span>
           </a>
           <a href="https://linkedin.com/in/dangruskin" target="_blank" class="contact-link">
             <span class="contact-link-label">LinkedIn</span>
