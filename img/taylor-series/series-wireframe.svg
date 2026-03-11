@@ -1,0 +1,155 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="660" viewBox="0 0 800 660" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif">
+
+  <!-- Background -->
+  <rect width="800" height="660" fill="#f5f2ed"/>
+
+  <!-- Title bar -->
+  <rect width="800" height="40" fill="#1a1814"/>
+  <text x="400" y="25" text-anchor="middle" font-size="9" fill="rgba(255,255,255,0.6)" letter-spacing="2.5" font-weight="600">UX INFORMATION ARCHITECTURE — SERIES PAGE REDESIGN</text>
+
+  <!-- ===================== PAGE WIREFRAME ===================== -->
+  <!-- Page frame: x=215 to x=600, width=385 -->
+
+  <!-- HERO -->
+  <rect x="215" y="55" width="385" height="68" rx="2" fill="#dbd7d0" stroke="#ccc" stroke-width="1"/>
+  <text x="407" y="93" text-anchor="middle" font-size="8.5" fill="#a09b95" letter-spacing="1">HERO — LIFESTYLE IMAGE + SERIES TITLE</text>
+
+  <!-- ZONE 1: Series Overview -->
+  <!-- Zone bar -->
+  <rect x="210" y="133" width="3" height="68" fill="#4d7a5e"/>
+  <!-- Zone label -->
+  <text x="200" y="164" text-anchor="end" font-size="7.5" fill="#4d7a5e" font-weight="700" letter-spacing="1">ZONE 1</text>
+  <text x="200" y="175" text-anchor="end" font-size="7" fill="#4d7a5e" letter-spacing="0.5">OVERVIEW</text>
+  <!-- Content: text lines + CTA -->
+  <rect x="219" y="133" width="381" height="68" rx="2" fill="#eeeae4" stroke="#ddd" stroke-width="1"/>
+  <line x1="232" y1="149" x2="440" y2="149" stroke="#ccc" stroke-width="1.5"/>
+  <line x1="232" y1="160" x2="400" y2="160" stroke="#ccc" stroke-width="1.5"/>
+  <line x1="232" y1="171" x2="420" y2="171" stroke="#ccc" stroke-width="1.5"/>
+  <!-- CTA button zone 1 -->
+  <rect x="459" y="151" width="126" height="22" rx="3" fill="rgba(196,112,63,0.12)" stroke="#c4703f" stroke-width="1.5"/>
+  <text x="522" y="166" text-anchor="middle" font-size="8" fill="#c4703f" font-weight="600">VIEW ALL MODELS →</text>
+
+  <!-- ZONE 2: Model Browser -->
+  <!-- Zone bar -->
+  <rect x="210" y="211" width="3" height="115" fill="#c4703f"/>
+  <!-- Zone label -->
+  <text x="200" y="261" text-anchor="end" font-size="7.5" fill="#c4703f" font-weight="700" letter-spacing="1">ZONE 2</text>
+  <text x="200" y="272" text-anchor="end" font-size="7" fill="#c4703f" letter-spacing="0.5">MODEL</text>
+  <text x="200" y="282" text-anchor="end" font-size="7" fill="#c4703f" letter-spacing="0.5">BROWSER</text>
+  <!-- Content: 3 model cards -->
+  <rect x="219" y="211" width="381" height="115" rx="2" fill="#f3f0eb" stroke="#ddd" stroke-width="1"/>
+  <text x="407" y="225" text-anchor="middle" font-size="7.5" fill="#bbb" letter-spacing="1.5">MEET THE SERIES</text>
+
+  <!-- Card 1 -->
+  <rect x="228" y="231" width="112" height="85" rx="2" fill="#e4e0d9" stroke="#ccc" stroke-width="1"/>
+  <rect x="234" y="237" width="100" height="44" rx="1" fill="#ccc9c2"/>
+  <line x1="234" y1="288" x2="316" y2="288" stroke="#bbb" stroke-width="1.5"/>
+  <line x1="234" y1="297" x2="306" y2="297" stroke="#bbb" stroke-width="1.5"/>
+  <rect x="234" y="305" width="80" height="8" rx="2" fill="rgba(196,112,63,0.25)"/>
+  <text x="274" y="312" text-anchor="middle" font-size="6.5" fill="#c4703f" font-weight="600">SEE MODEL →</text>
+
+  <!-- Card 2 -->
+  <rect x="348" y="231" width="112" height="85" rx="2" fill="#e4e0d9" stroke="#ccc" stroke-width="1"/>
+  <rect x="354" y="237" width="100" height="44" rx="1" fill="#ccc9c2"/>
+  <line x1="354" y1="288" x2="436" y2="288" stroke="#bbb" stroke-width="1.5"/>
+  <line x1="354" y1="297" x2="426" y2="297" stroke="#bbb" stroke-width="1.5"/>
+  <rect x="354" y="305" width="80" height="8" rx="2" fill="rgba(196,112,63,0.25)"/>
+  <text x="394" y="312" text-anchor="middle" font-size="6.5" fill="#c4703f" font-weight="600">SEE MODEL →</text>
+
+  <!-- Card 3 -->
+  <rect x="468" y="231" width="112" height="85" rx="2" fill="#e4e0d9" stroke="#ccc" stroke-width="1"/>
+  <rect x="474" y="237" width="100" height="44" rx="1" fill="#ccc9c2"/>
+  <line x1="474" y1="288" x2="556" y2="288" stroke="#bbb" stroke-width="1.5"/>
+  <line x1="474" y1="297" x2="546" y2="297" stroke="#bbb" stroke-width="1.5"/>
+  <rect x="474" y="305" width="80" height="8" rx="2" fill="rgba(196,112,63,0.25)"/>
+  <text x="514" y="312" text-anchor="middle" font-size="6.5" fill="#c4703f" font-weight="600">SEE MODEL →</text>
+
+  <!-- ZONE 3: Features -->
+  <!-- Zone bar -->
+  <rect x="210" y="336" width="3" height="125" fill="#4d7a5e"/>
+  <!-- Zone label -->
+  <text x="200" y="390" text-anchor="end" font-size="7.5" fill="#4d7a5e" font-weight="700" letter-spacing="1">ZONE 3</text>
+  <text x="200" y="401" text-anchor="end" font-size="7" fill="#4d7a5e" letter-spacing="0.5">FEATURE</text>
+  <text x="200" y="411" text-anchor="end" font-size="7" fill="#4d7a5e" letter-spacing="0.5">DEEP-DIVE</text>
+  <!-- Content: alternating image/text rows -->
+  <rect x="219" y="336" width="381" height="125" rx="2" fill="#eeeae4" stroke="#ddd" stroke-width="1"/>
+  <!-- Feature row 1: image left, text right -->
+  <rect x="228" y="345" width="135" height="44" rx="1" fill="#ccc9c2"/>
+  <line x1="372" y1="352" x2="512" y2="352" stroke="#ccc" stroke-width="1.5"/>
+  <line x1="372" y1="362" x2="490" y2="362" stroke="#ccc" stroke-width="1.5"/>
+  <line x1="372" y1="372" x2="504" y2="372" stroke="#ccc" stroke-width="1.5"/>
+  <!-- Feature row 2: text left, image right -->
+  <rect x="447" y="397" width="135" height="44" rx="1" fill="#ccc9c2"/>
+  <line x1="228" y1="404" x2="368" y2="404" stroke="#ccc" stroke-width="1.5"/>
+  <line x1="228" y1="414" x2="352" y2="414" stroke="#ccc" stroke-width="1.5"/>
+  <line x1="228" y1="424" x2="360" y2="424" stroke="#ccc" stroke-width="1.5"/>
+  <!-- CTA zone 3 -->
+  <rect x="228" y="449" width="128" height="8" rx="2" fill="rgba(196,112,63,0.25)"/>
+  <text x="292" y="456" text-anchor="middle" font-size="6.5" fill="#c4703f" font-weight="600">EXPLORE THIS MODEL →</text>
+
+  <!-- ZONE 4: Browse and Filter -->
+  <!-- Zone bar -->
+  <rect x="210" y="471" width="3" height="125" fill="#c4703f"/>
+  <!-- Zone label -->
+  <text x="200" y="521" text-anchor="end" font-size="7.5" fill="#c4703f" font-weight="700" letter-spacing="1">ZONE 4</text>
+  <text x="200" y="532" text-anchor="end" font-size="7" fill="#c4703f" letter-spacing="0.5">BROWSE</text>
+  <text x="200" y="542" text-anchor="end" font-size="7" fill="#c4703f" letter-spacing="0.5">&amp; FILTER</text>
+  <!-- Content: sidebar + grid -->
+  <rect x="219" y="471" width="381" height="125" rx="2" fill="#f3f0eb" stroke="#ddd" stroke-width="1"/>
+  <!-- Sidebar -->
+  <rect x="228" y="480" width="78" height="108" rx="2" fill="#e4e0d9" stroke="#ccc" stroke-width="1"/>
+  <text x="267" y="494" text-anchor="middle" font-size="7" fill="#a09b95" letter-spacing="1">FILTERS</text>
+  <line x1="236" y1="500" x2="298" y2="500" stroke="#ccc" stroke-width="1"/>
+  <line x1="236" y1="510" x2="294" y2="510" stroke="#ccc" stroke-width="1"/>
+  <line x1="236" y1="520" x2="296" y2="520" stroke="#ccc" stroke-width="1"/>
+  <line x1="236" y1="530" x2="292" y2="530" stroke="#ccc" stroke-width="1"/>
+  <line x1="236" y1="540" x2="298" y2="540" stroke="#ccc" stroke-width="1"/>
+  <line x1="236" y1="550" x2="294" y2="550" stroke="#ccc" stroke-width="1"/>
+  <line x1="236" y1="560" x2="296" y2="560" stroke="#ccc" stroke-width="1"/>
+  <line x1="236" y1="570" x2="292" y2="570" stroke="#ccc" stroke-width="1"/>
+  <!-- Grid row 1 -->
+  <rect x="316" y="480" width="84" height="52" rx="2" fill="#e4e0d9" stroke="#ccc" stroke-width="1"/>
+  <rect x="408" y="480" width="84" height="52" rx="2" fill="#e4e0d9" stroke="#ccc" stroke-width="1"/>
+  <rect x="500" y="480" width="84" height="52" rx="2" fill="#e4e0d9" stroke="#ccc" stroke-width="1"/>
+  <!-- Grid row 2 -->
+  <rect x="316" y="540" width="84" height="52" rx="2" fill="#e4e0d9" stroke="#ccc" stroke-width="1"/>
+  <rect x="408" y="540" width="84" height="52" rx="2" fill="#e4e0d9" stroke="#ccc" stroke-width="1"/>
+  <rect x="500" y="540" width="84" height="52" rx="2" fill="#e4e0d9" stroke="#ccc" stroke-width="1"/>
+
+  <!-- ===================== ANNOTATIONS (right side) ===================== -->
+
+  <!-- Annotation 1 — Zone 1 -->
+  <line x1="601" y1="167" x2="638" y2="167" stroke="#ddd" stroke-width="1" stroke-dasharray="3,3"/>
+  <text x="642" y="161" font-size="8" fill="#666" font-weight="600">SERIES OVERVIEW</text>
+  <text x="642" y="172" font-size="7.5" fill="#999">Orients all users before</text>
+  <text x="642" y="182" font-size="7.5" fill="#999">model browsing begins</text>
+
+  <!-- Annotation 2 — Zone 2 -->
+  <line x1="601" y1="268" x2="638" y2="268" stroke="#ddd" stroke-width="1" stroke-dasharray="3,3"/>
+  <text x="642" y="262" font-size="8" fill="#666" font-weight="600">MODEL BROWSER</text>
+  <text x="642" y="273" font-size="7.5" fill="#999">Compare without</text>
+  <text x="642" y="283" font-size="7.5" fill="#999">leaving the page</text>
+
+  <!-- Annotation 3 — CTA callout -->
+  <circle cx="634" cy="313" r="3" fill="#c4703f" opacity="0.8"/>
+  <text x="642" y="310" font-size="7.5" fill="#c4703f">Entry points for</text>
+  <text x="642" y="320" font-size="7.5" fill="#c4703f">style-first buyers</text>
+
+  <!-- Annotation 4 — Zone 3 -->
+  <line x1="601" y1="398" x2="638" y2="398" stroke="#ddd" stroke-width="1" stroke-dasharray="3,3"/>
+  <text x="642" y="392" font-size="8" fill="#666" font-weight="600">FEATURE DEEP-DIVE</text>
+  <text x="642" y="403" font-size="7.5" fill="#999">Tone &amp; craft for</text>
+  <text x="642" y="413" font-size="7.5" fill="#999">knowledge-driven buyers</text>
+
+  <!-- Annotation 5 — Zone 4 -->
+  <line x1="601" y1="533" x2="638" y2="533" stroke="#ddd" stroke-width="1" stroke-dasharray="3,3"/>
+  <text x="642" y="527" font-size="8" fill="#666" font-weight="600">BROWSE &amp; FILTER</text>
+  <text x="642" y="538" font-size="7.5" fill="#999">Spec filtering for</text>
+  <text x="642" y="548" font-size="7.5" fill="#999">expert buyers</text>
+
+  <!-- CTA note at bottom -->
+  <rect x="215" y="610" width="385" height="32" rx="2" fill="rgba(196,112,63,0.07)" stroke="rgba(196,112,63,0.3)" stroke-width="1"/>
+  <circle cx="233" cy="626" r="4" fill="#c4703f" opacity="0.8"/>
+  <text x="244" y="630" font-size="8" fill="#c4703f" font-weight="600">Multiple entry points to product pages throughout — not just a single CTA at the bottom</text>
+
+</svg>
