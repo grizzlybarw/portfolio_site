@@ -30,9 +30,9 @@ _Edit the text below and ask Claude Code to apply changes to the HTML files._
 - Tags: `Workflow Design` · `Enterprise UX`
 - Thumb tag: `Civic Tech`
 
-#### Card 02 — Case Finder
-- Title: `Case Finder`
-- Tags: `Search & Filter` · `Information Architecture`
+#### Card 02 — Interview Platform Redesign
+- Title: `Interview Platform Redesign`
+- Tags: `UX Design` · `Enterprise UX`
 - Thumb tag: `Civic Tech`
 
 #### Card 03 — GridX Empower Re-imagined
@@ -174,67 +174,83 @@ Adoption had historically been a problem — users default to what they know. I 
 
 ---
 
-## PAGE: case-finder.html
+## PAGE: interview-platform-redesign.html
 
 ### Hero
-- Eyebrow: `Product Design · Civic Tech · Information Architecture`
-- Title line 1: `Case`
-- Title line 2 (italic): `Finder`
-- Summary: `Giving officers a fast, flexible way to search and reference previous cases — reducing lookup time by 40% and surfacing organizational insights that were invisible before.`
+- Eyebrow: `UX Design · Civic Tech · Enterprise UX`
+- Title line 1: `Interview Platform`
+- Title line 2 (italic): `Redesign`
+- Summary: `Reduced cognitive load for asylum and refugee officers by modernizing a 7-year-old interview notes UI — preserving every feature officers relied on while making the experience meaningfully easier to use.`
 - Confidential note: `*This case study is based on confidential work. All sensitive details and data have been modified, abstracted, or removed. Visuals shown are conceptual representations.`
 
 #### Meta
-- Role: `Product Designer`
-- Team: `Designer, PM, Engineering, Stakeholders`
-- Timeline: `2 Months`
-- Domain: `Civic Tech · Information Architecture`
+- Role: `Senior Product Designer`
+- Team: `Design, Engineering, Leadership, Stakeholders`
+- Timeline: `3 Months`
+- Domain: `Civic Tech · Enterprise UX`
 
 ### The Problem
 - Section label: `The Problem`
-- Statement: `Officers were managing reference materials the same way everyone manages things they don't trust the system to handle: locally, inconsistently, alone.`
-- Body paragraph 1: `To complete their work, officers frequently relied on previous cases or locally stored reference documents. These offline assets varied widely from user to user and office to office — making it time-consuming and inconsistent to find the right information at the right moment.`
-- Body paragraph 2: `Beyond the day-to-day inefficiency, keeping reference materials offline meant the organization had no visibility into which assets were actually valuable. There was no way to measure, improve, or scale support — the data simply didn't exist.`
-- Body paragraph 3: `The opportunity was two-sided: give officers a better tool, and give the business the analytics it needed to get better over time.`
+- Statement: `Asylum and refugee officers are already managing one of the most cognitively demanding jobs imaginable. The interview platform was adding to that load — not reducing it.`
+- Body paragraph 1: `Officers conducting interviews are simultaneously taking verbatim notes, managing required forms, coordinating with attorneys and interpreters, and processing deeply personal — often heartbreaking — testimony. The stakes are as high as they get.`
+- Body paragraph 2: `The legacy platform had been designed 7 years prior and never updated. It had accumulated friction: a cluttered interface, visual noise, and common actions that took more effort to execute than they should. Officers had adapted — but adapted doesn't mean optimal.`
+- Body paragraph 3: `The opportunity wasn't to reinvent the product. It was to simplify what was already there — reduce visual noise, modernize the UI, and make the most common actions easier to execute — without disrupting the shortcuts and workflows officers had built over years of practice.`
 
 ### Results
 - Section label: `Results`
-- Stat 1: `~40%` | Label: `Decrease in case lookup time for officers using the new system`
-- Stat 2: `41%` | Label: `Of users interacting with the experience actively use the filter functionality`
-- Stat 3: `17%` | Label: `Of all page visitors use filters — strong signal for a newly launched feature`
+- Stat 1: `30%` | Label: `Adoption rate in week one — strong for any UI update, exceptional for this user base`
+- Stat 2: `194` | Label: `Officers opted in during the first week of the launch window`
+- Stat 3: `1` | Label: `Bug report in launch week — a minor alignment fix for an edge case involving an extremely long question`
 
 ### Process
 - Section label: `Process`
 
-#### Phase 01 — Research & Analysis
-I interviewed 4 officers about their current workflow — specifically how they used reference materials, where those materials came from, and how they stored and searched for information in the moment. The picture that emerged was consistent: everyone had developed their own system because the shared one didn't work. From those sessions I distilled a north star problem statement that became the lens for everything that followed.
+#### Phase 01 — Prior Research & Assumptions
+50+ prior user interviews with officers meant I already had a deep picture of how the platform was being used — the workarounds, the friction points, the moments where the interface was fighting the user. No separate discovery round was needed. I drew directly on that knowledge to form design assumptions and identify the highest-leverage areas to address.
 
-#### Phase 02 — Workshops
-I facilitated workshops with subject matter experts to nail down which data fields were both useful to officers and technically feasible to surface. This sounds like a small detail, but when you're building what is essentially a highly specific search table, the content in that table is the product. Getting this wrong would have made everything else irrelevant.
+#### Phase 02 — Design Crit & Studio
+Facilitated a design studio with 7 other designers to brainstorm approaches to the UI complexity and multi-form-factor input challenges. Running it as a structured crit gave us the range of directions we needed without losing focus. The output was a set of divergent ideas to evaluate and narrow.
 
-#### Phase 03 — Prototyping
-I created multiple high-fidelity prototypes to present to leadership. Leadership feedback was a critical gate — without their buy-in on the direction, this feature wouldn't have shipped. Making the designs concrete enough to critique early meant the conversations were specific and productive rather than theoretical.
+#### Phase 03 — User Research & Prototype Testing
+Three sessions with active officers. I mapped their real interaction patterns — reordering, bulk delete, core interview documentation — then presented mockups of the redesigned UI and asked for direct reactions. At the start of each session I asked users to score the current app out of 10. I got 7.5, 10, and 10. After seeing the new designs, all three said they'd score it higher.
 
-#### Phase 04 — Usability Testing
-I tested the designs with officers directly — asking how useful they'd find the tool in practice, getting reactions to different filter variants, and verifying that the table data was actually helpful. The sessions confirmed the core direction and surfaced smaller refinements. Officers were direct about what worked and what didn't, which made the feedback easy to act on.
+#### Phase 04 — Design System & Handoff
+Finalized the designs and built the new components directly into the Figma design system I manage for the team. Then ran a structured handoff meeting with engineering — documented, reusable pieces rather than static screens for developers to interpret.
 
-#### Phase 05 — Component Creation & Handoff
-With the final design locked, I cleaned up all components and contributed them to our internal design system — documented, annotated, and ready for handoff. Every section and interaction state was documented before development began, which kept implementation questions to a minimum.
+#### Phase 05 — Development Collaboration
+The build took about a month. I worked alongside the dev team in joint sessions throughout — resolving bugs, refining details, and making sure the shipped product matched the design intent. This phase also included navigating leadership feedback on whitespace. The resolution: tighter margins where they made sense, plus a new table view mode that displays Q&A side-by-side. Both sides got something real.
 
-#### Phase 06 — Launch
-I coordinated the rollout with stakeholders and worked directly with users during the launch. Adoption is always the hardest part — people are creatures of habit, and the offline workarounds had been comfortable. Getting officers into the new system required patience and presence, not just a good product.
+#### Phase 06 — Validation Testing & Launch
+Four users, pre-launch. All four said they'd opt in. None found the changes disruptive. They called out color coding for multi-answer questions as a standout — particularly valuable in family and group interviews. I proposed an opt-in window before the full switchover: early adopters would surface bugs, and if they liked the experience, they'd become advocates before the change was mandatory. 194 users opted in during the first week. Only 6 turned it off.
+
+### Key Screens
+- Section label: `Key Screens`
+
+#### Card 1 — Color-Coded Q&A
+- Label: `Color-Coded Q&A`
+- Description: `Multi-applicant answers color-coded by family member. In group and family unit interviews, officers track multiple people's responses within a single question thread — color coding turned a scanning problem into a clear, at-a-glance read.`
+
+#### Card 2 — Table View
+- Label: `Table View`
+- Description: `Questions and answers displayed side-by-side. Designed for officers on small laptop monitors, and surfaced as the middle ground between leadership's density request and user research pointing toward breathing room.`
+
+#### Card 3 — Drag & Drop Reordering
+- Label: `Drag & Drop Reordering`
+- Description: `Refined reordering and bulk delete interactions for the Q&A list. Officers reorganize elements throughout every interview — making this faster and more reliable removed a persistent friction that added up over long sessions.`
 
 ### What Users Said
 - Section label: `What Users Said`
-- Quote 1 (hero): `"I like this, I like this part — this is really cool. I could see this being really useful."` — `Officer User — referencing the filter functionality`
-- Quote 2: `"Useful tool to be able to refer back to cases I've done before."` — `Officer User`
-- Quote 3: `"I think you guys have nailed it in terms of what needs to be on there. I can't think of anything else that would be beneficial — it pretty much covers all of the bases."` — `Officer User`
+- Quote 1 (hero): `"Increase to maybe an 8.5. Family unit, question format, the color coding, with the questions and alignment it's easier on the eye."` — `Officer User — post-prototype session, on their revised score for the new UI`
+- Quote 2: `"If I could go higher than a 10 I would, this looks cleaner and sharper."` — `Officer User — post-prototype session`
+- Quote 3: `"The drag and drop conversational answer features are exciting and helpful."` — `Officer User — validation testing`
+- Quote 4: `"The new UI is a refinement, not a disruption — I'd still rate this app 10/10."` — `Officer User — validation testing`
 
 ### Takeaways
 - Section label: `Takeaways`
-- Heading: `Understanding how people currently solve a problem is the whole job.`
-- Body paragraph 1: `The offline workarounds officers had built weren't signs of dysfunction — they were signals of a real need the existing system had failed to meet. Following those signals led directly to a solution that resonated on first contact.`
-- Body paragraph 2: `The analytics angle was also a win that almost didn't happen. Centralizing reference materials wasn't just about officer efficiency — it was about giving the organization a data layer it had never had. That second-order value came from understanding the problem deeply, not just solving the surface complaint.`
-- Body paragraph 3: `Adoption is ongoing. People are stuck in their ways — which is a challenge, not a failure. The feedback since launch has been strongly positive, and the usage numbers are heading in the right direction.`
+- Heading: `Listening to leadership and advocating for users aren't mutually exclusive — but it takes work.`
+- Body paragraph 1: `The strongest tension in this project came from leadership feedback on whitespace. Their instinct was to compress the UI; the user research pointed the other direction. The table view mode was the resolution — not a compromise that satisfied no one, but a genuine solution that gave officers a choice and gave leadership the density option they wanted.`
+- Body paragraph 2: `The opt-in rollout was a deliberate design decision. Early adopters surfaced edge cases we'd missed, became advocates in their offices, and gave us a feedback loop before the change was mandatory. 30% adoption in week one with almost no churn was the result.`
+- Body paragraph 3: `Working on tools this high-stakes is a constant reminder that interface decisions are never neutral. Officers using this platform are documenting people's lives. Clarity, speed, and reduced friction aren't UX nice-to-haves here — they're the point.`
 
 ### Next Project
 - Label: `Next Project`

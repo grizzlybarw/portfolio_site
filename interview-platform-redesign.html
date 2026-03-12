@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Interview Platform Redesign — Dan Gruskin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="case-study.css" />
+</head>
+<body>
+
+  <div class="scroll-progress" id="scroll-progress"></div>
+  <div class="bg-gradient"></div>
+
+  <!-- SPLIT HERO -->
+  <div class="split-hero">
+
+    <!-- Left text panel -->
+    <div class="split-hero-left">
+      <div class="sh-top">
+        <a href="index.html#work" class="sh-back">← Work</a>
+        <div class="sh-eyebrow">UX Design · Civic Tech · Enterprise UX</div>
+        <h1 class="sh-title">Interview Platform<em>Redesign</em></h1>
+        <p class="sh-summary">Reduced cognitive load for asylum and refugee officers by modernizing a 7-year-old interview notes UI — preserving every feature officers relied on while making the experience meaningfully easier to use.</p>
+        <p class="sh-confidential">*This case study is based on confidential work. All sensitive details and data have been modified, abstracted, or removed. Visuals shown are conceptual representations.</p>
+      </div>
+      <div class="sh-meta">
+        <div class="sh-meta-row">
+          <span class="sh-meta-label">Role</span>
+          <span class="sh-meta-value">Senior Product Designer</span>
+        </div>
+        <div class="sh-meta-row">
+          <span class="sh-meta-label">Team</span>
+          <span class="sh-meta-value">Design, Engineering, Leadership, Stakeholders</span>
+        </div>
+        <div class="sh-meta-row">
+          <span class="sh-meta-label">Timeline</span>
+          <span class="sh-meta-value">3 Months</span>
+        </div>
+        <div class="sh-meta-row">
+          <span class="sh-meta-label">Domain</span>
+          <span class="sh-meta-value">Civic Tech · Enterprise UX</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right bold color panel -->
+    <div class="split-hero-right"></div>
+
+    <!-- Floating product screenshot — breaks the grid -->
+    <div class="split-hero-img">
+      <img src="img/thumbnails/interview-platform-redesign.jpg" alt="Interview Platform Redesign interface" />
+    </div>
+
+  </div>
+
+  <!-- PROBLEM -->
+  <section class="cs-section">
+    <div class="cs-section-label">The Problem</div>
+    <div class="cs-problem">
+      <div class="cs-problem-statement">
+        Asylum and refugee officers are already managing one of the most cognitively demanding jobs imaginable. The interview platform was adding to that load —<em> not reducing it.</em>
+      </div>
+      <div class="cs-problem-body">
+        <p>Officers conducting interviews are simultaneously taking verbatim notes, managing required forms, coordinating with attorneys and interpreters, and processing deeply personal — often heartbreaking — testimony. The stakes are as high as they get. Every missed step or moment of confusion has real consequences for real people.</p>
+        <p>The legacy platform had been designed 7 years prior and never updated. It had accumulated friction: a cluttered interface, visual noise that made it harder to focus, and common actions that took more effort to execute than they should. Officers had adapted, building their own workarounds and muscle memory around its quirks. But adapted doesn't mean optimal.</p>
+        <p>The opportunity wasn't to reinvent the product. It was to simplify what was already there — reduce visual noise, modernize the UI, and make the most common actions easier to find and execute — without disrupting the shortcuts and workflows officers had built over years of practice.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESULTS -->
+  <section class="cs-section">
+    <div class="cs-section-label">Results</div>
+    <div class="cs-results">
+      <div class="cs-stat">
+        <div class="cs-stat-number">30<span>%</span></div>
+        <div class="cs-stat-label">Adoption rate in week one — strong for any UI update, exceptional for this user base</div>
+      </div>
+      <div class="cs-stat">
+        <div class="cs-stat-number">194</div>
+        <div class="cs-stat-label">Officers opted in during the first week of the launch window</div>
+      </div>
+      <div class="cs-stat">
+        <div class="cs-stat-number">1</div>
+        <div class="cs-stat-label">Bug report in launch week — a minor alignment fix for an edge case involving an extremely long question</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section class="cs-section">
+    <div class="cs-section-label">Process</div>
+    <div class="cs-process-stack">
+
+      <div class="cs-process-phase">
+        <div class="cs-phase-header">
+          <div class="cs-phase-num-block" aria-hidden="true">01</div>
+          <div class="cs-phase-label">Prior Research &amp; Assumptions</div>
+        </div>
+        <div class="cs-phase-body">
+          50+ prior user interviews with officers meant I already had a deep picture of how the platform was being used — the workarounds, the friction points, the moments where the interface was fighting the user rather than helping them. No separate discovery round was needed. I drew directly on that knowledge to form design assumptions and identify the highest-leverage areas to address.
+        </div>
+      </div>
+
+      <div class="cs-phase-connector" aria-hidden="true"></div>
+
+      <div class="cs-process-phase">
+        <div class="cs-phase-header">
+          <div class="cs-phase-num-block" aria-hidden="true">02</div>
+          <div class="cs-phase-label">Design Crit &amp; Studio</div>
+        </div>
+        <div class="cs-phase-body">
+          I facilitated a design studio with 7 other designers to brainstorm approaches to the UI complexity and multi-form-factor input challenges. Running the session as a structured crit rather than an open ideation gave us the range of directions we needed without losing focus. The output was a set of divergent ideas to evaluate and narrow — not a polished design, but a much richer starting point.
+        </div>
+      </div>
+
+      <div class="cs-phase-connector" aria-hidden="true"></div>
+
+      <div class="cs-process-phase">
+        <div class="cs-phase-header">
+          <div class="cs-phase-num-block" aria-hidden="true">03</div>
+          <div class="cs-phase-label">User Research &amp; Prototype Testing</div>
+        </div>
+        <div class="cs-phase-body">
+          Three sessions with active officers. I mapped their real interaction patterns — how often they reordered elements, how they used bulk delete, how they moved through the core task of documenting an interview. Then I presented mockups of the redesigned UI and asked for direct reactions. At the start of each session I asked users to score the current app out of 10. I got 7.5, 10, and 10. After seeing the new designs, all three said they'd score it higher. That's not a vanity metric — it's a signal that the redesign was landing as a genuine improvement, not a disruption.
+        </div>
+      </div>
+
+      <div class="cs-phase-connector" aria-hidden="true"></div>
+
+      <div class="cs-process-phase">
+        <div class="cs-phase-header">
+          <div class="cs-phase-num-block" aria-hidden="true">04</div>
+          <div class="cs-phase-label">Design System &amp; Handoff</div>
+        </div>
+        <div class="cs-phase-body">
+          Finalized the designs and built the new components directly into the Figma design system I manage for the team. Then ran a structured handoff meeting with engineering. Doing the component work before handoff meant developers had documented, reusable pieces to build from — not a set of static screens they had to interpret on their own.
+        </div>
+      </div>
+
+      <div class="cs-phase-connector" aria-hidden="true"></div>
+
+      <div class="cs-process-phase">
+        <div class="cs-phase-header">
+          <div class="cs-phase-num-block" aria-hidden="true">05</div>
+          <div class="cs-phase-label">Development Collaboration</div>
+        </div>
+        <div class="cs-phase-body">
+          The build took about a month. I worked alongside the dev team in joint sessions throughout — resolving bugs, refining details, and making sure the shipped product matched the intent of the designs. This phase also included a productive tension with leadership, who raised concerns about whitespace. Their instinct was to compress the UI; the user research pointed the other direction. The resolution: tighter margins where they made sense, and a new table view mode that displays Q&A side-by-side — particularly useful for officers conducting interviews on smaller laptop monitors. Both sides got something real.
+        </div>
+      </div>
+
+      <div class="cs-phase-connector" aria-hidden="true"></div>
+
+      <div class="cs-process-phase">
+        <div class="cs-phase-header">
+          <div class="cs-phase-num-block" aria-hidden="true">06</div>
+          <div class="cs-phase-label">Validation Testing &amp; Launch</div>
+        </div>
+        <div class="cs-phase-body">
+          Four users, pre-launch. All four said they'd opt in. None found the changes disruptive. They called out color coding for multi-answer questions as a standout improvement — particularly valuable in family and group interviews where tracking multiple applicants' answers in a single thread is genuinely hard. They also appreciated the improved drag-and-drop reordering, bulk delete, and the layout options. I proposed an opt-in window before the full switchover: early adopters would surface bugs we'd missed, and if they liked the new experience, they'd become advocates in their offices before the change was mandatory. 194 users opted in during the first week. Only 6 turned it off.
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- KEY SCREENS -->
+  <div class="feature-callout">
+    <div class="cs-section-label">Key Screens</div>
+    <div class="feature-callout-grid">
+      <div class="feature-card">
+        <div class="feature-card-img">
+          <img src="img/feature-interview-color-coding.png" alt="Color-coded Q&A for multiple applicants" />
+        </div>
+        <div class="feature-card-label">Color-Coded Q&amp;A</div>
+        <div class="feature-card-desc">Multi-applicant answers color-coded by family member. In group and family unit interviews, officers are tracking multiple people's responses within a single question thread — color coding turned a scanning problem into a clear, at-a-glance read.</div>
+      </div>
+      <div class="feature-card feature-card--offset">
+        <div class="feature-card-img">
+          <img src="img/feature-interview-table-view.png" alt="Table view with Q&A side by side" />
+        </div>
+        <div class="feature-card-label">Table View</div>
+        <div class="feature-card-desc">Questions and answers displayed side-by-side. Designed primarily for officers on small laptop monitors — and surfaced as the middle ground between leadership's request for density and user research that pointed toward breathing room. Both sides got something real.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-card-img">
+          <img src="img/feature-interview-drag-drop.png" alt="Drag and drop reordering interface" />
+        </div>
+        <div class="feature-card-label">Drag &amp; Drop Reordering</div>
+        <div class="feature-card-desc">Refined reordering and bulk delete interactions for the Q&A list. Officers reorganize elements throughout every interview — making this faster and more reliable removed a persistent small friction that added up over long sessions.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- USER QUOTES -->
+  <section class="cs-section">
+    <div class="cs-section-label">What Users Said</div>
+    <div class="cs-quotes">
+      <div class="cs-quote cs-quote--hero">
+        <div class="cs-quote-text">"Increase to maybe an 8.5. Family unit, question format, the color coding, with the questions and alignment it's easier on the eye."</div>
+        <div class="cs-quote-attr">Officer User — post-prototype session, on their revised score for the new UI</div>
+      </div>
+      <div class="cs-quote">
+        <div class="cs-quote-text">"If I could go higher than a 10 I would, this looks cleaner and sharper."</div>
+        <div class="cs-quote-attr">Officer User — post-prototype session</div>
+      </div>
+      <div class="cs-quote">
+        <div class="cs-quote-text">"The drag and drop conversational answer features are exciting and helpful."</div>
+        <div class="cs-quote-attr">Officer User — validation testing</div>
+      </div>
+      <div class="cs-quote">
+        <div class="cs-quote-text">"The new UI is a refinement, not a disruption — I'd still rate this app 10/10."</div>
+        <div class="cs-quote-attr">Officer User — validation testing</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONCLUSION -->
+  <section class="cs-section">
+    <div class="cs-section-label">Takeaways</div>
+    <div class="cs-conclusion">
+      <div class="cs-conclusion-heading">
+        Listening to leadership and advocating for users aren't mutually exclusive —<em> but it takes work.</em>
+      </div>
+      <div class="cs-conclusion-body">
+        <p>The strongest tension in this project came from leadership feedback on whitespace. Their instinct was to compress the UI; the user research pointed the other direction. The table view mode was the resolution — not a compromise that satisfied no one, but a genuine solution that gave officers a choice and gave leadership the density option they wanted. That's the job: find the middle ground that doesn't sacrifice the user experience to satisfy an internal preference.</p>
+        <p>The opt-in rollout was also a deliberate design decision, not just a project management call. Early adopters surfaced edge cases we'd missed, became advocates in their offices, and gave us a feedback loop before the change was forced on everyone. 30% adoption in week one with almost no churn was the result. That number doesn't happen when you just flip a switch.</p>
+        <p>Working on tools this high-stakes is a constant reminder that interface decisions are never neutral. Officers using this platform are documenting people's lives. Clarity, speed, and reduced friction aren't UX nice-to-haves here — they're the point.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEXT PROJECT -->
+  <div class="cs-next">
+    <div class="cs-next-inner">
+      <div class="cs-next-label">Next Project</div>
+      <a href="empower.html" class="cs-next-card">
+        <div>
+          <div class="cs-next-card-title">GridX Empower Re-imagined</div>
+          <div class="cs-next-card-sub">SaaS · Product Strategy · Clean Energy</div>
+        </div>
+        <div class="cs-next-arrow">→</div>
+      </a>
+    </div>
+  </div>
+
+  <script src="case-study.js"></script>
+</body>
+</html>
